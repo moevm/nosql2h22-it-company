@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:5.0.12
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+
+volumes:
+  mongodb-data:
