@@ -11,5 +11,18 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
 
+  postgresdb:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./sql_db/postgres-init.sql:/docker-entrypoint-initdb.d/db.sql
+    environment:
+      POSTGRES_DB: it-service-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
 volumes:
   mongodb-data:
+  postgres: {}
