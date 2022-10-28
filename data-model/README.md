@@ -715,13 +715,13 @@ document:                        // <- таблица, содержащая ин
 
 ### Оценка удельного объёма информации
 
-Пусть количество записей в коллекции `A` равняется $x_{\mathrm{A}}$. Весь объём занимаемой памяти равен $V_{actual} = 110\,x_{\mathrm{auth}} + 2328\,x_{\mathrm{person}} + 516\,x_{\mathrm{office}} + 48\,x_{\mathrm{person\_to\_project}} + 116\,x_{\mathrm{project}} + 116\,x_{\mathrm{nationality}} + 1088\,x_{\mathrm{watcher}} + 94\,x_{\mathrm{document}}$.
+Пусть количество записей в коллекции `A` равняется $x_{\mathrm{A}}$. Весь объём занимаемой памяти равен $V_{actual} = 110\,x_{\mathrm{auth}} + 2328\,x_{\mathrm{person}} + 516\,x_{\mathrm{office}} + 48\,x_{\mathrm{person\_{}to\_{}project}} + 116\,x_{\mathrm{project}} + 116\,x_{\mathrm{nationality}} + 1088\,x_{\mathrm{watcher}} + 94\,x_{\mathrm{document}}$.
 
-Аналогично расчётам оценки удельного объёма информации в нереляционной базе данных заключаем, что $x_{\mathrm{auth}} = x_{\mathrm{person}}$, $x_{\mathrm{office}} = \mathrm{const}$, $x_{\mathrm{project}} = \mathrm{const}$, $x_{\mathrm{watcher}} = 130\,x_{\mathrm{person}}$, $x_{\mathrm{document}} = 2\,x_{\mathrm{person}}$. Аналогично коллекциям `office` и `project` коллекцию `nationality` можно считать словарём: $x_{\mathrm{document}} = \mathrm{const}$. Поскольку количество проектов у человека не превышает 10, то $x_{\mathrm{person\_to\_project}} = 10\,x_{\mathrm{person}}$. Учитывая всё выше перечисленное, получаем следующее значение объёма памяти: $V_{actual} = 144\,546\,x_{\mathrm{person}}$.
+Аналогично расчётам оценки удельного объёма информации в нереляционной базе данных заключаем, что $x_{\mathrm{auth}} = x_{\mathrm{person}}$, $x_{\mathrm{office}} = \mathrm{const}$, $x_{\mathrm{project}} = \mathrm{const}$, $x_{\mathrm{watcher}} = 130\,x_{\mathrm{person}}$, $x_{\mathrm{document}} = 2\,x_{\mathrm{person}}$. Аналогично коллекциям `office` и `project` коллекцию `nationality` можно считать словарём: $x_{\mathrm{document}} = \mathrm{const}$. Поскольку количество проектов у человека не превышает 10, то $x_{\mathrm{person\_{}to\_{}project}} = 10\,x_{\mathrm{person}}$. Учитывая всё выше перечисленное, получаем следующее значение объёма памяти: $V_{actual} = 144\,546\,x_{\mathrm{person}}$.
 
 ### Избыточность модели
 
-Избыточными полями являются те поля коллекций, которые могут повторяться в разных документах. В нашей базе данных к таким полям в худшем случае относятся: `person._id`, `person.sex`, `person.position`, `person.status`, `person.job_time.start`, `person.job_time.end`, `person.office_id`, `person.nationality`, `watcher.user_id`, `watcher.date`, `watcher.project_id`, `document.type`, `document.user_id`, `document.status`. Итого, суммарный объём избыточных данных равен $5\,524\,x_{\mathrm{person}}$, следовательно, "чистый" объём данных равен $V_{clear} = 139\,022\,x_{\mathrm{person}}$.
+Избыточными полями являются те поля коллекций, которые могут повторяться в разных документах. В нашей базе данных к таким полям в худшем случае относятся: `person.id`, `person.sex`, `person.position`, `person.status`, `person.job_time_start`, `person.job_time_end`, `person.office_id`, `person.nationality_id`, `watcher.person_id`, `watcher.date`, `watcher.project_id`, `document.type`, `document.person_id`, `document.status`. Итого, суммарный объём избыточных данных равен $5\,524\,x_{\mathrm{person}}$, следовательно, "чистый" объём данных равен $V_{clear} = 139\,022\,x_{\mathrm{person}}$.
 
 Таким образом, избыточность модели равна
 
@@ -1053,6 +1053,6 @@ FROM person
 |Удельный объём информации|$144\,546\,x$|$166\,864\,x$|
 |Избыточность|$1,040$|$1,027$|
 |Среднее количество запросов|$2,15$|$1,20$|
-|Количество коллекций|8|6|
+|Количество коллекций|$8$|$6$|
 
 Исходя из вышеприведённых результатов можно заключить, что реляционная база данных занимает меньше памяти, чем нереляционная, однако избыточность данных у неё больше. Также преимуществом нереляционной БД является меньшее количество обращений к коллекциям.
