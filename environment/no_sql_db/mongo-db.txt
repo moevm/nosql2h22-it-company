@@ -1,0 +1,1139 @@
+Рыжий Чипс
+#4787
+
+Рыжий Чипс — 23.09.2022
+Изображение
+waiddew — 23.09.2022
+Изображение
+Изображение
+Изображение
+это отпуск/болезнь
+заполненный вариант дня
+Изображение
+Aleksey Lambin — 23.09.2022
+Изображение
+Изображение
+waiddew — 03.10.2022
+Изображение
+waiddew — 24.10.2022
+Изображение
+waiddew — 24.10.2022
+https://stackoverflow.com/questions/29299477/how-to-create-and-use-enum-in-mongoose
+Stack Overflow
+How to Create and Use Enum in Mongoose
+I am trying to create and use an enum type in Mongoose. I checked it out, but I'm not getting the proper result. I'm using enum in my program as follows:
+My schema is:
+var RequirementSchema = new
+Изображение
+Aleksey Lambin — 24.10.2022
+Watcher в Use cases
+Watcher в модели данных
+Изображение
+Aleksey Lambin — 24.10.2022
+Database
+
+auth:
+{
+    _id: uuid,
+    login: string,
+    password_hash: string
+}
+
+person:
+{
+    _id: uuid, // такой же, как в auth
+    name: string,
+    surname: string,
+    patronymic: string
+    birhday: date,
+    sex: enum, // 'FEMALE', 'MALE'
+    first_work_date: date,
+    position: string,
+    status: enum, // 'WORKING', 'ON_HOLIDAY', 'SEEK_LEAVE', 'NOT_WORKING'
+    contacts: {
+        'phone_number': string,
+        'email': string
+    },
+    job_time: {
+        start: string, // probably not
+        end: string
+    },
+    office_address: string,
+    confidential: {
+        nationality: string,
+        passport_data: {
+            number: string,
+            issued_place: string,
+            issued_date: string // or not
+        },
+        address: string,
+        salary: uint,
+        projects: string[]
+    },
+    comments: text
+}
+
+watcher:
+{
+    _id: uuid,
+    person_id: uuid,
+    date: date,
+    activity: string,
+    hours_amount: uint,
+    comments: text
+}
+
+documents:
+{
+    _id: uuid,
+    type: string,
+    person_id: uuid,
+    order_date: date,
+    status: enum // 'ORDERED', 'IN_PROGRESS', 'DONE', 'CANCELED'
+}
+Aleksey Lambin — 24.10.2022
+Database
+
+auth:
+{
+    _id: ObjectId,                // <- идентификатор пользователя (12 байт)
+    login: String,                // <- логин пользователя (не более 15 символов или 30 байт)
+Раскрыть
+Database.txt
+5 кб
+https://www.prisma.io/dataguide/mongodb/mongodb-datatypes
+Prisma's Data Guide
+MongoDB Data Types | Prisma's Data Guide
+In this guide, we'll cover data types in MongoDB.
+MongoDB Data Types | Prisma's Data Guide
+Рыжий Чипс — 25.10.2022
+http://se.moevm.info/doku.php/staff:courses:no_sql_introduction:calculating_data_model_size
+Aleksey Lambin — 26.10.2022
+Изображение
+Изображение
+Aleksey Lambin — 26.10.2022
+Database
+
+auth:
+{
+    _id: ObjectId,                  // <- идентификатор пользователя (12 байт)
+    login: String,                  // <- логин пользователя (не более 15 символов или 30 байт)
+Раскрыть
+Database.txt
+5 кб
+sex: Enum ('FEMALE', 'MALE')
+person_status: Enum ('WORKING', 'ON_HOLIDAY', 'SEEK_LEAVE', 'NOT_WORKING')
+document_status: Enum ('ORDERED', 'IN_PROGRESS', 'DONE', 'CANCELED')
+waiddew — 26.10.2022
+Мы будем использовать походу bson types:
+https://www.mongodb.com/docs/v5.0/reference/bson-types/
+BSON Types
+BSON Types
+все таблицы в единственном числе
+waiddew — 26.10.2022
+зачем писать NULL рядом с полем? (там по умолчанию все поля nullable)
+Рыжий Чипс — 26.10.2022
+'JUNIOR_BACKEND_DEVELOPER',
+                'MIDDLE_BACKEND_DEVELOPER',
+                'SENIOR_BACKEND_DEVELOPER',
+                'JUNIOR_FRONTEND_DEVELOPER',
+                'MIDDLE_FRONTEND_DEVELOPER',
+                'SENIOR_FRONTEND_DEVELOPER',
+                'JUNIOR_QA_DEVELOPER',
+                'MIDDLE_QA_DEVELOPER',
+                'SENIOR_QA_DEVELOPER',
+                'JUNIOR_DEVOPS_DEVELOPER',
+                'MIDDLE_DEVOPS_DEVELOPER',
+                'SENIOR_DEVOPS_DEVELOPER',
+                'HR',
+                'PM',
+                'ADMINISTRATION',
+                'OFFICE_MANAGER'
+Aleksey Lambin — 26.10.2022
+Тип вложенного файла: unknown
+model.drawio
+6.94 KB
+Рыжий Чипс — 26.10.2022
+person_to_project
+Aleksey Lambin — Вчера, в 0:30
+Database
+
+auth:                               // <- коллекция, содержащая информацию для аутентификации (итого 74 байта)
+{
+    _id: ObjectId,                  // <- идентификатор пользователя (12 байт)
+    login: String,                  // <- логин пользователя (до 15 символов или 15 байт)
+Раскрыть
+Database.txt
+6 кб
+waiddew — Вчера, в 0:38
+password hash example:
+TE3KubFENw8dKoMa6pB2p4YJ+s0=
+
+Aleksey Lambin — Вчера, в 0:45
+Изображение
+Изображение
+Рыжий Чипс — Вчера, в 1:00
+INSERT INTO auth
+VALUES ('78a1f37d-9043-4783-a5f5-3a353d9bff49', 'your_aksioma', ''),
+       ('b45afca5-6e10-4968-98a4-d45d5a6bba60', 'waiddew', ''),
+       ('0fb7403e-0f9b-449c-8636-85df3ffdc92b', 'alelambin', '');
+
+INSERT INTO nationality
+VALUES ('f7d00710-1f66-46d8-a3de-b0e4536774a1', 'BELARUS'),
+       ('a5a47416-95ee-4839-aa77-c3e9e06403e3', 'RUSSIA');
+
+INSERT INTO office
+VALUES ('bd711817-57a0-430d-8553-15dd4e3d7de0', 'Офис Витебск', 'Улица Чапаева, дом 34'),
+       ('5cdd0c6d-2f9c-477b-8d26-db429dcf11a2', 'Офис Ставрополь', 'Улица Людникова, дом 12'),
+       ('6b79d640-88fa-46cb-bd72-dbb28b335faf', 'Офис Тобольск', 'Улица Фрунзе, дом 23');
+
+INSERT INTO person
+VALUES ('78a1f37d-9043-4783-a5f5-3a353d9bff49', 'Екатерина', 'Аксёнова', 'Александровна', 'FEMALE',
+        '2001-11-14', '2022-04-14', 'JUNIOR_BACKEND_DEVELOPER', 'WORKING', '79112886438',
+        'kate.kate6575@gmail.com', '11:00', '20:00', 'bd711817-57a0-430d-8553-15dd4e3d7de0',
+        'f7d00710-1f66-46d8-a3de-b0e4536774a1', 'BM5653789', 'Октябрьский РОВД', '2015-10-14',
+        'Улица Торжковская, дом 15',1000000, 'Устала'),
+       ('b45afca5-6e10-4968-98a4-d45d5a6bba60', 'Арутюнян', 'Владимир', 'Валерьевич', 'MALE',
+        '2001-02-25', '2022-03-10', 'SENIOR_BACKEND_DEVELOPER', 'WORKING', '79615673412',
+        'waiddew@gmail.com', '11;00', '20:00', 'a5a47416-95ee-4839-aa77-c3e9e06403e3',
+        '5cdd0c6d-2f9c-477b-8d26-db429dcf11a2', '95653789', 'Ставропольский РОВД', '2015-11-14',
+        'Улица Торжковская, дом 15', 2000000, 'Мало спит'),
+       ('0fb7403e-0f9b-449c-8636-85df3ffdc92b', 'Лвмбин', 'Алексей', 'Владимирович', 'MALE',
+        '2001-10-18', '2022-04-25', 'MIDDLE_BACKEND_DEVELOPER', 'WORKING', '79116753412',
+        'alelambin@gmail.com', '10:00', '19:00', 'a5a47416-95ee-4839-aa77-c3e9e06403e3',
+        '6b79d640-88fa-46cb-bd72-dbb28b335faf', '34253789', 'Тобольский РОВД', '2015-12-14',
+        'Улица Торжковская, дом 15', 3000000, 'Продуктивный');
+Рыжий Чипс — Вчера, в 1:50
+INSERT INTO auth
+VALUES ('78a1f37d-9043-4783-a5f5-3a353d9bff49', 'your_aksioma', ''),
+       ('b45afca5-6e10-4968-98a4-d45d5a6bba60', 'waiddew', ''),
+       ('0fb7403e-0f9b-449c-8636-85df3ffdc92b', 'alelambin', '');
+
+INSERT INTO nationality
+Раскрыть
+message.txt
+4 кб
+Aleksey Lambin — Вчера, в 1:53
+Database
+
+auth:                               // <- коллекция, содержащая информацию для аутентификации (итого 74 байта)
+{
+    _id: ObjectId,                  // <- идентификатор пользователя (12 байт)
+    login: String,                  // <- логин пользователя (до 15 символов или 15 байт)
+Раскрыть
+Database.txt
+6 кб
+8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV
+ndlXbmW/PZqxZ6wDhHyBwn6PKSPc6AKn
+m5C09li7Qk/4ifl7IwPXxY96j/YNQZq4
+Aleksey Lambin — Вчера, в 2:06
+http://se.moevm.info/doku.php/staff:courses:no_sql_introduction:calculating_data_model_size
+Рыжий Чипс — Вчера, в 2:13
+https://github.com/moevm/nosql2h22-bottle-neck/wiki/%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85
+GitHub
+Модель данных · moevm/nosql2h22-bottle-neck Wiki
+Contribute to moevm/nosql2h22-bottle-neck development by creating an account on GitHub.
+Модель данных · moevm/nosql2h22-bottle-neck Wiki
+Рыжий Чипс — Вчера, в 2:51
+DO
+$$
+    BEGIN
+        IF NOT EXISTS(SELECT 1
+                      FROM pg_type t
+                               LEFT JOIN pg_namespace n ON t.typnamespace = n.oid
+Раскрыть
+message.txt
+10 кб
+Aleksey Lambin — Вчера, в 3:18
+# Модель данных
+
+## Нереляционная база данных
+
+Разработана схема нереляционной базы данных:
+
+Раскрыть
+model.md
+8 кб
+Рыжий Чипс — Вчера, в 3:53
+-- Сценарий использования – "Авторизация"
+
+-- Переменные для "честности запроса"
+WITH my_constants_1 (usr_login, usr_password_hash) as (
+    values ('your_aksioma', '8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV')
+)
+Раскрыть
+message.txt
+4 кб
+Рыжий Чипс — Вчера, в 11:25
+Все sql use cases
+-- Сценарий использования – "Авторизация"
+
+-- Переменные для "честности запроса"
+WITH my_constants (usr_login, usr_password_hash)
+         as (values ('your_aksioma', '8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV'))
+Раскрыть
+message.txt
+19 кб
+Рыжий Чипс — Вчера, в 18:02
+-- Сценарий использования – "Авторизация"
+
+-- Переменные для "честности запроса"
+WITH my_constants (usr_login, usr_password_hash)
+         as (values ('your_aksioma', '8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV'))
+Раскрыть
+message.txt
+19 кб
+Рыжий Чипс — Сегодня, в 0:12
+-- Сценарий использования – "Просмотр дней отпуска"
+
+-- Переменные для "честности запроса"
+WITH my_constants (usr_activity, start_date, end_date) as (values ('Отпуск', '2022-10-21', '2022-10-25'))
+
+SELECT watcher.date
+FROM watcher
+         JOIN project p on p.id = watcher.project_id
+WHERE p.name = (SELECT usr_activity FROM my_constants)
+  AND watcher.date BETWEEN (SELECT start_date::date FROM my_constants)
+      AND (SELECT end_date::date FROM my_constants);
+
+-- Сценарий использования – "Просмотр больничных дней"
+
+-- Переменные для "честности запроса"
+WITH my_constants (usr_activity, start_date, end_date) as (values ('Больничный', '2022-10-21', '2022-10-25'))
+
+SELECT watcher.date
+FROM watcher
+         JOIN project p on p.id = watcher.project_id
+WHERE p.name = (SELECT usr_activity FROM my_constants)
+  AND watcher.date BETWEEN (SELECT start_date::date FROM my_constants)
+    AND (SELECT end_date::date FROM my_constants);
+waiddew — Сегодня, в 2:09
+use it
+
+db.createCollection("auth", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+Раскрыть
+message.txt
+21 кб
+waiddew — Сегодня, в 2:56
+{"_id": new ObjectId("6359c5e317df7f8644c2cea2"), "login": "your_aksioma", "password_hash": "8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV"}
+Aleksey Lambin — Сегодня, в 3:59
+https://www.tutorialspoint.com/how-to-convert-birth-date-records-to-age-with-mongodb
+How to convert birth date records to age with MongoDB
+How to convert birth date records to age with MongoDB - Let us create a collection with documents −> db.demo754.insertOne({DateOfBirth:new Date(2000-05-03 ...
+waiddew — Сегодня, в 4:25
+Изображение
+let nameMatchExpression = "а";
+let surnameMatchExpression = "а";
+let patronymicMatchExpression = "а";
+let sexMatch = "FEMALE"
+let ageMinMatchExpression = 18;
+let ageMaxMatchExpression = 30;
+let positionMatchExpression = "a";
+let emailMatchExpression = "a";
+let phoneMatchExpression = "7";
+
+db.person.aggregate([
+    {$addFields: {age: {$dateDiff: {startDate: "$birthday", endDate: new Date(), unit: "year"}}}},
+    {
+        $match: {
+            name: {$regex: nameMatchExpression, $options: "i"},
+            surname: {$regex: surnameMatchExpression, $options: "i"},
+            patronymic: {$regex: patronymicMatchExpression, $options: "i"},
+            sex: {$regex: sexMatch, $options: "i"},
+            age: {$gte: ageMinMatchExpression, $lte: ageMaxMatchExpression},
+            position: {$regex: positionMatchExpression, $options: "i"},
+            "contacts.email": {$regex: emailMatchExpression, $options: "i"},
+            "contacts.phone_number": {$regex: phoneMatchExpression, $options: "i"},
+        }
+    },
+    {$unset: "age"},
+    {$project: {_id: 1, name: 1, surname: 1, position: 1}}
+]);
+waiddew — Сегодня, в 4:44
+use it
+
+db.createCollection("auth", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+Раскрыть
+message.txt
+25 кб
+waiddew — Сегодня, в 5:14
+use it
+
+db.createCollection("auth", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+Раскрыть
+message.txt
+26 кб
+Aleksey Lambin — Сегодня, в 5:27
+# Модель данных
+
+## Нереляционная база данных
+
+### Графическое представление
+
+Раскрыть
+model.md
+47 кб
+Изображение
+Изображение
+﻿
+use it
+
+db.createCollection("auth", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "login", "password_hash"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId",
+                }, login: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 15
+                }, password_hash: {
+                    bsonType: "string",
+                    minLength: 32,
+                    maxLength: 32
+                }
+            }
+        }
+    }
+});
+
+db.createCollection("person", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "name", "surname", "sex", "birthday", "first_work_date", "position", "status", "contacts", "job_time", "office_id", "confidential", "comment"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId",
+                },
+                name: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 40,
+                },
+                surname: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 40,
+                },
+                patronymic: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 40,
+                },
+                sex: {
+                    bsonType: "string",
+                    enum: ["FEMALE", "MALE"],
+                },
+                birthday: {
+                    bsonType: "date",
+                },
+                first_work_date: {
+                    bsonType: "date",
+                },
+                position: {
+                    bsonType: "string",
+                    enum: ["JUNIOR_BACKEND_DEVELOPER", "MIDDLE_BACKEND_DEVELOPER", "SENIOR_BACKEND_DEVELOPER", "JUNIOR_FRONTEND_DEVELOPER", "MIDDLE_FRONTEND_DEVELOPER", "SENIOR_FRONTEND_DEVELOPER", "JUNIOR_QA_DEVELOPER", "MIDDLE_QA_DEVELOPER", "SENIOR_QA_DEVELOPER", "JUNIOR_DEVOPS_DEVELOPER", "MIDDLE_DEVOPS_DEVELOPER", "SENIOR_DEVOPS_DEVELOPER", "HR", "PM", "ADMINISTRATION", "OFFICE_MANAGER"],
+                },
+                status: {
+                    bsonType: "string",
+                    enum: ["WORKING", "ON_HOLIDAY", "SEEK_LEAVE", "NOT_WORKING"],
+                },
+                contacts: {
+                    bsonType: "object",
+                    required: ["phone_number", "email"],
+                    additionalProperties: false,
+                    properties: {
+                        phone_number: {
+                            bsonType: "string",
+                            minLength: 1,
+                            maxLength: 20,
+                            pattern: "^\\d+$",
+                        }, email: {
+                            bsonType: "string",
+                            minLength: 1,
+                            maxLength: 100,
+                            pattern: "^[\\w\\d.-]+@[\\w\\d]+\\.[\\w\\d]+$",
+                        },
+                    }
+                },
+                job_time: {
+                    bsonType: "object",
+                    required: ["start", "end"],
+                    additionalProperties: false,
+                    properties: {
+                        start: {
+                            bsonType: "string",
+                            minLength: 5,
+                            maxLength: 5,
+                            pattern: "^([01]\\d|2[0-3]):[0-5]\\d$",
+                        }, end: {
+                            bsonType: "string",
+                            minLength: 5,
+                            maxLength: 5,
+                            pattern: "^([01]\\d|2[0-3]):[0-5]\\d$",
+                        },
+                    }
+                },
+                office_id: {
+                    bsonType: "objectId",
+                },
+                confidential: {
+                    bsonType: "object",
+                    required: ["passport_data", "nationality", "address", "salary", "project_ids"],
+                    additionalProperties: false,
+                    properties: {
+                        passport_data: {
+                            bsonType: "object",
+                            required: ["number", "issued_place", "issued_date"],
+                            additionalProperties: false,
+                            properties: {
+                                number: {
+                                    bsonType: "string",
+                                    minLength: 1,
+                                    maxLength: 20,
+                                },
+                                issued_place: {
+                                    bsonType: "string",
+                                    minLength: 1,
+                                    maxLength: 100,
+                                },
+                                issued_date: {
+                                    bsonType: "date",
+                                },
+                            }
+                        },
+                        nationality: {
+                            bsonType: "string",
+                            minLength: 1,
+                            maxLength: 50,
+                        },
+                        address: {
+                            bsonType: "string",
+                            minLength: 1,
+                            maxLength: 200,
+                        },
+                        salary: {
+                            bsonType: "long",
+                            minimum: 0,
+                        },
+                        project_ids: {
+                            bsonType: "array",
+                            minItems: 1,
+                            maxItems: 10,
+                            uniqueItems: true,
+                            items: {
+                                bsonType: "objectId",
+                            }
+                        }
+                    }
+                },
+                comment: {
+                    bsonType: "string",
+                    maxLength: 512,
+                },
+            }
+        }
+    }
+});
+
+db.createCollection("watcher", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "user_id", "date", "project_id", "minutes_amount", "comment"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                user_id: {
+                    bsonType: "objectId",
+                },
+                date: {
+                    bsonType: "date",
+                },
+                project_id: {
+                    bsonType: "objectId",
+                },
+                minutes_amount: {
+                    bsonType: "long",
+                    minimum: 0,
+                    maximum: 1440
+                },
+                comment: {
+                    bsonType: "string",
+                    maxLength: 512,
+                }
+            }
+        }
+    }
+});
+
+db.createCollection("document", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "user_id", "type", "order_date", "status"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                user_id: {
+                    bsonType: "objectId",
+                },
+                type: {
+                    bsonType: "string",
+                    enum: ["INCOME_STATEMENT", "WORK_STATEMENT"],
+                },
+                order_date: {
+                    bsonType: "date",
+                },
+                status: {
+                    bsonType: "string",
+                    enum: ["ORDERED", "IN_PROGRESS", "DONE", "CANCELED"]
+                }
+            }
+        }
+    }
+});
+
+db.createCollection("project", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "name"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                name: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 50
+                }
+            }
+        }
+    }
+});
+
+db.createCollection("office", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["_id", "name"],
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                name: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 50,
+                },
+                address: {
+                    bsonType: "string",
+                    minLength: 1,
+                    maxLength: 200,
+                }
+            }
+        }
+    }
+});
+
+
+db.getCollection("auth").insertMany([
+    {
+        _id: ObjectId("6359c5e317df7f8644c2cea2"),
+        login: "your_aksioma",
+        password_hash: "8BeNwoHhivE2zbcrhHnX9vqcAZWP1MnV"
+    },
+    {
+        _id: ObjectId("6359c7518d8c0a7a7102b16b"),
+        login: "waiddew",
+        password_hash: "ndlXbmW/PZqxZ6wDhHyBwn6PKSPc6AKn"
+    },
+    {
+        _id: ObjectId("6359c8cdc5b9e790613b4c6e"),
+        login: "alelambin",
+        password_hash: "m5C09li7Qk/4ifl7IwPXxY96j/YNQZq4"
+    }
+])
+
+db.getCollection("office").insertMany([
+    {
+        _id: ObjectId("6359c11c2416d454722f826f"),
+        name: "Офис Витебск",
+        address: "Улица Чапаева, дом 34",
+    },
+    {
+        _id: ObjectId("6359c1851ac10bc03d41ec6f"),
+        name: "Офис Ставрополь",
+        address: "Улица Людникова, дом 12",
+    },
+    {
+        _id: ObjectId("6359c18e62901a6a7db55ef7"),
+        name: "Офис Тобольск",
+        address: "Улица Фрунзе, дом 23",
+    },
+])
+
+db.getCollection("project").insertMany([
+    {
+        _id: ObjectId("6359c20fea6757775ceca286"),
+        name: "Buhinder",
+    },
+    {
+        _id: ObjectId("6359c217e6faf17102236f02"),
+        name: "Госуслуги",
+    },
+    {
+        _id: ObjectId("6359c21b9b681fad015df5ec"),
+        name: "Курс крипты",
+    },
+])
+
+db.getCollection("person").insertMany([
+    {
+        _id: ObjectId("6359c5e317df7f8644c2cea2"),
+        name: "Екатерина",
+        surname: "Аксёнова",
+        patronymic: "Александровна",
+        sex: "FEMALE",
+        birthday: new Date("2001-11-14"),
+        first_work_date: new Date("2022-04-14"),
+        position: "JUNIOR_BACKEND_DEVELOPER",
+        status: "WORKING",
+        contacts: {
+            phone_number: "79112886438",
+            email: "kate.kate6575@gmail.com"
+        },
+        job_time: {
+            start: "11:00",
+            end: "20:00"
+        },
+        office_id: ObjectId("6359c11c2416d454722f826f"),
+        confidential: {
+            passport_data: {
+                number: "BM5653789",
+                issued_place: "Октябрьский РОВД",
+                issued_date: new Date("2015-10-14")
+            },
+            nationality: "BELARUS",
+            address: "Улица Торжковская, дом 15",
+            salary: Long("1000000"),
+            project_ids: [ObjectId("6359c20fea6757775ceca286")]
+        },
+        comment: "Устала"
+    },
+    {
+        _id: ObjectId("6359c7518d8c0a7a7102b16b"),
+        name: "Владимир",
+        surname: "Арутюнян",
+        patronymic: "Валерьевич",
+        sex: "MALE",
+        birthday: new Date("2001-02-25"),
+        first_work_date: new Date("2022-03-10"),
+        position: "SENIOR_BACKEND_DEVELOPER",
+        status: "WORKING",
+        contacts: {
+            phone_number: "79615673412",
+            email: "waid123@gmail.com"
+        },
+        job_time: {
+            start: "11:00",
+            end: "20:00"
+        },
+        office_id: ObjectId("6359c1851ac10bc03d41ec6f"),
+        confidential: {
+            passport_data: {
+                number: "95653789",
+                issued_place: "Ставропольский РОВД",
+                issued_date: new Date("2015-11-14")
+            },
+            nationality: "RUSSIA",
+            address: "Улица Торжковская, дом 15",
+            salary: Long("2000000"),
+            project_ids: [ObjectId("6359c217e6faf17102236f02")]
+        },
+        comment: "Мало спит"
+    },
+    {
+        _id: ObjectId("6359c8cdc5b9e790613b4c6e"),
+        name: "Алексей",
+        surname: "Ламбин",
+        patronymic: "Владимирович",
+        sex: "MALE",
+        birthday: new Date("2001-10-18"),
+        first_work_date: new Date("2022-04-25"),
+        position: "MIDDLE_BACKEND_DEVELOPER",
+        status: "WORKING",
+        contacts: {
+            phone_number: "79116753412",
+            email: "alelambin@gmail.com"
+        },
+        job_time: {
+            start: "10:00",
+            end: "19:00"
+        },
+        office_id: ObjectId("6359c18e62901a6a7db55ef7"),
+        confidential: {
+            passport_data: {
+                number: "34253789",
+                issued_place: "Тобольский РОВД",
+                issued_date: new Date("2015-12-14")
+            },
+            nationality: "RUSSIA",
+            address: "Улица Торжковская, дом 15",
+            salary: Long("3000000"),
+            project_ids: [ObjectId("6359c21b9b681fad015df5ec")]
+        },
+        comment: "Продуктивный"
+    }
+])
+
+db.getCollection("watcher").insertMany([
+    {
+        _id: ObjectId("6359d0baf1339ed8b904fb00"),
+        user_id: ObjectId("6359c5e317df7f8644c2cea2"),
+        date: new Date("2022-10-22"),
+        project_id: ObjectId("6359c20fea6757775ceca286"),
+        minutes_amount: Long("360"),
+        comment: "Сделала авторизацию"
+    },
+    {
+        _id: ObjectId("6359d0c3115416e46e3609a6"),
+        user_id: ObjectId("6359c7518d8c0a7a7102b16b"),
+        date: new Date("2022-10-22"),
+        project_id: ObjectId("6359c217e6faf17102236f02"),
+        minutes_amount: Long("480"),
+        comment: "Создал бд для справок о доходах"
+    },
+    {
+        _id: ObjectId("6359d0c74740cf592677187d"),
+        user_id: ObjectId("6359c8cdc5b9e790613b4c6e"),
+        date: new Date("2022-10-22"),
+        project_id: ObjectId("6359c21b9b681fad015df5ec"),
+        minutes_amount: Long("420"),
+        comment: "Добавил генератор задач"
+    }
+])
+
+db.getCollection("document").insertMany([
+    {
+        _id: ObjectId("6359d3a576a26bfdc3a506e8"),
+        user_id: ObjectId("6359c5e317df7f8644c2cea2"),
+        type: "INCOME_STATEMENT",
+        order_date: new Date("2022-10-20"),
+        status: "IN_PROGRESS"
+    },
+    {
+        _id: ObjectId("6359d3ab518959c50c28cabe"),
+        user_id: ObjectId("6359c7518d8c0a7a7102b16b"),
+        type: "WORK_STATEMENT",
+        order_date: new Date("2022-10-10"),
+        status: "DONE"
+    },
+    {
+        _id: ObjectId("6359d3b1e3cfaf528035efe8"),
+        user_id: ObjectId("6359c8cdc5b9e790613b4c6e"),
+        type: "WORK_STATEMENT",
+        order_date: new Date("2022-10-26"),
+        status: "ORDERED"
+    },
+])
+
+
+let kateAuth = db.getCollection("auth").findOne({login: "your_aksioma"});
+let vladimirAuth = db.getCollection("auth").findOne({login: "waiddew"});
+let alexeyAuth = db.getCollection("auth").findOne({login: "alelambin"});
+
+
+//-- Сценарий использования – "Авторизация"
+db.getCollection("auth")
+    .findOne({login: kateAuth.login, password_hash: kateAuth.password_hash}, {_id: 1});
+
+
+//-- Сценарий использования – "Добавление задачи"
+let firstWeekDate = new Date("1900-02-20")
+let lastWeekDate = new Date("2033-02-20")
+
+// Получение всех записей для пользователя за промежуток
+db.watcher
+    .aggregate(
+        {$match: {date: {$gte: firstWeekDate, $lte: lastWeekDate}, user_id: kateAuth._id}},
+        {$group: {_id: "$date", minutes_amount: {$sum: "$minutes_amount"}}}
+        )
+
+// Добавление задачи
+let row = ObjectId("6359d0baf1339ed8b904fb00")
+let newProjectId = ObjectId("6359c217e6faf17102236f02")
+let newComment = "random new comment"
+let newMinutes = Long("1020")
+let specificDateForNewRow = new Date("2030-10-22")
+
+db.watcher.insertOne({
+    user_id: kateAuth._id,
+    date: specificDateForNewRow,
+    project_id: newProjectId,
+    comment: newComment,
+    minutes_amount: newMinutes
+})
+
+
+// -- Сценарий использования – "Просмотр задач"
+let specificDay = new Date("2032-10-22")
+db.watcher.find({user_id: kateAuth._id, date: specificDay})
+
+
+// -- Сценарий использования – "Изменение задачи"
+// Обновление одной записи
+db.watcher.updateOne(
+    {_id: row},
+    {$set: {project_id: newProjectId, comment: newComment, minutes_amount: newMinutes}}
+    )
+
+
+// -- Сценарий использования – "Удаление задачи"
+db.watcher.deleteOne({_id: row})
+
+
+// -- Сценарий использования – "Просмотр дней отпуска"
+// Возвращение списка дат
+db.watcher.aggregate([
+    {$match: {date: {$gte: firstWeekDate, $lte: lastWeekDate}, user_id: kateAuth._id}},
+    {$lookup: {from: "project", localField: "project_id", foreignField: "_id", as: "project_info"}},
+    // {$unwind: {path: "$project_info", preserveNullAndEmptyArrays: false}},
+    {$match: {"project_info.name": "Отпуск"}},
+    {$group: {_id: "$date"}},
+])
+
+
+// -- Сценарий использования – "Просмотр больничных дней"
+// Возвращение списка дат
+db.watcher.aggregate([
+    {$match: {date: {$gte: firstWeekDate, $lte: lastWeekDate}, user_id: kateAuth._id}},
+    {$lookup: {from: "project", localField: "project_id", foreignField: "_id", as: "project_info"}},
+    {$unwind: {path: "$project_info", preserveNullAndEmptyArrays: false}},
+    {$match: {"project_info.name": "Больничный"}},
+    {$group: {_id: "$date"}},
+])
+
+
+// -- Сценарий использования – "Изменение своих контактов"
+// Получение полной информации о человеке
+db.person.findOne({_id: kateAuth._id})
+
+// Изменение одного поля
+let newPhone = "791112929292"
+let newEmail = "muzan@demon.com"
+
+db.person.updateOne(
+    {_id: kateAuth._id},
+    {$set: {contacts: {phone_number: newPhone, email: newEmail}}}
+    )
+
+
+// -- Сценарий использования – "Поиск сотрудника"
+let matchExpression = "а"
+db.person.find(
+    {name: {$regex: matchExpression, $options: "i"}},
+    {_id: 1, name: 1, surname: 1, position: 1})
+
+
+// -- Сценарий использования – "Расширенный поиск сотрудника"
+db.person.find(
+    {
+        name: {$regex: matchExpression, $options: "i"},
+        surname: {$regex: matchExpression, $options: "i"},
+        date: {$regex: matchExpression, $options: "i"},
+        sex: {$regex: matchExpression, $options: "i"},
+        birthday: {$regex: matchExpression, $options: "i"}
+        position: {$regex: matchExpression, $options: "i"},
+        contacts: {
+            email: {$regex: matchExpression, $options: "i"},
+            phone_number: {$regex: matchExpression, $options: "i"},
+        }
+    },
+    {_id: 1, name: 1, surname: 1, position: 1}
+    )
+
+// второй способ
+let nameMatchExpression = "а";
+let surnameMatchExpression = "а";
+let patronymicMatchExpression = "а";
+let sexMatch = "FEMALE"
+let ageMinMatchExpression = 18;
+let ageMaxMatchExpression = 30;
+let positionMatchExpression = "a";
+let emailMatchExpression = "a";
+let phoneMatchExpression = "7";
+
+db.person.aggregate([
+    {$addFields: {age: {$dateDiff: {startDate: "$birthday", endDate: new Date(), unit: "year"}}}},
+    {
+        $match: {
+            name: {$regex: nameMatchExpression, $options: "i"},
+            surname: {$regex: surnameMatchExpression, $options: "i"},
+            patronymic: {$regex: patronymicMatchExpression, $options: "i"},
+            sex: {$regex: sexMatch, $options: "i"},
+            age: {$gte: ageMinMatchExpression, $lte: ageMaxMatchExpression},
+            position: {$regex: positionMatchExpression, $options: "i"},
+            "contacts.email": {$regex: emailMatchExpression, $options: "i"},
+            "contacts.phone_number": {$regex: phoneMatchExpression, $options: "i"},
+        }
+    },
+    {$unset: "age"},
+    {$project: {_id: 1, name: 1, surname: 1, position: 1}}
+]);
+
+
+// -- Сценарий использования – "Заказ справки"
+// Добавление заказанной справки
+let nowDate = new Date()
+let selectedStatus = "IN_PROGRESS"
+let selectedType = "INCOME_STATEMENT"
+db.document.insertOne({order_date: nowDate, status: selectedStatus, type: selectedType, user_id: kateAuth._id})
+
+
+// -- Сценарий использования – "Просмотр заказанных справок"
+db.document.find({user_id: kateAuth._id})
+
+
+// -- Сценарий использования – "Просмотр списанных часов другим пользователем"
+// ПОВТОР КОДА, НЕ ВИЖУ СМЫСЛА ВСТАВЛЯТЬ ЭТОТ СЦЕНАРИЙ
+
+// Предпросмотр недели с суммой часов по каждому дню
+db.watcher
+    .aggregate(
+        {$match: {date: {$gte: firstWeekDate, $lte: lastWeekDate}, user_id: kateAuth._id}},
+        {$group: {_id: "$date", minutes_amount: {$sum: "$minutes_amount"}}}
+        )
+
+// Конкретный день
+db.watcher.find({user_id: kateAuth._id, date: specificDay})
+
+
+// -- Сценарий использования – "Добавление сотрудника"
+// Добавление в auth
+let muzanAuth = {
+    _id: ObjectId("635b14aecc60fb4f04fc25d1"),
+    login: "muzan_kibutsuji",
+    password_hash: "f415df421177820c3a69db701f424efb"
+}
+db.getCollection("auth").insertOne(muzanAuth)
+
+// Добавление в person
+let muzanPerson = {
+    _id: muzanAuth._id,
+    name: "Muzan",
+    surname: "Kibutsuji",
+    patronymic: "Example",
+    sex: "MALE",
+    birthday: new Date("1095-01-01"),
+    first_work_date: new Date("1096-01-01"),
+    position: "ADMINISTRATION",
+    status: "ON_HOLIDAY",
+    contacts: {
+        phone_number: "1038492382334",
+        email: "muzan@demon.com",
+    },
+    job_time: {
+        start: "09:00",
+        end: "18:00",
+    },
+    office_id: ObjectId("6359c18e62901a6a7db55ef7"),
+    confidential: {
+        passport_data: {
+            number: "BM3478689",
+            issued_place: "Октябрьский РОВД",
+            issued_date: new Date("2015-10-14")
+        },
+        nationality: "RUSSIA",
+        address: "Улица Торжковская, дом 15",
+        salary: Long("1000000"),
+        project_ids: [ObjectId("6359c217e6faf17102236f02")],
+    },
+    comment: "Молодой специалист"
+}
+db.person.insertOne(muzanPerson)
+
+
+// -- Сценарий использования – "Изменение информации о сотруднике"
+let muzanUpdatedPerson = muzanPerson = {
+    status: "WORKING",
+    contacts: {
+        phone_number: "100001001111",
+    },
+    job_time: {
+        start: "10:00",
+        end: "19:00",
+    },
+    confidential: {
+        salary: Long("312000000"),
+    },
+    comment: "Обновленная информация"
+}
+db.person.updateOne(
+    {_id: muzanAuth._id},
+    {$set: muzanUpdatedPerson}
+    )
+
+
+// -- Сценарий использования – "Удаление сотрудника"
+db.person.deleteOne({_id: muzanAuth._id})
+
+
+// -- Сценарий использования – "Просмотр всех заказанных справок"
+db.document.find({
+    user_id: kateAuth._id,
+    status: {$in: ["DONE", "ORDERED"]}
+});
+
+
+// -- Сценарий использования – "Изменение статуса заказа"
+let documentId = ObjectId("6359beb21b389817992710c0")
+let newDocumentStatus = "DONE"
+
+db.document.updateOne(
+    {_id: documentId},
+    {$set: {status: newDocumentStatus}}
+)
+
+
+// -- Сценарий использования – "Массовый импорт / экспорт данных"
+// Auth
+db.getCollection("auth").find()
+
+// Person
+db.person.aggregate([
+    {$lookup: {from: "office", localField: "office_id", foreignField: "_id", as: "office_info"}},
+    {$lookup: {from: "project", localField: "confidential.project_ids", foreignField: "_id", as: "confidential.projects_info"}},
+    {$unset: ["office_id", "confidential.project_ids"]}
+])
+
+// Document
+db.document.find()
+
+// Watcher
+db.watcher.aggregate(
+    {$lookup: {from: "project", localField: "project_id", foreignField: "_id", as: "project_info"}},
+    {$unset: ["project_id"]}
+)
