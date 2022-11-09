@@ -1,9 +1,8 @@
-package com.nosql.authservice
+package com.nosql.authservice.repository
 
 import com.nosql.authservice.common.integration.AbstractIntegrationTest
 import com.nosql.authservice.factory.SimpleCheckTestDataFactory
 import com.nosql.authservice.factory.SimpleCheckTestDataFactory.Companion.ID
-import com.nosql.authservice.repository.SimpleCheckRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import kotlinx.coroutines.runBlocking
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 
-class SimpleCheckIntegrationTest : AbstractIntegrationTest() {
+class SimpleCheckRepositoryIntegrationTest : AbstractIntegrationTest() {
 
     @Autowired
     lateinit var simpleCheckRepository: SimpleCheckRepository
