@@ -1,0 +1,42 @@
+### Sign up person
+POST http://localhost:8080/public/api/v1/person/sign-up
+Content-Type: application/json
+
+{
+  "id": "6359c5e317df7f8644c2cea2",
+  "name": "Екатерина",
+  "surname": "Аксёнова",
+  "patronymic": "Александровна",
+  "sex": "FEMALE",
+  "birthday": "2001-11-14",
+  "firstWorkDate": "2022-04-14",
+  "position": "JUNIOR_BACKEND_DEVELOPER",
+  "status": "WORKING",
+  "contacts": {
+    "phoneNumber": "79112886438",
+    "email": "kate.kate6575@gmail.com"
+  },
+  "jobTime": {
+    "start": "11:00",
+    "end": "20:00"
+  },
+  "officeId": "6359c11c2416d454722f826f",
+  "confidential": {
+    "passportData": {
+      "number": "BM5653789",
+      "issuedPlace": "Октябрьский РОВД",
+      "issuedDate": "2015-10-14"
+    },
+    "nationality": "BELARUS",
+    "address": "Улица Торжковская, дом 15",
+    "salary": "1000000",
+    "projectIds": [
+      "6359c20fea6757775ceca286"
+    ]
+  },
+  "comment": "Устала"
+}
+
+### Delete person
+DELETE http://localhost:8080/public/api/v1/person/6359c5e317df7f8644c2cea2
+Content-Type: application/json

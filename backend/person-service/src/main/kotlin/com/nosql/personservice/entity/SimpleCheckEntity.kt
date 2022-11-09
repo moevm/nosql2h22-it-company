@@ -1,4 +1,4 @@
-package com.nosql.authservice.entity
+package com.nosql.personservice.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 data class SimpleCheckEntity(
 
     @Id
-    val id: String? = null,
+    var id: String? = null,
 
     @Field("message")
     val message: String,
