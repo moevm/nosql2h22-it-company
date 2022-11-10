@@ -2,8 +2,8 @@ package com.nosql.authservice.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class SignInResponseDto (
+data class RefreshTokenDto(
 
-    @JsonProperty("id")
-    val id: String,
+    @JsonProperty("refreshToken")
+    val refreshToken: String,
 )

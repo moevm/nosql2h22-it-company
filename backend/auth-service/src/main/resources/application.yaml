@@ -16,3 +16,14 @@ mongock:
   default-migration-author: mongock
   migration-scan-package:
     - com.nosql.authservice.configuration.mongodb.migration
+
+jwt:
+  issuer: ${JWT_ISSUER:nosql-it-company}
+  access-token:
+    ttl: ${JWT_ACCESS_TOKEN_TTL:PT30M}
+  refresh-token:
+    ttl: ${JWT_REFRESH_TOKEN_TTL:P180D}
+  keystore:
+    password: ${JWT_KEYSTORE_PASSWORD:}
+    resource-path: ${JWT_KEYSTORE_RESOURCE_PATH:jwks/nosql-jwt.jks}
+    keypair-alias: ${JWT_KEYSTORE_KEYPAIR_ALIAS:nosql-it-company-jwt}
