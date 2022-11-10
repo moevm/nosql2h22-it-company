@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 @EnableReactiveMongoRepositories(basePackages = ["com.nosql.authservice.repository"])
 class MongoConfig : AbstractReactiveMongoConfiguration() {
 
-    @Value("\${spring.data.mongodb.auth.uri}")
+    @Value("\${spring.data.mongodb.uri}")
     private lateinit var mongoUri: String
 
     override fun reactiveMongoClient(): MongoClient {
