@@ -7,6 +7,9 @@ spring:
   main:
     banner-mode: off
 
+app:
+  secret-key: ${APP_SECRET_KEY:}
+
 mongock:
   enabled: true
   transaction-enabled: false
