@@ -35,8 +35,8 @@ class UserController(
     ) = userService.signIn(userDto)
 
     companion object {
-        const val SING_IN_URL_PATH = "sing-in"
-        const val SING_UP_URL_PATH = "sing-up"
+        const val SING_IN_URL_PATH = "sign-in"
+        const val SING_UP_URL_PATH = "sign-up"
 
     }
 }

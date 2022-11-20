@@ -1,2 +1,18 @@
 spring:
-  application.name: auth-service
+  application:
+    name: auth-service
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:}
+  main:
+    banner-mode: off
+
+app:
+  secret-key: ${APP_SECRET_KEY:}
+
+mongock:
+  enabled: true
+  transaction-enabled: false
+  default-migration-author: mongock
+  migration-scan-package:
+    - com.nosql.authservice.configuration.mongodb.migration

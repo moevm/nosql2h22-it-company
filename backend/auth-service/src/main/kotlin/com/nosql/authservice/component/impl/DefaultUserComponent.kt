@@ -8,7 +8,6 @@ import com.nosql.authservice.common.logger.logFailed
 import com.nosql.authservice.common.logger.logSuccess
 import com.nosql.authservice.common.logger.logger
 import com.nosql.authservice.component.UserComponent
-import com.nosql.authservice.dto.UserDto
 import com.nosql.authservice.entity.UserEntity
 import com.nosql.authservice.exception.UserAlreadyExistsException
 import com.nosql.authservice.repository.UserRepository
@@ -27,8 +26,8 @@ class DefaultUserComponent(
     private val log: Logger by logger()
 
     @Transactional
-    override suspend fun saveIfNotExists(user: UserEntity): UserEntity {
-        val operationDetails = "Save if not exists 'auth' record with login = ${user.login}"
+    override suspend fun save(user: UserEntity): UserEntity {
+        val operationDetails = "Save 'auth' record with login = ${user.login}"
 
         log.logBefore(operationDetails)
 
@@ -53,13 +52,13 @@ class DefaultUserComponent(
     }
 
     @Transactional(readOnly = true)
-    override suspend fun getByLoginAndPasswordHash(userDto: UserDto): UserEntity {
-        val (login, passwordHash) = userDto
+    override suspend fun getByLoginAndPasswordHash(user: UserEntity): UserEntity {
+        val login = user.login
         val operationDetails = "Get 'auth' record by login = '$login'"
 
         log.logBefore(operationDetails)
 
-        return userRepository.getByLoginAndPasswordHash(login, passwordHash)
+        return userRepository.getByLoginAndPasswordHash(login, user.passwordHash)
             .switchIfEmpty(
                 NotFoundException(
                     description = "Not found 'auth' record by given login = '$login'"
@@ -89,9 +88,11 @@ class DefaultUserComponent(
             is DataIntegrityViolationException -> {
                 DataIntegrityViolationApplicationException()
             }
+
             is ApplicationException -> {
                 error.apply { description = "$operationFailedWithMessage error: $errorDetails" }
             }
+
             else -> {
                 ApplicationException(
                     description = "$operationFailedWithMessage unexpected error: $errorDetails",
