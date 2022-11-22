@@ -1,0 +1,40 @@
+body {
+    background-color: #E5383B;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10vh;
+    gap: 3rem;
+
+    position: absolute;
+    width: 52vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.title h1 {
+    max-width: 100%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 84px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #F5F3F4;
+}
+
+.title img {
+    max-width: 100%;
+}

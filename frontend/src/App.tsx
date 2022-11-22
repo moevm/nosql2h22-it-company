@@ -1,12 +1,15 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {AuthPage} from "./pages/AuthPage";
+import {HomePage} from "./pages/HomePage";
 
 function App() {
     return (
-        <div className="container">
-            <h1>Test</h1>
-            <Button variant="contained">Test button</Button>
-        </div>
+        <Routes>
+            <Route path="/" element={ <Navigate to="/auth" /> } />
+            <Route path="/auth" element={ <AuthPage/> } />
+            <Route path="/home" element={ <HomePage/> } />
+        </Routes>
     );
 }
 
