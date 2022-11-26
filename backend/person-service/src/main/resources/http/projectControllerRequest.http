@@ -1,0 +1,3 @@
+### Get all project
+GET http://localhost:8081/public/api/v1/project
+Content-Type: application/json

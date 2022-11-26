@@ -7,13 +7,14 @@ import com.nosql.personservice.entity.JobTimeEntity
 import com.nosql.personservice.entity.PersonEntity
 import com.nosql.personservice.util.convert
 import org.bson.types.ObjectId
+import org.springframework.context.annotation.Lazy
 import org.springframework.core.convert.ConversionService
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 
 @Component
 class PersonDtoToPersonEntityConverter(
-    private val conversionService: ConversionService,
+    @Lazy private val conversionService: ConversionService,
 ) : Converter<PersonDto, PersonEntity> {
 
     override fun convert(from: PersonDto): PersonEntity {

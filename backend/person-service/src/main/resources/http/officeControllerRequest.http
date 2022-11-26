@@ -1,0 +1,3 @@
+### Get all offices
+GET http://localhost:8081/public/api/v1/office
+Content-Type: application/json

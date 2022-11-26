@@ -5,5 +5,6 @@ enum class ApplicationExceptionCodeEnum(val message: String) {
     DECODING_EXCEPTION("Invalid request"),
     NOT_FOUND_EXCEPTION("Not found any record by provided parameters"),
     UNEXPECTED_EXCEPTION("Unexpected application error"),
+    USER_ALREADY_EXISTS_EXCEPTION("User with given id already exists"),
     VALIDATION_EXCEPTION("Invalid data"),
 }
