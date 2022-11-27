@@ -1,9 +1,11 @@
 package com.nosql.personservice.controller
 
+import com.nosql.personservice.constants.openapi.SECURITY_SCHEME_IDENTIFIER
 import com.nosql.personservice.constants.url.PUBLIC_API_V1_PERSON_URL_PATH
 import com.nosql.personservice.dto.ContactsDto
 import com.nosql.personservice.dto.PersonDto
 import com.nosql.personservice.service.PersonService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -20,6 +22,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping(PUBLIC_API_V1_PERSON_URL_PATH)
+@SecurityRequirement(name = SECURITY_SCHEME_IDENTIFIER)
 class PersonController(
     private val personService: PersonService,
 ) {
@@ -91,6 +94,7 @@ class PersonController(
     ) = personService.delete(personId)
 
     companion object {
+
         private const val SIGN_UP_URL_PATH = "sign-up"
         private const val PERSON_ID_URL_PATH = "{personId}"
         private const val ALL_URL_PATH = "all"
