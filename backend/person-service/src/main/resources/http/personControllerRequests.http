@@ -1,5 +1,6 @@
 ### Sign up person
 POST http://localhost:8081/public/api/v1/person/sign-up
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
@@ -40,10 +41,12 @@ Content-Type: application/json
 
 ### Delete person
 DELETE http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Update person's contacts
 PUT http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2/contacts
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
@@ -53,16 +56,20 @@ Content-Type: application/json
 
 ### Get person
 GET http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Get person by name
 GET http://localhost:8081/public/api/v1/person?name=кат
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Extended get person
 GET http://localhost:8081/public/api/v1/person/extended
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Get all person
 GET http://localhost:8081/public/api/v1/person/all?page=0
+Authorization: Bearer <access_token>
 Content-Type: application/json
