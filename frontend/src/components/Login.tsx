@@ -13,6 +13,8 @@ import TextField from "@mui/material/TextField";
 import {ThemeProvider} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import loginTheme from "../themes/LoginTheme";
+import {IUser, IError} from "../models";
+import {USER_TOKEN} from "../constants";
 
 interface IData {
     login: string,
@@ -36,13 +38,13 @@ export function Login() {
             ...data,
             showAlert: false,
         });
-        axios.post(`http://localhost:8080/public/api/v1/auth/sign-in`, {
+        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}${process.env.REACT_APP_AUTH_SIGN_IN}`, {
             login: data.login,
             password: data.password
         }).then(response => {
-            localStorage.setItem("jwt", response.data.jwt);
-            navigate("/home");
-        }).catch(error => {
+            localStorage.setItem(USER_TOKEN, response.data.jwt);
+            navigate(`${process.env.REACT_APP_HOME_PAGE}`);
+        }).catch((error: IError) => {
             setData({
                 ...data,
                 showAlert: true,

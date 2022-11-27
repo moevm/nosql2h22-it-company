@@ -6,9 +6,9 @@ import {HomePage} from "./pages/HomePage";
 function App() {
     return (
         <Routes>
-            <Route path="/" element={ <Navigate to="/auth" /> } />
-            <Route path="/auth" element={ <AuthPage/> } />
-            <Route path="/home" element={ <HomePage/> } />
+            <Route path="/" element={ <Navigate to={`${process.env.REACT_APP_AUTH_PAGE}`} /> } />
+            <Route path={process.env.REACT_APP_AUTH_PAGE} element={ <AuthPage/> } />
+            <Route path={process.env.REACT_APP_HOME_PAGE} element={ <HomePage/> } />
         </Routes>
     );
 }
