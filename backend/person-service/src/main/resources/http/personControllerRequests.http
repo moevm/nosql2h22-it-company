@@ -1,5 +1,5 @@
 ### Sign up person
-POST http://localhost:8080/public/api/v1/person/sign-up
+POST http://localhost:8081/public/api/v1/person/sign-up
 Content-Type: application/json
 
 {
@@ -7,6 +7,7 @@ Content-Type: application/json
   "name": "Екатерина",
   "surname": "Аксёнова",
   "patronymic": "Александровна",
+  "age": "25",
   "sex": "FEMALE",
   "birthday": "2001-11-14",
   "firstWorkDate": "2022-04-14",
@@ -38,5 +39,30 @@ Content-Type: application/json
 }
 
 ### Delete person
-DELETE http://localhost:8080/public/api/v1/person/6359c5e317df7f8644c2cea2
+DELETE http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+Content-Type: application/json
+
+### Update person's contacts
+PUT http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2/contacts
+Content-Type: application/json
+
+{
+  "phoneNumber": "375297169253",
+  "email": "kate6575@gmail.com"
+}
+
+### Get person
+GET http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+Content-Type: application/json
+
+### Get person by name
+GET http://localhost:8081/public/api/v1/person?name=кат
+Content-Type: application/json
+
+### Extended get person
+GET http://localhost:8081/public/api/v1/person/extended
+Content-Type: application/json
+
+### Get all person
+GET http://localhost:8081/public/api/v1/person/all?page=0
 Content-Type: application/json

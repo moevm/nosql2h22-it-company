@@ -1,4 +1,4 @@
-package com.nosql.authservice.common.exception.handler
+package com.nosql.personservice.common.exception.handler
 
 import com.nosql.personservice.common.exception.ApplicationException
 import com.nosql.personservice.common.exception.dto.ApplicationErrorDto
