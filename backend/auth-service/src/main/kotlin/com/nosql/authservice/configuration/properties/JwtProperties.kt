@@ -7,9 +7,15 @@ import javax.validation.constraints.NotBlank
 
 @Validated
 @ConstructorBinding
-@ConfigurationProperties("app")
-data class AppProperties(
+@ConfigurationProperties("jwt")
+data class JwtProperties(
 
     @field:NotBlank
-    val secretKey: String,
+    val issuer: String,
+
+    val accessToken: TokenProperties,
+
+    val refreshToken: TokenProperties,
+
+    val keystore: KeystoreProperties,
 )

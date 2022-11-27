@@ -1,8 +1,8 @@
 package com.nosql.authservice.controller
 
 import com.nosql.authservice.constants.url.PUBLIC_API_V1_AUTH_URL_PATH
-import com.nosql.authservice.dto.UserDto
-import com.nosql.authservice.service.UserService
+import com.nosql.authservice.dto.RefreshTokenDto
+import com.nosql.authservice.service.JwtService
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -12,31 +12,21 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping(PUBLIC_API_V1_AUTH_URL_PATH)
-class UserController(
-    private val userService: UserService,
+class JwtController(
+    private val jwtService: JwtService,
 ) {
 
     @PostMapping(
-        path = [SIGN_UP_URL_PATH],
+        path = [UPDATE_TOKENS_BY_REFRESH],
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE],
     )
-    suspend fun signUp(
-        @Valid @RequestBody userDto: UserDto,
-    ) = userService.signUp(userDto)
-
-    @PostMapping(
-        path = [SIGN_IN_URL_PATH],
-        consumes = [APPLICATION_JSON_VALUE],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun signIn(
-        @Valid @RequestBody userDto: UserDto,
-    ) = userService.signIn(userDto)
+    suspend fun updateTokensByRefresh(
+        @Valid @RequestBody refreshTokenDto: RefreshTokenDto,
+    ) = jwtService.updateTokensByRefresh(refreshTokenDto.refreshToken)
 
     companion object {
 
-        const val SIGN_IN_URL_PATH = "sign-in"
-        const val SIGN_UP_URL_PATH = "sign-up"
+        const val UPDATE_TOKENS_BY_REFRESH = "token/refresh"
     }
 }

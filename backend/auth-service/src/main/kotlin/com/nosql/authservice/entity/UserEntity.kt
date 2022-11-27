@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
 @Document(collection = "user")
-data class UserEntity (
+data class UserEntity(
 
     @Id
     var id: ObjectId? = null,
@@ -15,5 +15,5 @@ data class UserEntity (
     val login: String,
 
     @Field("password_hash")
-    var passwordHash: String
+    var passwordHash: String,
 )
