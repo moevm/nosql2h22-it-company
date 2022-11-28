@@ -2,8 +2,9 @@ package com.nosql.authservice.configuration.mongodb.migration
 
 import com.nosql.authservice.configuration.mongodb.migration.AbstractChangeUnit.Companion.CHANGE_UNIT_AUTHOR
 import com.nosql.authservice.configuration.mongodb.migration.UserChangeUnitV2.Companion.CHANGE_UNIT_PARAMETER
-import com.nosql.authservice.dto.UserDto
+import com.nosql.authservice.dto.SignUpRequestDto
 import com.nosql.authservice.entity.UserEntity
+import com.nosql.authservice.enumerator.Role
 import com.nosql.authservice.util.convert
 import io.mongock.api.annotations.ChangeUnit
 import io.mongock.api.annotations.Execution
@@ -18,11 +19,16 @@ class UserChangeUnitV2(
 
     @Execution
     override fun execute() {
-        val objects = listOf(
-            UserDto(login = "alexey", password = "alexey"),
-            UserDto(login = "kate", password = "kate"),
-            UserDto(login = "vladimir", password = "vladimir"),
-        ).map { conversionService.convert(it, UserEntity::class) }
+        val objects = Role.values()
+            .toList()
+            .map {
+                SignUpRequestDto(
+                    login = it.name.lowercase(),
+                    password = it.name.lowercase(),
+                    role = it,
+                )
+            }
+            .map { conversionService.convert(it, UserEntity::class) }
 
         mongoTemplate.insertAll(objects)
     }

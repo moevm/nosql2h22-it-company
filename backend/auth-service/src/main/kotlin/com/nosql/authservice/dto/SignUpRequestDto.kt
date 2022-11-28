@@ -3,13 +3,14 @@ package com.nosql.authservice.dto
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.nosql.authservice.enumerator.Role
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class UserDto(
+data class SignUpRequestDto(
 
     @JsonProperty("login")
     @field:NotBlank(message = "login must not be null or blank")
@@ -25,4 +26,7 @@ data class UserDto(
         message = "password can contain letters, numbers, '_', '-', '@', '*'"
     )
     val password: String,
+
+    @JsonProperty("role")
+    val role: Role,
 )

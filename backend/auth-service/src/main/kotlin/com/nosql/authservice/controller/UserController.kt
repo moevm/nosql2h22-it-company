@@ -1,6 +1,7 @@
 package com.nosql.authservice.controller
 
 import com.nosql.authservice.constants.url.PUBLIC_API_V1_AUTH_URL_PATH
+import com.nosql.authservice.dto.SignUpRequestDto
 import com.nosql.authservice.dto.UserDto
 import com.nosql.authservice.service.UserService
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -22,8 +23,8 @@ class UserController(
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun signUp(
-        @Valid @RequestBody userDto: UserDto,
-    ) = userService.signUp(userDto)
+        @Valid @RequestBody signUpRequestDto: SignUpRequestDto,
+    ) = userService.signUp(signUpRequestDto)
 
     @PostMapping(
         path = [SIGN_IN_URL_PATH],
