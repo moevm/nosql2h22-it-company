@@ -1,10 +1,9 @@
-### Sign up person
+### Save watcher
 POST http://localhost:8082/public/api/v1/watcher
-Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NTFmYTViN2YzZGEwOTExYjgxZWQzIiwiaWF0IjoxNjY5NjY4Nzg3LCJleHAiOjE2Njk2NzA1ODcsInJvbGUiOiJERVZFTE9QRVIifQ.fu5DX_UaeiQjGdeyenwmIz9s3PIS8hvK3pqMVnJee0CkdI4Cg9NwqhgAKKHuzlApHEXlxlheqrQNs1plY-KYbBPyXUOcCb0-TF3CjVnmRY8j_kFg5uH2SR70YoWAr-xU_3a_9ezRiFUzJgKRE2cZ6cwJ4cfqj9kOhm8nhrQBTjDVxipDg3FQLqs12rPVu5anUmhSIFoF0z4bWUAVLC_GmVG8SuRziPCYLj4cstFdMP93EF7vjzufqJplkfYE-b8tc0yjDcManymlwIcAkFAWwwqGnMGejgpD5_BhV3v5sn28nDQ1DFeegllhiIgyQPs2p2zkHDVdR-2xLmW_8Ui66Q
+Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "id": "6359d0baf1339ed8b904fb00",
   "date": "2022-10-22",
   "projectId": "6359c20fea6757775ceca286",
   "minutesAmount": "360",

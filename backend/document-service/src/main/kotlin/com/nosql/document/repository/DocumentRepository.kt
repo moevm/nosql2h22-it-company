@@ -1,10 +1,10 @@
-package com.nosql.watcher.repository
+package com.nosql.document.repository
 
-import com.nosql.watcher.entity.WatcherEntity
+import com.nosql.document.entity.DocumentEntity
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface WatcherRepository : ReactiveMongoRepository<WatcherEntity, ObjectId>{
+interface DocumentRepository : ReactiveMongoRepository<DocumentEntity, ObjectId> {
 }

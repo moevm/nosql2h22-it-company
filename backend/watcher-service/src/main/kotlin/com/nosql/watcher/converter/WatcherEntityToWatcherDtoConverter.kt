@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 class WatcherEntityToWatcherDtoConverter : Converter<WatcherEntity, WatcherDto> {
 
     override fun convert(source: WatcherEntity) = WatcherDto(
-        id = source.id.toHexString(),
+        id = source.id!!.toHexString(),
         date = source.date,
         projectId = source.projectId.toHexString(),
         minutesAmount = source.minutesAmount,
