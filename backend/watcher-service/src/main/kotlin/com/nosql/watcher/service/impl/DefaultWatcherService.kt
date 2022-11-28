@@ -1,0 +1,45 @@
+package com.nosql.watcher.service.impl
+
+import com.nosql.watcher.component.WatcherComponent
+import com.nosql.watcher.dto.DefaultApiResponseDto
+import com.nosql.watcher.dto.WatcherDto
+import com.nosql.watcher.entity.WatcherEntity
+import com.nosql.watcher.service.WatcherService
+import com.nosql.watcher.util.convert
+import org.bson.types.ObjectId
+import org.springframework.core.convert.ConversionService
+import org.springframework.data.domain.Pageable
+import org.springframework.stereotype.Service
+import java.util.Date
+
+@Service
+class DefaultWatcherService(
+    private val watcherComponent: WatcherComponent,
+    private val conversionService: ConversionService,
+): WatcherService {
+    override suspend fun save(userId: String, watcherDto: WatcherDto): WatcherDto {
+        val watcher = makeWatcherEntity(userId, watcherDto)
+        val savedWatcher = watcherComponent.save(watcher)
+        return conversionService.convert(savedWatcher, WatcherDto::class)
+    }
+
+    override suspend fun get(watcherId: String): WatcherDto {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllByUserIdAndDate(userId: String, date: Date, pageable: Pageable): List<WatcherDto> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun update(watcherDto: WatcherDto) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun delete(watcherId: String): DefaultApiResponseDto {
+        TODO("Not yet implemented")
+    }
+
+    private fun makeWatcherEntity(userId: String, watcherDto: WatcherDto) =
+        conversionService.convert(watcherDto, WatcherEntity::class)
+            .apply { this.userId = ObjectId(userId) }
+}
