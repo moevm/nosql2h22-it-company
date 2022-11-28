@@ -43,6 +43,7 @@ dependencies {
 	implementation("commons-codec:commons-codec:1.15")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.13")
 
 	compileOnly("io.jsonwebtoken:jjwt-api:0.11.5")
 	compileOnly("io.mongock:mongock-springboot:5.1.6")

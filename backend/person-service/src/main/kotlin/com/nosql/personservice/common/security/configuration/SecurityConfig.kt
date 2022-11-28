@@ -17,7 +17,12 @@ class SecurityConfig {
         return http.csrf().disable()
             .httpBasic().disable()
             .formLogin().disable()
-            .authorizeExchange { it.anyExchange().authenticated() }
+            .authorizeExchange {
+                it.pathMatchers("/v3/api-docs/**", "/webjars/**", "/swagger-ui.html")
+                    .permitAll()
+                    .anyExchange()
+                    .authenticated()
+            }
             .oauth2ResourceServer { it.jwt() }
             .build()
     }
