@@ -9,12 +9,12 @@ export function AuthPage() {
     }, []);
 
     return (
-        <>
-            <div className="title">
+        <div className="auth-background">
+            <div className="auth-div">
                 <h1>ИС для IT-компаний</h1>
                 <img src={AUTH_PAGE_IMAGE} alt="Logo" />
             </div>
             <Auth />
-        </>
+        </div>
     );
 }
