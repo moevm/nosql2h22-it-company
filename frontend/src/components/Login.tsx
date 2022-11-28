@@ -38,7 +38,7 @@ export function Login() {
             ...data,
             showAlert: false,
         });
-        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}${process.env.REACT_APP_AUTH_SIGN_IN}`, {
+        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}/${process.env.REACT_APP_AUTH_SIGN_IN}`, {
             login: data.login,
             password: data.password
         }).then(response => {
@@ -111,6 +111,7 @@ export function Login() {
                     <Button
                         type="submit"
                         fullWidth
+                        sx={{textTransform: 'none', fontSize: '24px'}}
                     >
                         Войти
                     </Button>

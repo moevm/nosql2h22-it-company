@@ -1,12 +1,14 @@
-body {
+.auth-background {
     background-color: #E5383B;
+    width: 100vw;
+    height: 100vh;
 }
 
 ::-webkit-scrollbar {
     width: 0;
 }
 
-.title {
+.auth-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,9 +23,8 @@ body {
     top: 0;
 }
 
-.title h1 {
+.auth-div h1 {
     max-width: 100%;
-
     font-style: normal;
     font-weight: 700;
     font-size: 75px;
@@ -31,10 +32,9 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-
     color: #F5F3F4;
 }
 
-.title img {
+.auth-div img {
     max-width: 100%;
 }
