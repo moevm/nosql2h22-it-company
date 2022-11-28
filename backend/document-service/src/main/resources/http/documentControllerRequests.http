@@ -1,0 +1,10 @@
+### Save document
+POST http://localhost:8083/public/api/v1/document
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "orderDate": "2022-10-22",
+  "type": "INCOME_STATEMENT",
+  "status": "ORDERED"
+}

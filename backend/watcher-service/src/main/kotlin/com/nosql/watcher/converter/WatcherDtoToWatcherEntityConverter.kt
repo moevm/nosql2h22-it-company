@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class WatcherDtoToWatcherEntityConverter : Converter<WatcherDto, WatcherEntity> {
     override fun convert(source: WatcherDto) = WatcherEntity(
-        id = ObjectId(source.id),
+        id = source.id?.let { ObjectId(it) },
         date = source.date,
         projectId = ObjectId(source.projectId),
         minutesAmount = source.minutesAmount,
