@@ -1,5 +1,6 @@
 package com.nosql.watcher.service.impl
 
+import com.nosql.watcher.component.ProjectComponent
 import com.nosql.watcher.component.WatcherComponent
 import com.nosql.watcher.dto.DefaultApiResponseDto
 import com.nosql.watcher.dto.WatcherDto
@@ -15,6 +16,7 @@ import java.util.Date
 @Service
 class DefaultWatcherService(
     private val watcherComponent: WatcherComponent,
+    private val projectComponent: ProjectComponent,
     private val conversionService: ConversionService,
 ): WatcherService {
     override suspend fun save(userId: String, watcherDto: WatcherDto): WatcherDto {
@@ -33,6 +35,28 @@ class DefaultWatcherService(
         watcherComponent.getAllByUserIdAndDate(ObjectId(userId), from, to, pageable)
             .map { conversionService.convert(it, WatcherDto::class) }
 
+    override suspend fun getAllByUserIdAndSick(
+        userId: String,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): List<WatcherDto> {
+        val projectId = projectComponent.getIdByName(SICK_PROJECT_NAME)
+        return watcherComponent.getAllByUserIdAndDateAndProjectId(ObjectId(userId), projectId, from, to, pageable)
+            .map { conversionService.convert(it, WatcherDto::class) }
+    }
+
+    override suspend fun getAllByUserIdAndVacation(
+        userId: String,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): List<WatcherDto> {
+        val projectId = projectComponent.getIdByName(VACATION_PROJECT_NAME)
+        return watcherComponent.getAllByUserIdAndDateAndProjectId(ObjectId(userId), projectId, from, to, pageable)
+            .map { conversionService.convert(it, WatcherDto::class) }
+    }
+
     override suspend fun update(watcherDto: WatcherDto) {
         TODO("Not yet implemented")
     }
@@ -44,4 +68,10 @@ class DefaultWatcherService(
     private fun makeWatcherEntity(userId: String, watcherDto: WatcherDto) =
         conversionService.convert(watcherDto, WatcherEntity::class)
             .apply { this.userId = ObjectId(userId) }
+
+
+    companion object {
+        private const val SICK_PROJECT_NAME = "Больничный"
+        private const val VACATION_PROJECT_NAME = "Отпуск"
+    }
 }

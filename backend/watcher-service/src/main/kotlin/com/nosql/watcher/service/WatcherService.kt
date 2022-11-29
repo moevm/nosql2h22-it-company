@@ -15,6 +15,10 @@ interface WatcherService {
 
     suspend fun getAllByUserIdAndDate(userId: String, from: Date, to: Date, pageable: Pageable): List<WatcherDto>
 
+    suspend fun getAllByUserIdAndSick(userId: String, from: Date, to: Date, pageable: Pageable): List<WatcherDto>
+
+    suspend fun getAllByUserIdAndVacation(userId: String, from: Date, to: Date, pageable: Pageable): List<WatcherDto>
+
     suspend fun update(watcherDto: WatcherDto)
 
     suspend fun delete(watcherId: String): DefaultApiResponseDto
