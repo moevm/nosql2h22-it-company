@@ -10,7 +10,7 @@ import java.util.Date
 class WatcherEntity (
 
     @Id
-    var id: ObjectId,
+    var id: ObjectId? = null,
 
     @Field("user_id")
     var userId: ObjectId? = null,

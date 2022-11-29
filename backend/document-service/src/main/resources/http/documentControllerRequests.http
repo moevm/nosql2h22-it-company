@@ -1,0 +1,25 @@
+### Save document
+POST http://localhost:8083/public/api/v1/document
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "orderDate": "2022-10-22",
+  "type": "INCOME_STATEMENT",
+  "status": "ORDERED"
+}
+
+### Get document
+GET http://localhost:8083/public/api/v1/document/6359d0baf1339ed8b904fb00
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Get document by user id
+GET http://localhost:8083/public/api/v1/document/all-own
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Get all document
+GET http://localhost:8083/public/api/v1/document/all?page=0
+Authorization: Bearer <access_token>
+Content-Type: application/json

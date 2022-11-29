@@ -10,7 +10,7 @@ import java.util.Date
 class WatcherDto (
 
     @JsonProperty("id")
-    var id: String,
+    var id: String? = null,
 
     @JsonProperty("date")
     val date: Date,
