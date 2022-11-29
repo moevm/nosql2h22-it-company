@@ -1,7 +1,12 @@
+server:
+  port: 8080
+
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:mongo@localhost:27017/it-service-db?authSource=admin
+      username: mongo
+      password: mongo
+      database: it-service-db
 
 app:
   secret-key: very-secret-key

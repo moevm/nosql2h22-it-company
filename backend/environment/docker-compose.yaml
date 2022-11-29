@@ -1,5 +1,15 @@
 version: '3.9'
 
+x-mongodb-variables: &default-mongodb-authentication
+  MONGODB_HOST: mongodb
+  MONGODB_PORT: 27017
+  MONGODB_USERNAME: mongo
+  MONGODB_PASSWORD: mongo
+  MONGODB_DATABASE: it-service-db
+
+x-auth-variables: &default-auth-jwks
+  JWKS_URI: http://auth-service:8080/public/api/v1/auth/.well-known/jwks.json
+
 services:
   mongodb:
     image: mongo:5.0.12
@@ -11,18 +21,57 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
 
-  postgresdb:
-    image: postgres:13
+  auth-service:
+    image: backend/auth-service
+    build:
+      context: ../auth-service
+    depends_on:
+      - mongodb
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres:/var/lib/postgresql/data
-      - ./sql_db/postgres-init.sql:/docker-entrypoint-initdb.d/db.sql
+      - "8080:8080"
     environment:
-      POSTGRES_DB: it-service-db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      <<: *default-mongodb-authentication
+      APP_SECRET_KEY: MIICXgIBAAKBgQDcJgPe+TWqKt3/6H7ChXh6yMAzBlejnnSiLrLzYYFhMdueDKHWJUtzpz9lEbt1wB7teRcjYG/uqiAlJGxyWj17Yv2uOS9MXROjdxyX8rTrEDlSX2KQWoJAYjalT15ISYMUOAOjpN9gnkJ+AB4Df86Lo5Z0DKU00If6I+7mH+zPuQIDAQABAoGBAMKcvIlNRvqCYLQMhJpTQTlR5E53CdxzhGmm3L04chZI6/tg8WQMnhHERM+FCHHEf9KwXBsC8pBKRpZvB4tjaLrZyH64r9YdO10tIKPXMyMJZbkn5ofT4NECobHHxOu4IyvS4IHGZqELoeoq68sdF9+Vwt2seNVoHxn5MyaQCVEBAkEA9UvKFRDQHV0VkahAP0O3h92mXgtoM8AUKlhK5a97kKg1AQXK1Q+ekRCemY7ItJ2MboimFOiCEvu+EbQEu/K6GQJBAOXBTTEIWSsMhys2yQHSbimhTfDOkNfJyofzZvpJnfr3/dvM7JKi/D2nxkWeL9y73uK/liBlak79ER/Eu6q4tqECQQD1M9XGSRBAyhQNjorqst57ym3MBMsdMBz4V1pHT6vNZtfVNd0ULpDrohlolvq60eLXe3HJ5MJiB5RwTeuNlY3BAkEAv+2hqTM7Id4eUHg8pDwAcOBh9qbokorsmHM5dB3pTgy6UVI30is7Ido0pFWH0BJVGABJzhhKHWAEXRCAYRZa4QJAcHHG2bleGO4iysHBcCX70vYe/bNclnPfTeMHfWvYYrPWNnDZvcgfyKSMjVYz88vvZCFnUTIgzwb3XHGI6LEgFA==
+      JWT_KEYSTORE_PASSWORD: MIICWgIBAAKBgFeGtMr+IjK5nSIgYdPAHSVzhkqsro8OPPtClTPaOFCuVmQ+rwm+1hDN9pocKCAfVBYVDCpjyWRHXYIPwOM8rlYBgz+Lbn4vTWBL+XZCPc1CZZByNydMTAoIe3QMRAp5C4/YmEeM33rWi5LKrg+IjJYwQEbznx3mvOTGa4jUDyxVAgMBAAECgYAwxk9vo4kZLViEUPlTEAbt/N/EM1CfRbbz6dnNaHjjdRONj2TpkGAoQy5+GNy/cdXg7F+4K51p9V8FgJPjzcf0XNOQSA/ivui51Ozo0Gl6e2Xe/vID/KcZs3NozRg8/A96KAWuOHzayFfufSdhsR5oPYIcB9fkWRw8XRTd/JohDQJBAJaEARyqwTVKxTUY7yklwpodqW6Mq5umcTlAAH03OPrjVcHl0mrcaRmRQplwmqeCfLxcl8JcNe4jDc8NK5NppF8CQQCU3cWfq3xwpwiKbRu/75i66PtUYdXg8ynUH8vns3cvaEXP9Oob5icL0xMGgMdJxvVVHVBk38KU3s3zGujnHkvLAkAFiPEphrX4Kbm6zCHvV24ikLisUgv1e1dqjYn3ENLNlxKOQM9OErDiuc7DKbrmMgw4OQdzpERvb2aQmKFjmFztAkAYPcTgq1woPAr3/6x1JN8KEMZch1H8v5wgHs1lfaP65E/5/TfiMyhIlKaUeIP7T5rDsXJV+toExANlgwxKFnThAkAzhZwmhrHKdN8m3J58O9W0Ri07ym+3xSsheZgH+VlMgmWwPAJnUMZtfRqUNYXcsAH2soPPRTC6rXmvJtJFtRt/
+
+  person-service:
+    image: backend/person-service
+    build:
+      context: ../person-service
+    depends_on:
+      - mongodb
+      - auth-service
+    ports:
+      - "8081:8080"
+    environment:
+      <<: *default-mongodb-authentication
+      <<: *default-auth-jwks
+
+  watcher-service:
+    image: backend/watcher-service
+    build:
+      context: ../watcher-service
+    depends_on:
+      - mongodb
+      - auth-service
+    ports:
+      - "8082:8080"
+    environment:
+      <<: *default-mongodb-authentication
+      <<: *default-auth-jwks
+
+  document-service:
+    image: backend/document-service
+    build:
+      context: ../document-service
+    depends_on:
+      - mongodb
+      - auth-service
+    ports:
+      - "8083:8080"
+    environment:
+      <<: *default-mongodb-authentication
+      <<: *default-auth-jwks
 
 volumes:
   mongodb-data:
-  postgres: {}

@@ -1,5 +1,16 @@
 spring:
-  application.name: person-service
+  application:
+    name: person-service
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      username: ${MONGODB_USERNAME:}
+      password: ${MONGODB_PASSWORD:}
+      database: ${MONGODB_DATABASE:}
+      authentication-database: admin
+  main:
+    banner-mode: off
   security:
     oauth2:
       resourceserver:
