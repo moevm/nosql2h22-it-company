@@ -13,6 +13,7 @@ import kotlinx.coroutines.reactor.awaitSingle
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 @Component
@@ -35,7 +36,41 @@ class DefaultDocumentComponent(
     }
 
     override suspend fun get(documentId: ObjectId): DocumentEntity {
-        TODO("Not yet implemented")
+
+        val operationDetails = "Get 'document' record with id = '$documentId'"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.findById(documentId)
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
+    override suspend fun getAll(pageable: Pageable): List<DocumentEntity> {
+
+        val operationDetails = "Get all 'document' records"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.findAllByIdNotNull(pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
+    override suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity> {
+
+        val operationDetails = "Get all 'document' records with userId = 'userId'"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.findAllByUserId(userId, pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
     }
 
     override suspend fun update(document: DocumentEntity) {
