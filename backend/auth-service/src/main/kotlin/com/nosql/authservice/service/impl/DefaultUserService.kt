@@ -2,6 +2,7 @@ package com.nosql.authservice.service.impl
 
 import com.nosql.authservice.component.UserComponent
 import com.nosql.authservice.dto.DefaultApiResponseDto
+import com.nosql.authservice.dto.SignUpRequestDto
 import com.nosql.authservice.dto.TokensDto
 import com.nosql.authservice.dto.UserDto
 import com.nosql.authservice.entity.UserEntity
@@ -18,8 +19,8 @@ class DefaultUserService(
     private val conversionService: ConversionService,
 ) : UserService {
 
-    override suspend fun signUp(userDto: UserDto): DefaultApiResponseDto {
-        conversionService.convert(userDto, UserEntity::class)
+    override suspend fun signUp(signUpRequestDto: SignUpRequestDto): DefaultApiResponseDto {
+        conversionService.convert(signUpRequestDto, UserEntity::class)
             .let { userComponent.save(it) }
 
         return DefaultApiResponseDto("ok")
@@ -29,7 +30,8 @@ class DefaultUserService(
         val user = conversionService.convert(userDto, UserEntity::class)
             .let { userComponent.getByLoginAndPasswordHash(it) }
         val userId = user.id!!.toHexString()
+        val role = user.role!!
 
-        return jwtService.generateTokens(userId)
+        return jwtService.generateTokens(userId, role)
     }
 }

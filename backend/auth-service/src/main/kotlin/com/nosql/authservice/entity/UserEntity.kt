@@ -1,5 +1,6 @@
 package com.nosql.authservice.entity
 
+import com.nosql.authservice.enumerator.Role
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -15,5 +16,8 @@ data class UserEntity(
     val login: String,
 
     @Field("password_hash")
-    var passwordHash: String,
+    val passwordHash: String,
+
+    @Field("role")
+    val role: Role? = null,
 )

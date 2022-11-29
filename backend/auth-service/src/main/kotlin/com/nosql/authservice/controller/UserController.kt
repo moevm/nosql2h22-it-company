@@ -17,15 +17,6 @@ class UserController(
 ) {
 
     @PostMapping(
-        path = [SIGN_UP_URL_PATH],
-        consumes = [APPLICATION_JSON_VALUE],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun signUp(
-        @Valid @RequestBody userDto: UserDto,
-    ) = userService.signUp(userDto)
-
-    @PostMapping(
         path = [SIGN_IN_URL_PATH],
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE],
@@ -37,6 +28,5 @@ class UserController(
     companion object {
 
         const val SIGN_IN_URL_PATH = "sign-in"
-        const val SIGN_UP_URL_PATH = "sign-up"
     }
 }
