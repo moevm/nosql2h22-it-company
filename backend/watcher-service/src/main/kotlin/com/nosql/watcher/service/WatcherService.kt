@@ -11,7 +11,9 @@ interface WatcherService {
 
     suspend fun get(watcherId: String): WatcherDto
 
-    suspend fun getAllByUserIdAndDate(userId: String, date: Date, pageable: Pageable): List<WatcherDto>
+    suspend fun getAll(pageable: Pageable): List<WatcherDto>
+
+    suspend fun getAllByUserIdAndDate(userId: String, from: Date, to: Date, pageable: Pageable): List<WatcherDto>
 
     suspend fun update(watcherDto: WatcherDto)
 

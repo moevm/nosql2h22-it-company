@@ -37,11 +37,41 @@ class DefaultWatcherComponent(
     }
 
     override suspend fun get(watcherId: ObjectId): WatcherEntity {
-        TODO("Not yet implemented")
+
+        val operationDetails = "Get 'watcher' record with id = '$watcherId'"
+
+        log.logBefore(operationDetails)
+
+        return watcherRepository.findById(watcherId)
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
     }
 
-    override suspend fun getAllByUserIdAndDate(userId: ObjectId, date: Date, pageable: Pageable): List<WatcherEntity> {
-        TODO("Not yet implemented")
+    override suspend fun getAll(pageable: Pageable): List<WatcherEntity> {
+
+        val operationDetails = "Get all 'watcher' records"
+
+        log.logBefore(operationDetails)
+
+        return watcherRepository.findAllByIdNotNull(pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
+    override suspend fun getAllByUserIdAndDate(userId: ObjectId, from: Date, to: Date, pageable: Pageable): List<WatcherEntity> {
+
+        val operationDetails = "Get all 'watcher' records with userId = 'userId'"
+
+        log.logBefore(operationDetails)
+
+        return watcherRepository.findAllByUserIdAndDateBetween(userId, from, to, pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
     }
 
     override suspend fun update(watcher: WatcherEntity) {
