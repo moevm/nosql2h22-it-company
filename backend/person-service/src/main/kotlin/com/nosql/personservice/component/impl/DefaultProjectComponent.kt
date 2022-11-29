@@ -10,6 +10,7 @@ import com.nosql.personservice.component.ProjectComponent
 import com.nosql.personservice.entity.ProjectEntity
 import com.nosql.personservice.repository.ProjectRepository
 import kotlinx.coroutines.reactor.awaitSingle
+import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.data.domain.Pageable
@@ -21,6 +22,18 @@ class DefaultProjectComponent(
 ) : ProjectComponent {
 
     private val log: Logger by logger()
+
+    override suspend fun getById(id: ObjectId): ProjectEntity {
+
+        val operationDetails = "Get 'project' record with id = '$id'"
+
+        log.logBefore(operationDetails)
+
+        return projectRepository.findById(id)
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
 
     override suspend fun getAll(pageable: Pageable): List<ProjectEntity> {
 

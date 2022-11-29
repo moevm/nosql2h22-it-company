@@ -10,6 +10,7 @@ import com.nosql.personservice.component.OfficeComponent
 import com.nosql.personservice.entity.OfficeEntity
 import com.nosql.personservice.repository.OfficeRepository
 import kotlinx.coroutines.reactor.awaitSingle
+import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.data.domain.Pageable
@@ -21,8 +22,20 @@ class DefaultOfficeComponent(
 ) : OfficeComponent {
 
     private val log: Logger by logger()
+    override suspend fun getById(id: ObjectId): OfficeEntity {
+
+        val operationDetails = "Get 'office' record with id = '$id'"
+
+        log.logBefore(operationDetails)
+
+        return officeRepository.findById(id)
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
 
     override suspend fun getAll(pageable: Pageable): List<OfficeEntity> {
+
         val operationDetails = "Get 'office' records"
 
         log.logBefore(operationDetails)
