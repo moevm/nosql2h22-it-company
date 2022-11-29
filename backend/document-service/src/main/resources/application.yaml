@@ -3,7 +3,12 @@ spring:
     name: document-service
   data:
     mongodb:
-      uri: ${MONGODB_URI:}
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      username: ${MONGODB_USERNAME:}
+      password: ${MONGODB_PASSWORD:}
+      database: ${MONGODB_DATABASE:}
+      authentication-database: admin
   main:
     banner-mode: off
   security:
