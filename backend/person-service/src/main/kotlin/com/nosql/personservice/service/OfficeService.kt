@@ -5,5 +5,7 @@ import org.springframework.data.domain.Pageable
 
 interface OfficeService {
 
+    suspend fun getById(id: String): OfficeDto
+
     suspend fun getAll(pageable: Pageable): List<OfficeDto>
 }
