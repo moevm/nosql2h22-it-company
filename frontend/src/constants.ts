@@ -1,4 +1,48 @@
 export const USER_TOKEN = "jwt";
 export const AUTH_PAGE_IMAGE = "auth_image.png";
 export const AUTH_PAGE_TITLE = "Auth";
-export const AUTH_HOME_TITLE = "Home";
+export const HOME_PAGE_TITLE = "Home";
+export const PERSON_PAGE_TITLE = "Person";
+export const PERSON_ADVANCED_SEARCH_ENUMS = [
+    {
+        name: "sex",
+        value: "Пол",
+        enum: [
+            {name: "UNDEFINED", value: "Не имеет значения"},
+            {name: "MALE", value: "Мужчина"},
+            {name: "FEMALE", value: "Женщина"}
+        ]
+    },
+    {
+        name: "position",
+        value: "Должность",
+        enum: [
+            {name: "JUNIOR_BACKEND_DEVELOPER", value: "Junior backend developer"},
+            {name: "MIDDLE_BACKEND_DEVELOPER", value: "Middle backend developer"},
+            {name: "SENIOR_BACKEND_DEVELOPER", value: "Senior backend developer"},
+            {name: "JUNIOR_FRONTEND_DEVELOPER", value: "Junior frontend developer"},
+            {name: "MIDDLE_FRONTEND_DEVELOPER", value: "Middle frontend developer"},
+            {name: "SENIOR_FRONTEND_DEVELOPER", value: "Senior frontend developer"},
+            {name: "JUNIOR_QA_DEVELOPER", value: "Junior QA developer"},
+            {name: "MIDDLE_QA_DEVELOPER", value: "Middle QA developer"},
+            {name: "SENIOR_QA_DEVELOPER", value: "Senior QA developer"},
+            {name: "JUNIOR_DEVOPS_DEVELOPER", value: "Junior devops developer"},
+            {name: "MIDDLE_DEVOPS_DEVELOPER", value: "Middle devops developer"},
+            {name: "SENIOR_DEVOPS_DEVELOPER", value: "Senior devops developer"},
+            {name: "HR", value: "HR"},
+            {name: "PM", value: "PM"},
+            {name: "ADMINISTRATION", value: "Administrator"},
+            {name: "OFFICE_MANAGER", value: "Office manager"}
+        ]
+    },
+    {
+        name: "status",
+        value: "Статус",
+        enum: [
+            {name: "WORKING", value: "Работает"},
+            {name: "ON_HOLIDAY", value: "В отпуске"},
+            {name: "SEEK_LEAVE", value: "На больничном"},
+            {name: "NOT_WORKING", value: "Уволен"}
+        ]
+    }
+]
