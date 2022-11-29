@@ -61,13 +61,37 @@ class DefaultWatcherComponent(
             .awaitSingle()
     }
 
-    override suspend fun getAllByUserIdAndDate(userId: ObjectId, from: Date, to: Date, pageable: Pageable): List<WatcherEntity> {
+    override suspend fun getAllByUserIdAndDate(
+        userId: ObjectId,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): List<WatcherEntity> {
 
-        val operationDetails = "Get all 'watcher' records with userId = 'userId'"
+        val operationDetails = "Get all 'watcher' records with userId = '$userId'"
 
         log.logBefore(operationDetails)
 
         return watcherRepository.findAllByUserIdAndDateBetween(userId, from, to, pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
+    override suspend fun getAllByUserIdAndDateAndProjectId(
+        userId: ObjectId,
+        projectId: ObjectId,
+        from: Date, to:
+        Date, pageable:
+        Pageable
+    ): List<WatcherEntity> {
+
+        val operationDetails = "Get all 'watcher' records with userId = '$userId' and projectId = '$projectId'"
+
+        log.logBefore(operationDetails)
+
+        return watcherRepository.findAllByUserIdAndProjectIdAndDateBetween(userId, projectId, from, to, pageable)
             .onErrorMap { handleError(it, operationDetails) }
             .collectList()
             .doOnSuccess { log.logSuccess(operationDetails) }
