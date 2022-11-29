@@ -23,13 +23,15 @@ class DefaultWatcherService(
         return conversionService.convert(savedWatcher, WatcherDto::class)
     }
 
-    override suspend fun get(watcherId: String): WatcherDto {
-        TODO("Not yet implemented")
-    }
+    override suspend fun get(watcherId: String) =  watcherComponent.get(ObjectId(watcherId))
+        .let { conversionService.convert(it, WatcherDto::class) }
 
-    override suspend fun getAllByUserIdAndDate(userId: String, date: Date, pageable: Pageable): List<WatcherDto> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAll(pageable: Pageable) = watcherComponent.getAll(pageable)
+        .map { conversionService.convert(it, WatcherDto::class) }
+
+    override suspend fun getAllByUserIdAndDate(userId: String, from: Date, to: Date, pageable: Pageable) =
+        watcherComponent.getAllByUserIdAndDate(ObjectId(userId), from, to, pageable)
+            .map { conversionService.convert(it, WatcherDto::class) }
 
     override suspend fun update(watcherDto: WatcherDto) {
         TODO("Not yet implemented")
