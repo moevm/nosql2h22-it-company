@@ -1,10 +1,10 @@
 ### Sign up person
-POST http://localhost:8081/public/api/v1/person/sign-up
+POST http://localhost:8081/admin/api/v1/person/sign-up
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
-  "id": "6359c5e317df7f8644c2cea2",
+  "id": "63851fa5b7f3da0911b81ed5",
   "name": "Екатерина",
   "surname": "Аксёнова",
   "patronymic": "Александровна",
@@ -40,12 +40,12 @@ Content-Type: application/json
 }
 
 ### Delete person
-DELETE http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+DELETE http://localhost:8081/admin/api/v1/person/6359c5e317df7f8644c2cea2
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Update person's contacts
-PUT http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2/contacts
+PUT http://localhost:8081/public/api/v1/person/contacts
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
@@ -55,12 +55,12 @@ Content-Type: application/json
 }
 
 ### Get person
-GET http://localhost:8081/public/api/v1/person/6359c5e317df7f8644c2cea2
+GET http://localhost:8081/public/api/v1/person
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Get person by name
-GET http://localhost:8081/public/api/v1/person?name=кат
+GET http://localhost:8081/public/api/v1/person/name?name=кат
 Authorization: Bearer <access_token>
 Content-Type: application/json
 

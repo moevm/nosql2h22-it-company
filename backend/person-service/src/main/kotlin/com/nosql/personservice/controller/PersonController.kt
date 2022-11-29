@@ -1,18 +1,17 @@
 package com.nosql.personservice.controller
 
+import com.nosql.personservice.common.auth.UserAuth
+import com.nosql.personservice.common.auth.UserAuthInfo
 import com.nosql.personservice.constants.openapi.SECURITY_SCHEME_IDENTIFIER
 import com.nosql.personservice.constants.url.PUBLIC_API_V1_PERSON_URL_PATH
 import com.nosql.personservice.dto.ContactsDto
-import com.nosql.personservice.dto.PersonDto
 import com.nosql.personservice.service.PersonService
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -27,30 +26,29 @@ class PersonController(
     private val personService: PersonService,
 ) {
 
-    @PostMapping(
-        path = [SIGN_UP_URL_PATH],
-        consumes = [APPLICATION_JSON_VALUE],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun signUp(
-        @Valid @RequestBody personDto: PersonDto,
-    ) = personService.signUp(personDto)
-
     @GetMapping(
-        path = [PERSON_ID_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun get(
+        @UserAuth userAuthInfo: UserAuthInfo,
+    ) = personService.get(userAuthInfo.userId)
+
+    @GetMapping(
+        value = [PERSON_ID_URL_PATH],
+        produces = [APPLICATION_JSON_VALUE],
+    )
+    suspend fun getById(
         @PathVariable personId: String,
     ) = personService.get(personId)
 
     @GetMapping(
-        path = [ALL_URL_PATH],
+        value = [ALL_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun getAll(@PageableDefault(page = 0, size = 20) pageable: Pageable) = personService.getAll(pageable)
 
     @GetMapping(
+        value = [NAME_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun getAllByName(
@@ -75,28 +73,19 @@ class PersonController(
     ) = personService.extendedGet(name, surname, patronymic, sex, position, status, startAge, endAge, pageable)
 
     @PutMapping(
-        path = [PERSON_ID_URL_PATH, CONTACTS_URL_PATH],
+        path = [CONTACTS_URL_PATH],
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun editContacts(
-        @PathVariable personId: String,
+        @UserAuth userAuthInfo: UserAuthInfo,
         @Valid @RequestBody contactsDto: ContactsDto,
-    ) = personService.editContacts(personId, contactsDto)
-
-    @DeleteMapping(
-        path = [PERSON_ID_URL_PATH],
-        consumes = [APPLICATION_JSON_VALUE],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun delete(
-        @PathVariable personId: String,
-    ) = personService.delete(personId)
+    ) = personService.editContacts(userAuthInfo.userId, contactsDto)
 
     companion object {
 
-        private const val SIGN_UP_URL_PATH = "sign-up"
         private const val PERSON_ID_URL_PATH = "{personId}"
+        private const val NAME_URL_PATH = "name"
         private const val ALL_URL_PATH = "all"
         private const val EXTENDED_URL_PATH = "extended"
         private const val CONTACTS_URL_PATH = "contacts"
