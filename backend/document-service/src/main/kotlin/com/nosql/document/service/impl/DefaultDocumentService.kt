@@ -8,6 +8,7 @@ import com.nosql.document.service.DocumentService
 import com.nosql.document.util.convert
 import org.bson.types.ObjectId
 import org.springframework.core.convert.ConversionService
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,9 +23,15 @@ class DefaultDocumentService(
         return conversionService.convert(savedDocument, DocumentDto::class)
     }
 
-    override suspend fun get(documentId: String): DocumentDto {
-        TODO("Not yet implemented")
-    }
+    override suspend fun get(documentId: String) =  documentComponent.get(ObjectId(documentId))
+        .let { conversionService.convert(it, DocumentDto::class) }
+
+    override suspend fun getAll(pageable: Pageable) = documentComponent.getAll(pageable)
+        .map { conversionService.convert(it, DocumentDto::class) }
+
+    override suspend fun getAllByUserId(userId: String, pageable: Pageable) =
+        documentComponent.getAllByUserId(ObjectId(userId), pageable)
+            .map { conversionService.convert(it, DocumentDto::class) }
 
     override suspend fun update(documentDto: DocumentDto) {
         TODO("Not yet implemented")
