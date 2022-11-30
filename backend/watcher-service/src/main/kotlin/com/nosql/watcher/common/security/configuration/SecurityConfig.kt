@@ -1,11 +1,14 @@
 package com.nosql.watcher.common.security.configuration
 
+import com.nosql.watcher.common.security.filter.CorsFilter
+import com.nosql.watcher.configuration.properties.AppProperties
 import com.nosql.watcher.constants.authorization.ROLE_CLAIM
 import com.nosql.watcher.enumerator.Role
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter
@@ -16,7 +19,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 @EnableWebFluxSecurity
 @Suppress("SpreadOperator")
 @EnableReactiveMethodSecurity
-class SecurityConfig {
+class SecurityConfig(
+    private val appProperties: AppProperties,
+) {
 
     @Bean
     fun securityWebFilterChain(
@@ -26,6 +31,7 @@ class SecurityConfig {
         return http.csrf().disable()
             .httpBasic().disable()
             .formLogin().disable()
+            .cors().and()
             .authorizeExchange {
                 it.pathMatchers(ADMIN_URL_PATH_PATTERN).hasAuthority(Role.HR.name)
                     .pathMatchers(*OPEN_API_PATH_PATTERNS).permitAll()
@@ -34,6 +40,7 @@ class SecurityConfig {
             .oauth2ResourceServer { oauth2Customizer ->
                 oauth2Customizer.jwt { it.jwtAuthenticationConverter(jwtAuthenticationConverter) }
             }
+            .addFilterAt(CorsFilter(appProperties), SecurityWebFiltersOrder.CORS)
             .build()
     }
 
