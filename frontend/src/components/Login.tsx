@@ -42,7 +42,7 @@ export function Login() {
             login: data.login,
             password: data.password
         }).then(response => {
-            localStorage.setItem(USER_TOKEN, response.data.jwt);
+            localStorage.setItem(USER_TOKEN, response.data.accessToken);
             navigate(`${process.env.REACT_APP_HOME_PAGE}`);
         }).catch((error: IError) => {
             setData({

@@ -14,7 +14,7 @@ export function PersonModule() {
     useEffect(() => {
         document.title = PERSON_PAGE_TITLE;
         axios.get<IPerson>(`${process.env.REACT_APP_PERSON_HOST}/${process.env.REACT_APP_PERSON_GET}`, {
-            headers: {Authorization: `Bearer ${localStorage.jwt}`}
+            headers: {Authorization: `Bearer ${localStorage.accessToken}`}
         }).then(response => {
             setPersonInfo(response.data);
         }).catch((error: IError) => {

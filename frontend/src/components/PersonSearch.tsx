@@ -29,7 +29,7 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
         event.preventDefault();
         axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person`, {
             headers: {
-                Authorization: `Bearer ${localStorage.jwt}`
+                Authorization: `Bearer ${localStorage.accessToken}`
             },
             params: {
                 name: search.trim() === "" ? undefined : search

@@ -1,5 +1,13 @@
 export interface IUser {
-    jwt: string
+    accessToken: string
+}
+
+export interface IToken {
+    iss: string,
+    sub: string,
+    iat: number,
+    exp: number,
+    role: string
 }
 
 export interface IError {
@@ -40,4 +48,12 @@ export interface IPerson {
         projectIds: string[]
     },
     comment: string
+}
+
+export interface IDocument {
+    id: string,
+    type: string,
+    user_id: string,
+    order_date: string,
+    status: string
 }

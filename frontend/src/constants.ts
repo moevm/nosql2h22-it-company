@@ -1,8 +1,9 @@
-export const USER_TOKEN = "jwt";
+export const USER_TOKEN = "accessToken";
 export const AUTH_PAGE_IMAGE = "auth_image.png";
 export const AUTH_PAGE_TITLE = "Auth";
 export const HOME_PAGE_TITLE = "Home";
 export const PERSON_PAGE_TITLE = "Person";
+export const DOCUMENT_PAGE_TITLE = "Document";
 export const PERSON_ADVANCED_SEARCH_ENUMS = [
     {
         name: "sex",
@@ -45,4 +46,14 @@ export const PERSON_ADVANCED_SEARCH_ENUMS = [
             {name: "NOT_WORKING", value: "Уволен"}
         ]
     }
-]
+];
+export const DOCUMENT_TYPES = [
+    {
+        name: "INCOME_STATEMENT",
+        value: "Отчёт о доходах"
+    },
+    {
+        name: "WORK_STATEMENT",
+        value: "Отчёт об отработанных днях"
+    }
+];
