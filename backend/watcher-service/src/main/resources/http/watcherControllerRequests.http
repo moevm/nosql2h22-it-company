@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
   "date": "2022-10-22",
-  "projectId": "6359c20fea6757775ceca286",
+  "projectId": "63868db8b811340508c535d2",
   "minutesAmount": "360",
   "comment": "Сделала авторизацию"
 }
@@ -17,6 +17,21 @@ Content-Type: application/json
 
 ### Get watcher by user id and date
 GET http://localhost:8082/public/api/v1/watcher/all-own-between-dates?from=2022-10-24&to=2022-10-25
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Get watcher by user id and date
+GET http://localhost:8082/public/api/v1/watcher/all-own-between-dates?from=2022-10-24&to=2022-10-25
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Get watcher by user id and sick
+GET http://localhost:8082/public/api/v1/watcher/sick?from=2022-10-21&to=2022-10-25
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Get watcher by user id and vacation
+GET http://localhost:8082/public/api/v1/watcher/sick?from=2022-10-21&to=2022-10-25
 Authorization: Bearer <access_token>
 Content-Type: application/json
 

@@ -12,4 +12,12 @@ interface WatcherRepository : ReactiveMongoRepository<WatcherEntity, ObjectId> {
     fun findAllByIdNotNull(pageable: Pageable): Flux<WatcherEntity>
 
     fun findAllByUserIdAndDateBetween(userId: ObjectId, from: Date, to: Date, pageable: Pageable): Flux<WatcherEntity>
+
+    fun findAllByUserIdAndProjectIdAndDateBetween(
+        userId: ObjectId,
+        projectId: ObjectId,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): Flux<WatcherEntity>
 }

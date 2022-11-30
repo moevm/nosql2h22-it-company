@@ -41,6 +41,28 @@ class WatcherController(
     ) = watcherService.getAllByUserIdAndDate(userAuthInfo.userId, from, to, pageable)
 
     @GetMapping(
+        value = [SICK_URL_PATH],
+        produces = [APPLICATION_JSON_VALUE],
+    )
+    suspend fun getAllByUserIdAndDateAndSick(
+        @UserAuth userAuthInfo: UserAuthInfo,
+        @RequestParam(FROM_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) from: Date,
+        @RequestParam(TO_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) to: Date,
+        @PageableDefault(page = 0, size = 20) pageable: Pageable,
+    ) = watcherService.getAllByUserIdAndSick(userAuthInfo.userId, from, to, pageable)
+
+    @GetMapping(
+        value = [VACATION_URL_PATH],
+        produces = [APPLICATION_JSON_VALUE],
+    )
+    suspend fun getAllByUserIdAndDateAndVacation(
+        @UserAuth userAuthInfo: UserAuthInfo,
+        @RequestParam(FROM_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) from: Date,
+        @RequestParam(TO_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) to: Date,
+        @PageableDefault(page = 0, size = 20) pageable: Pageable,
+    ) = watcherService.getAllByUserIdAndVacation(userAuthInfo.userId, from, to, pageable)
+
+    @GetMapping(
         value = [ALL_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
@@ -68,6 +90,8 @@ class WatcherController(
     companion object {
         private const val ALL_URL_PATH = "all"
         private const val ALL_OWN_BETWEEN_DATES_URL_PATH = "all-own-between-dates"
+        private const val SICK_URL_PATH = "sick"
+        private const val VACATION_URL_PATH = "vacation"
         private const val ID_URL_PATH = "{id}"
         private const val FROM_QUERY_PARAM = "from"
         private const val TO_QUERY_PARAM = "to"
