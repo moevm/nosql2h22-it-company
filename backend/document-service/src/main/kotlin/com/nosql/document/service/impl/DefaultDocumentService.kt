@@ -4,6 +4,8 @@ import com.nosql.document.component.DocumentComponent
 import com.nosql.document.dto.DefaultApiResponseDto
 import com.nosql.document.dto.DocumentDto
 import com.nosql.document.entity.DocumentEntity
+import com.nosql.document.enumerator.DocumentStatus
+import com.nosql.document.enumerator.DocumentType
 import com.nosql.document.service.DocumentService
 import com.nosql.document.util.convert
 import org.bson.types.ObjectId
@@ -26,7 +28,11 @@ class DefaultDocumentService(
     override suspend fun get(documentId: String) =  documentComponent.get(ObjectId(documentId))
         .let { conversionService.convert(it, DocumentDto::class) }
 
-    override suspend fun getAll(pageable: Pageable) = documentComponent.getAll(pageable)
+    override suspend fun getAll(
+        types: List<DocumentType>,
+        statuses: List<DocumentStatus>,
+        pageable: Pageable,
+    ) = documentComponent.getAll(types, statuses, pageable)
         .map { conversionService.convert(it, DocumentDto::class) }
 
     override suspend fun getAllByUserId(userId: String, pageable: Pageable) =
