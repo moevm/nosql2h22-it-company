@@ -27,7 +27,7 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person`, {
+        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person/name`, {
             headers: {
                 Authorization: `Bearer ${localStorage.accessToken}`
             },
@@ -95,7 +95,7 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
                     open={searchAnchorElement !== null}
                     onClose={handleCloseSearch}
                 >
-                    {persons.map((person) => (
+                    {Array.isArray(persons) && persons.map((person, index) => (
                         <MenuItem key={person.id} onClick={() => handleClickPerson(person)}>
                             <ListItemText> {person.name} {person.surname} </ListItemText>
                         </MenuItem>

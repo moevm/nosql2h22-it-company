@@ -52,7 +52,7 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person/extend`, {
+        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person/extended`, {
             headers: {
                 Authorization: `Bearer ${localStorage.accessToken}`
             },
