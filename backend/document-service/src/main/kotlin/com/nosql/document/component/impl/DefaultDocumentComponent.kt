@@ -8,6 +8,8 @@ import com.nosql.document.common.logger.logSuccess
 import com.nosql.document.common.logger.logger
 import com.nosql.document.component.DocumentComponent
 import com.nosql.document.entity.DocumentEntity
+import com.nosql.document.enumerator.DocumentStatus
+import com.nosql.document.enumerator.DocumentType
 import com.nosql.document.repository.DocumentRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import org.bson.types.ObjectId
@@ -47,13 +49,13 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun getAll(pageable: Pageable): List<DocumentEntity> {
+    override suspend fun getAll(types: List<DocumentType>, statuses: List<DocumentStatus>, pageable: Pageable): List<DocumentEntity> {
 
         val operationDetails = "Get all 'document' records"
 
         log.logBefore(operationDetails)
 
-        return documentRepository.findAllByIdNotNull(pageable)
+        return documentRepository.findAllByIdNotNullAndTypeInAndStatusIn(types, statuses, pageable)
             .onErrorMap { handleError(it, operationDetails) }
             .collectList()
             .doOnSuccess { log.logSuccess(operationDetails) }

@@ -1,11 +1,11 @@
 ### Save document
 POST http://localhost:8083/public/api/v1/document
-Authorization: Bearer <access-token>
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
   "orderDate": "2022-10-22",
-  "type": "INCOME_STATEMENT",
+  "type": "WORK_STATEMENT",
   "status": "ORDERED"
 }
 
@@ -20,6 +20,6 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Get all document
-GET http://localhost:8083/public/api/v1/document/all?page=0
+GET http://localhost:8083/public/api/v1/document/all?sort=type,desc
 Authorization: Bearer <access_token>
 Content-Type: application/json
