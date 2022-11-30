@@ -47,7 +47,9 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
 
     useEffect(() => {
         axios.get<IPerson>(`${process.env.REACT_APP_PERSON_HOST}/${process.env.REACT_APP_PERSON_GET}`, {
-            headers: {Authorization: `Bearer ${localStorage.jwt}`}
+            headers: {
+                Authorization: `Bearer ${localStorage.accessToken}`
+            }
         }).then(response => {
             setData({
                 ...data,

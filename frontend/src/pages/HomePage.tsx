@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {ActiveModule, Header} from "../components/Header";
 import {NoModule} from "../components/NoModule";
 import {PersonModule} from "../components/PersonModule";
+import {DocumentModule} from "../components/DocumentModule";
 import {HOME_PAGE_TITLE} from "../constants";
 
 export function HomePage() {
@@ -16,6 +17,7 @@ export function HomePage() {
             <Header activeModule={activeModule} setActiveModule={setActiveModule} />
             {activeModule === ActiveModule.NONE && <NoModule />}
             {activeModule === ActiveModule.PERSON && <PersonModule />}
+            {activeModule === ActiveModule.DOCUMENT && <DocumentModule />}
         </div>
     );
 }
