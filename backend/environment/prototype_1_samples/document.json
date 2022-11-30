@@ -1,0 +1,26 @@
+[
+  {
+    "_id": {"$oid": "6387b05134c1126329303df3"},
+    "_class": "com.nosql.document.entity.DocumentEntity",
+    "order_date": {"$date": "2022-08-25T00:00:00.000Z"},
+    "status": "CANCELED",
+    "type": "WORK_STATEMENT",
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  },
+  {
+    "_id": {"$oid": "6387b11e34c1126329303df4"},
+    "_class": "com.nosql.document.entity.DocumentEntity",
+    "order_date": {"$date": "2022-10-22T00:00:00.000Z"},
+    "status": "ORDERED",
+    "type": "INCOME_STATEMENT",
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  },
+  {
+    "_id": {"$oid": "6387b12834c1126329303df5"},
+    "_class": "com.nosql.document.entity.DocumentEntity",
+    "order_date": {"$date": "2022-06-28T00:00:00.000Z"},
+    "status": "DONE",
+    "type": "WORK_STATEMENT",
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  }
+]

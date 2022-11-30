@@ -1,0 +1,38 @@
+[
+  {
+    "_id": {"$oid": "6387b06c8a883711c2e83963"},
+    "_class": "com.nosql.watcher.entity.WatcherEntity",
+    "comment": "Задача NIC-216 (Реализация реализации)",
+    "date": {"$date": "2022-11-21T00:00:00.000Z"},
+    "minutes_amount": 360,
+    "project_id": {"$oid": "63868db8b811340508c535d2"},
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  },
+  {
+    "_id": {"$oid": "6387b8b48a883711c2e83964"},
+    "_class": "com.nosql.watcher.entity.WatcherEntity",
+    "comment": "Задача NIC-214 (Get / Post запросы для User)",
+    "date": {"$date": "2022-11-22T00:00:00.000Z"},
+    "minutes_amount": 180,
+    "project_id": {"$oid": "63868db8b811340508c535d2"},
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  },
+  {
+    "_id": {"$oid": "6387b8bf8a883711c2e83965"},
+    "_class": "com.nosql.watcher.entity.WatcherEntity",
+    "comment": "Задача NIC-213 (Покрытие тестами сервиса)",
+    "date": {"$date": "2022-11-23T00:00:00.000Z"},
+    "minutes_amount": 400,
+    "project_id": {"$oid": "63868db8b811340508c535d2"},
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  },
+  {
+    "_id": {"$oid": "6387b8bf8a883711c2e83964"},
+    "_class": "com.nosql.watcher.entity.WatcherEntity",
+    "comment": "Задача NIC-201 (Добавление DELETE эндпоинта)",
+    "date": {"$date": "2022-12-01T00:00:00.000Z"},
+    "minutes_amount": 450,
+    "project_id": {"$oid": "63868db8b811340508c535d2"},
+    "user_id": {"$oid": "63851fa5b7f3da0911b81ed5"}
+  }
+]
