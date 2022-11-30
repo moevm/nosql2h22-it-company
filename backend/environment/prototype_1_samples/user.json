@@ -1,0 +1,16 @@
+[
+  {
+    "_id": {"$oid": "63851fa5b7f3da0911b81ed3"},
+    "_class": "com.nosql.authservice.entity.UserEntity",
+    "login": "developer",
+    "password_hash": "13d7fe04b73b2d7929bf008d4287dca5d8edfec09e61d0810bf8068930675c82",
+    "role": "DEVELOPER"
+  },
+  {
+    "_id": {"$oid": "63851fa5b7f3da0911b81ed5"},
+    "_class": "com.nosql.authservice.entity.UserEntity",
+    "login": "hr",
+    "password_hash": "57662b0f1c6d7010342882546f9f96010cddc8d749cab08cb6171ed05d41f9d5",
+    "role": "HR"
+  }
+]

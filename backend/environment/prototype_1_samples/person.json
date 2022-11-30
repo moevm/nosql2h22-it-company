@@ -1,0 +1,68 @@
+[
+  {
+    "_id": {"$oid": "63851fa5b7f3da0911b81ed5"},
+    "_class": "com.nosql.personservice.entity.PersonEntity",
+    "birthday": {"$date": "2001-11-14T00:00:00.000Z"},
+    "comment": "Pre-Middle",
+    "confidential": {
+      "passportData": { 
+        "number": "BM5653789",
+        "issuedPlace": "Октябрьский РОВД",
+        "issuedDate": "Wed Oct 14 03:00:00 MSK 2015"
+      }, 
+      "nationality": "BELARUS",
+      "address": "Улица Торжковская, дом 15",
+      "salary": "1000000",
+      "projectIds": ["6387b89b303c944393cb9410"]
+    },
+    "contacts": {
+      "phoneNumber": "79112886438",
+      "email": "kate.kate6575@gmail.com"
+    },
+    "firstWorkDate": {"$date": "2022-04-14T00:00:00.000Z"},
+    "jobTime": {
+      "start": "11:00",
+      "end": "20:00"
+    },
+    "name": "Екатерина",
+    "officeId": {"$oid": "6359c11c2416d454722f826f"},
+    "patronymic": "Александровна",
+    "position": "JUNIOR_BACKEND_DEVELOPER",
+    "sex": "FEMALE",
+    "status": "WORKING",
+    "surname": "Аксёнова"
+  },
+  {
+    "_id": {"$oid": "63851fa5b7f3da0911b81ed3"},
+    "_class": "com.nosql.personservice.entity.PersonEntity",
+    "birthday": {"$date": "1999-11-05T00:00:00.000Z"},
+    "comment": "Комментарий для Марии",
+    "confidential": {
+      "passportData": {
+        "number": "2929291", 
+        "issuedPlace": "МВД России",
+        "issuedDate": "Mon Jul 11 04:00:00 MSK 2011"
+      },
+      "nationality": "RUSSIA",
+      "address": "Улица Ленина, дом 1",
+      "salary": "2500000",
+      "projectIds": ["6359c20fea6757775ceca286"]
+    },
+    "contacts": {
+      "phoneNumber": "79118123818",
+      "email": "maria.ivanova@gmail.com"
+    },
+    "firstWorkDate": {"$date": "2020-07-14T00:00:00.000Z"},
+    "jobTime": {
+      "start": "09:00",
+      "end": "18:00"
+    },
+    "name": "Мария",
+    "officeId": {"$oid": "6359c11c2416d454722f826f"},
+    "patronymic": "Александровна",
+    "position": "MIDDLE_FRONTEND_DEVELOPER",
+    "sex": "FEMALE",
+    "status": "WORKING",
+    "surname": "Иванова"
+  }
+]
