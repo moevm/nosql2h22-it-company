@@ -3,8 +3,9 @@ POST http://localhost:8080/public/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-  "login": "new-user",
-  "password": "a4f3"
+  "login": "new-use",
+  "password": "a4f3",
+  "role": "HR"
 }
 
 ### Sign in user
@@ -12,6 +13,6 @@ POST http://localhost:8080/public/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-  "login": "new-user",
-  "password": "a4f3"
+  "login": "hr",
+  "password": "hr"
 }
