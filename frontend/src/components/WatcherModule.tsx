@@ -26,7 +26,7 @@ const Item = styled(Paper)(({theme}) => ({
 
 export function WatcherModule() {
     const [week, setWeek] = useState<string[]>(["2022-11-28", "2022-12-04"]);
-    const [weekLabel, setWeekLabel] = useState<string>("2022.11.28 - 2022.12.04");
+    const [weekLabel, setWeekLabel] = useState<string>("2022-11-28 - 2022-12-04");
     const [tasks, setTasks] = useState<ITask[]>([]);
 
     const getTasks = () => {
@@ -48,24 +48,28 @@ export function WatcherModule() {
         getTasks();
     }, []);
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setWeekLabel(event.target.value);
-        setWeek(weekLabel.split(" - "));
+    useEffect(() => {
         getTasks();
+    }, [week]);
+
+    const handleChange = (event: SelectChangeEvent) => {
+        const localNewWeek = event.target.value
+        setWeekLabel(localNewWeek);
+        setWeek(localNewWeek.split(" - "));
     }
 
     return (
         <>
-            <FormControl fullWidth>
-                <InputLabel>Неделя:</InputLabel>
+            <FormControl fullWidth sx={{marginTop: "1rem"}}>
+                <InputLabel >Неделя:</InputLabel>
                 <Select
                     value={weekLabel}
                     label="Week"
                     onChange={handleChange}
                 >
-                    <MenuItem value="2022.11.21 - 2022.11.27">2022.11.21 - 2022.11.27</MenuItem>
-                    <MenuItem value="2022.11.28 - 2022.12.04">2022.11.28 - 2022.12.04</MenuItem>
-                    <MenuItem value="2022.12.05 - 2022.12.11">2022.12.05 - 2022.12.11</MenuItem>
+                    <MenuItem value="2022-11-21 - 2022-11-27">2022.11.21 - 2022.11.27</MenuItem>
+                    <MenuItem value="2022-11-28 - 2022-12-04">2022.11.28 - 2022.12.04</MenuItem>
+                    <MenuItem value="2022-12-05 - 2022-12-11">2022.12.05 - 2022.12.11</MenuItem>
                 </Select>
             </FormControl>
             <Stack spacing={2}>

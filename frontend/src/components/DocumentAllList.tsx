@@ -62,7 +62,7 @@ export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProp
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                        Дата заказа: {document.order_date}
+                        Дата заказа: {document.orderDate}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">

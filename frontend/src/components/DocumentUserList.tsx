@@ -43,7 +43,7 @@ export function DocumentUserList() {
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                         Дата заказа: {document.order_date}
+                         Дата заказа: {document.orderDate}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
