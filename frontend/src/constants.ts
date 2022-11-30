@@ -2,6 +2,7 @@ export const USER_TOKEN = "accessToken";
 export const AUTH_PAGE_IMAGE = "auth_image.png";
 export const AUTH_PAGE_TITLE = "Auth";
 export const HOME_PAGE_TITLE = "Home";
+export const WATCHER_PAGE_TITLE = "Watcher";
 export const PERSON_PAGE_TITLE = "Person";
 export const DOCUMENT_PAGE_TITLE = "Document";
 export const PERSON_ADVANCED_SEARCH_ENUMS = [
