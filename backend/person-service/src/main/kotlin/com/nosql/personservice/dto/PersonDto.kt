@@ -1,8 +1,10 @@
 package com.nosql.personservice.dto
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.nosql.personservice.constants.jackson.DATE_PATTERN
 import com.nosql.personservice.enumerator.PositionEnum
 import com.nosql.personservice.enumerator.SexEnum
 import com.nosql.personservice.enumerator.StatusEnum
@@ -28,9 +30,11 @@ class PersonDto (
     var sex: SexEnum,
 
     @JsonProperty("birthday")
+    @JsonFormat(pattern = DATE_PATTERN)
     var birthday: Date,
 
     @JsonProperty("firstWorkDate")
+    @JsonFormat(pattern = DATE_PATTERN)
     var firstWorkDate: Date,
 
     @JsonProperty("position")
