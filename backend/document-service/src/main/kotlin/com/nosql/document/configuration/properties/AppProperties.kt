@@ -1,4 +1,4 @@
-package com.nosql.authservice.configuration.properties
+package com.nosql.document.configuration.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
@@ -9,9 +9,6 @@ import javax.validation.constraints.NotBlank
 @ConstructorBinding
 @ConfigurationProperties("app")
 data class AppProperties(
-
-    @field:NotBlank
-    val secretKey: String,
 
     @field:NotBlank
     val corsAllowedOrigin: String,

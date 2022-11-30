@@ -12,3 +12,6 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:8080/public/api/v1/auth/.well-known/jwks.json
+
+app:
+  cors-allowed-origin: http://localhost:3000

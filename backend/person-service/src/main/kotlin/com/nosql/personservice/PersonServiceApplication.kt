@@ -2,8 +2,10 @@ package com.nosql.personservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 
+@ConfigurationPropertiesScan
 @SpringBootApplication(exclude = [DataSourceAutoConfiguration::class])
 class PersonServiceApplication
 

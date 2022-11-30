@@ -17,3 +17,6 @@ spring:
         jwt:
           issuer-uri: ${ISSUER_URI:nosql-it-company}
           jwk-set-uri: ${JWKS_URI:}
+
+app:
+  cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:}
