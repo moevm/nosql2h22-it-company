@@ -77,10 +77,10 @@ class PersonController(
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE],
     )
-    suspend fun editContacts(
+    suspend fun updateContacts(
         @UserAuth userAuthInfo: UserAuthInfo,
         @Valid @RequestBody contactsDto: ContactsDto,
-    ) = personService.editContacts(userAuthInfo.userId, contactsDto)
+    ) = personService.updateContacts(userAuthInfo.userId, contactsDto)
 
     companion object {
 

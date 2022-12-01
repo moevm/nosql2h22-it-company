@@ -4,8 +4,10 @@ import com.nosql.personservice.component.PersonComponent
 import com.nosql.personservice.dto.ContactsDto
 import com.nosql.personservice.dto.DefaultApiResponseDto
 import com.nosql.personservice.dto.PersonDto
+import com.nosql.personservice.entity.ContactsEntity
 import com.nosql.personservice.entity.PersonEntity
-import com.nosql.personservice.mergeContacts
+import com.nosql.personservice.mapper.merge
+import com.nosql.personservice.mapper.mergeContacts
 import com.nosql.personservice.service.PersonService
 import com.nosql.personservice.util.convert
 import org.bson.types.ObjectId
@@ -66,9 +68,23 @@ class DefaultPersonService(
         pageable = pageable,
     ).map { conversionService.convert(it, PersonDto::class) }
 
-    override suspend fun editContacts(personId: String, contactsDto: ContactsDto): PersonDto {
+    override suspend fun updateContacts(personId: String, contactsDto: ContactsDto): PersonDto {
         val personRecord = personComponent.get(ObjectId(personId))
-            .apply { mergeContacts(contactsDto) }
+            .apply {
+                val contacts = conversionService.convert(contactsDto, ContactsEntity::class)
+                mergeContacts(contacts)
+            }
+            .let { personComponent.update(it) }
+
+        return conversionService.convert(personRecord, PersonDto::class)
+    }
+
+    override suspend fun update(personId: String, personDto: PersonDto): PersonDto {
+        val personRecord = personComponent.get(ObjectId(personId))
+            .apply {
+                val person = conversionService.convert(personDto, PersonEntity::class)
+                merge(person)
+            }
             .let { personComponent.update(it) }
 
         return conversionService.convert(personRecord, PersonDto::class)

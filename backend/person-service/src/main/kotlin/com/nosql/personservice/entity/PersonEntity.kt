@@ -22,7 +22,7 @@ class PersonEntity(
     var surname: String,
 
     @Field("patronymic")
-    var patronymic: String,
+    var patronymic: String?,
 
     @Field("sex")
     var sex: SexEnum,

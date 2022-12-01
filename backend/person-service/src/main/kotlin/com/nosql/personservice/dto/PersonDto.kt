@@ -24,7 +24,7 @@ class PersonDto (
     var surname: String,
 
     @JsonProperty("patronymic")
-    var patronymic: String,
+    var patronymic: String?,
 
     @JsonProperty("sex")
     var sex: SexEnum,
