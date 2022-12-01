@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.nosql.document.constants.jackson.DATE_PATTERN
 import com.nosql.document.enumerator.DocumentStatus
+import com.nosql.document.enumerator.DocumentStatus.ORDERED
 import com.nosql.document.enumerator.DocumentType
 import java.time.Instant
 import java.util.Date
@@ -21,5 +22,5 @@ class DocumentDto (
     val orderDate: Date = Date.from(Instant.now()),
 
     @JsonProperty("status")
-    var status: DocumentStatus,
+    var status: DocumentStatus = ORDERED,
 )

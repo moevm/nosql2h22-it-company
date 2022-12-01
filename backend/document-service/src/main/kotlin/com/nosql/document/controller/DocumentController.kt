@@ -15,6 +15,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -71,6 +72,16 @@ class DocumentController(
         @UserAuth userAuthInfo: UserAuthInfo,
         @Valid @RequestBody documentDto: DocumentDto,
     ) = documentService.save(userAuthInfo.userId, documentDto)
+
+    @PutMapping(
+        value = [ID_URL_PATH],
+        consumes = [APPLICATION_JSON_VALUE],
+        produces = [APPLICATION_JSON_VALUE],
+    )
+    suspend fun updateStatus(
+        @PathVariable id: String,
+        @RequestBody documentDto: DocumentDto,
+    ) = documentService.update(id, documentDto)
 
     companion object {
         private const val TYPE_REQUEST_PARAM = "type"

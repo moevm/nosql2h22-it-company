@@ -10,6 +10,7 @@ import com.nosql.document.component.DocumentComponent
 import com.nosql.document.entity.DocumentEntity
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
+import com.nosql.document.mapper.merge
 import com.nosql.document.repository.DocumentRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import org.bson.types.ObjectId
@@ -64,7 +65,7 @@ class DefaultDocumentComponent(
 
     override suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity> {
 
-        val operationDetails = "Get all 'document' records with userId = 'userId'"
+        val operationDetails = "Get all 'document' records with userId = '$userId'"
 
         log.logBefore(operationDetails)
 
@@ -75,8 +76,18 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun update(document: DocumentEntity) {
-        TODO("Not yet implemented")
+    override suspend fun update(id: ObjectId, document: DocumentEntity): DocumentEntity {
+
+        val operationDetails = "Update 'document' record with id = '${id}'"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.findById(id)
+            .doOnNext { it.merge(document) }
+            .flatMap { documentRepository.save(it) }
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
     }
 
     override suspend fun delete(documentId: ObjectId) {

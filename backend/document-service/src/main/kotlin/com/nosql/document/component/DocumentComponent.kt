@@ -20,7 +20,7 @@ interface DocumentComponent {
 
     suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity>
 
-    suspend fun update(document: DocumentEntity)
+    suspend fun update(id: ObjectId, document: DocumentEntity): DocumentEntity
 
     suspend fun delete(documentId: ObjectId)
 }

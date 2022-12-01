@@ -39,9 +39,10 @@ class DefaultDocumentService(
         documentComponent.getAllByUserId(ObjectId(userId), pageable)
             .map { conversionService.convert(it, DocumentDto::class) }
 
-    override suspend fun update(documentDto: DocumentDto) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun update(id: String, documentDto: DocumentDto) =
+        conversionService.convert(documentDto, DocumentEntity::class)
+            .let { documentComponent.update(ObjectId(id), it) }
+            .let { conversionService.convert(it, DocumentDto::class) }
 
     override suspend fun delete(documentId: String): DefaultApiResponseDto {
         TODO("Not yet implemented")
