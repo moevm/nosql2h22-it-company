@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import {IPerson} from "../models";
 import personInfoTheme from "../themes/PersonInfoTheme";
 
 interface IProps {
@@ -16,15 +15,14 @@ const Item = styled(Paper)(({theme}) => ({
     backgroundColor: "#EFEFEF",
     ...theme.typography.body2,
     padding: theme.spacing(3),
-    borderRadius: "20px",
-    elevation: 6
+    borderRadius: "20px"
 }));
 
 export function PersonInfo({person}: IProps) {
     return (
         <ThemeProvider theme={personInfoTheme}>
             <Stack spacing={2}>
-                <Item sx={{width: "40%"}}>
+                <Item sx={{width: "40%"}} elevation={6}>
                     <Stack direction="row" sx={{}}>
                         <Avatar src="/broken-image.jpg" sx={{width: '75px', height: '75px', marginRight: '1rem'}} />
                         <div>
@@ -40,16 +38,16 @@ export function PersonInfo({person}: IProps) {
                         </div>
                     </Stack>
                 </Item>
-                <Item>
+                <Item elevation={6}>
                     Телефон: {person?.contacts.phoneNumber}
                 </Item>
-                <Item>
+                <Item elevation={6}>
                     Email: {person?.contacts.email}
                 </Item>
-                <Item>
+                <Item elevation={6}>
                     Время работы: {person?.jobTime.start} &ndash; {person?.jobTime.end}
                 </Item>
-                <Item>
+                <Item elevation={6}>
                     Комментарий:
                     <Typography variant="body1" component="p">
                         {person?.comment}

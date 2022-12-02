@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import Stack from "@mui/material/Stack";
 import {PersonAdvancedSearch} from "./PersonAdvancedSearch";
 import {PersonInfo} from "./PersonInfo";
 import {PersonSearch} from "./PersonSearch";
+import {personRequest} from "../utils/HTTPRequest";
 import {PERSON_PAGE_TITLE} from "../constants";
-import {IError, IPerson} from "../models";
 
 export function PersonModule() {
     const [personInfo, setPersonInfo] = useState<IPerson | null>(null);
@@ -13,9 +12,9 @@ export function PersonModule() {
 
     useEffect(() => {
         document.title = PERSON_PAGE_TITLE;
-        axios.get<IPerson>(`${process.env.REACT_APP_PERSON_HOST}/${process.env.REACT_APP_PERSON_GET}`, {
-            headers: {Authorization: `Bearer ${localStorage.accessToken}`}
-        }).then(response => {
+        personRequest.get<IPerson>(
+            `${process.env.REACT_APP_PERSON_GET}`
+        ).then(response => {
             setPersonInfo(response.data);
         }).catch((error: IError) => {
             console.log(error);

@@ -11,7 +11,6 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import {SearchOutlined, Tune} from "@mui/icons-material";
 import {ThemeProvider} from "@mui/material";
 import personSearchTheme from "../themes/PersonSearchTheme";
-import {IPerson} from "../models";
 
 interface IProps {
     setPerson: (data: IPerson) => void,

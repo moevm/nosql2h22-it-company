@@ -1,4 +1,5 @@
 export const USER_TOKEN = "accessToken";
+export const ADVANCED_ROLE_LIST = ["HR", "PM"];
 export const AUTH_PAGE_IMAGE = "auth_image.png";
 export const AUTH_PAGE_TITLE = "Auth";
 export const HOME_PAGE_TITLE = "Home";

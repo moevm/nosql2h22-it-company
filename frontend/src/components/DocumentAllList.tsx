@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {IDocument} from "../models";
 import {DOCUMENT_TYPES} from "../constants";
 
 interface IProps {
@@ -57,6 +56,10 @@ export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProp
         <Stack spacing={2}>
             {documentList.map((document: IDocument) => (
                 <Item elevation={6}>
+                    <Typography variant="body1" component="span">
+                        {DOCUMENT_TYPES.find(doc => doc.name === document.type)?.value}
+                    </Typography>
+                    <br/>
                     <Typography variant="body1" component="span">
                         {DOCUMENT_TYPES.find(doc => doc.name === document.type)?.value}
                     </Typography>

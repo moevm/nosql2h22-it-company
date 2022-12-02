@@ -13,7 +13,6 @@ import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import personAdvancedSearchTheme from "../themes/PersonAdvancedSearchTheme";
 import {PersonList} from "./PersonList";
-import {IPerson} from "../models";
 import {PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
 
 interface IProps {

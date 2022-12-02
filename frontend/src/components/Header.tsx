@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,10 +16,8 @@ import Toolbar from "@mui/material/Toolbar";
 import {ThemeProvider} from "@mui/material";
 import {AccessTime, GroupsOutlined, TextSnippetOutlined} from "@mui/icons-material";
 import headerTheme from "../themes/HeaderTheme";
-import Button from "@mui/material/Button";
+import {personRequest} from "../utils/HTTPRequest";
 import {USER_TOKEN} from "../constants";
-import axios from "axios";
-import {IError, IPerson} from "../models";
 
 export enum ActiveModule {
     NONE,
@@ -36,21 +36,26 @@ interface IActiveModule {
     setActiveModule: (data: ActiveModule) => void
 }
 
+const watcherButtonId = "watcher-button";
+const personButtonId = "person-button";
+const documentButtonId = "document-button";
+
 export function Header({activeModule, setActiveModule}: IActiveModule) {
     const [quitAnchorElement, setQuitAnchorElement] = useState<null | HTMLElement>(null);
     const [data, setData] = useState<IUserInfo>({
         userName: "",
         userSurname: ""
-    })
+    });
 
     const navigate = useNavigate();
 
+    const state = useSelector(state => state);
+
     useEffect(() => {
-        axios.get<IPerson>(`${process.env.REACT_APP_PERSON_HOST}/${process.env.REACT_APP_PERSON_GET}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.accessToken}`
-            }
-        }).then(response => {
+
+        personRequest.get<IPerson>(
+            `${process.env.REACT_APP_PERSON_GET}`
+        ).then(response => {
             setData({
                 ...data,
                 userName: response.data.name,
@@ -63,13 +68,13 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
 
     const handleClickModule = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         switch (event.currentTarget.id) {
-            case "watcher-button":
+            case watcherButtonId:
                 setActiveModule(ActiveModule.WATCHER);
                 break;
-            case "person-button":
+            case personButtonId:
                 setActiveModule(ActiveModule.PERSON);
                 break;
-            case "document-button":
+            case documentButtonId:
                 setActiveModule(ActiveModule.DOCUMENT);
                 break;
         }
@@ -97,7 +102,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                         <List>
                             <ListItem key="watcher" disablePadding>
                                 <ListItemButton
-                                    id="watcher-button"
+                                    id={watcherButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}>
@@ -108,7 +113,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                             </ListItem>
                             <ListItem key="person" disablePadding>
                                 <ListItemButton
-                                    id="person-button"
+                                    id={personButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}>
@@ -119,7 +124,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                             </ListItem>
                             <ListItem key="document" disablePadding>
                                 <ListItemButton
-                                    id="document-button"
+                                    id={documentButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}>

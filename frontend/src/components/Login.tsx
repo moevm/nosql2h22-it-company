@@ -13,8 +13,9 @@ import TextField from "@mui/material/TextField";
 import {ThemeProvider} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import loginTheme from "../themes/LoginTheme";
-import {IUser, IError} from "../models";
-import {USER_TOKEN} from "../constants";
+import {ADVANCED_ROLE_LIST, USER_TOKEN} from "../constants";
+import {personRequest} from "../utils/HTTPRequest";
+import {userSignIn} from "../store/reducer";
 
 interface IData {
     login: string,
@@ -30,7 +31,31 @@ export function Login() {
         showPassword: false,
         showAlert: false
     });
+
     const navigate = useNavigate();
+    const signIn = (user: IUser) => {
+        personRequest.get<IPerson>(
+            `${process.env.REACT_APP_PERSON_GET}`,
+            {
+                params: {
+                    accessToken: user.accessToken
+                }
+            }
+        ).then(response => {
+            userSignIn({
+                userId: response.data.id,
+                name: response.data.name,
+                surname: response.data.surname,
+                advancedRole: (ADVANCED_ROLE_LIST.indexOf(response.data.position) !== -1)
+            });
+            navigate(`${process.env.REACT_APP_HOME_PAGE}`);
+        }).catch((error: IError) => {
+            setData({
+                ...data,
+                showAlert: true,
+            });
+        });
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -43,7 +68,7 @@ export function Login() {
             password: data.password
         }).then(response => {
             localStorage.setItem(USER_TOKEN, response.data.accessToken);
-            navigate(`${process.env.REACT_APP_HOME_PAGE}`);
+            signIn(response.data);
         }).catch((error: IError) => {
             setData({
                 ...data,
