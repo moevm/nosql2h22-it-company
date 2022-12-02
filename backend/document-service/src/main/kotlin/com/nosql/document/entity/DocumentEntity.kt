@@ -23,6 +23,9 @@ class DocumentEntity(
     @Field("order_date")
     val orderDate: Date,
 
+    @Field("complete_date")
+    var completeDate: Date? = null,
+
     @Field("status")
     var status: DocumentStatus,
 )

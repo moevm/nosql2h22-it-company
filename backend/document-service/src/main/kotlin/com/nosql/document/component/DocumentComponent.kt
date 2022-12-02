@@ -1,6 +1,7 @@
 package com.nosql.document.component
 
 import com.nosql.document.entity.DocumentEntity
+import com.nosql.document.entity.PersonDocumentEntity
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
 import org.bson.types.ObjectId
@@ -16,7 +17,7 @@ interface DocumentComponent {
         types: List<DocumentType>,
         statuses: List<DocumentStatus>,
         pageable: Pageable,
-    ): List<DocumentEntity>
+    ): List<PersonDocumentEntity>
 
     suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity>
 

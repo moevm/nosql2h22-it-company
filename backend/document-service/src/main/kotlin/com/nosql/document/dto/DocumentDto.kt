@@ -21,6 +21,9 @@ class DocumentDto (
     @JsonFormat(pattern = DATE_PATTERN)
     val orderDate: Date = Date.from(Instant.now()),
 
+    @JsonProperty("completeDate")
+    val completeDate: Date? = null,
+
     @JsonProperty("status")
     var status: DocumentStatus = ORDERED,
 )

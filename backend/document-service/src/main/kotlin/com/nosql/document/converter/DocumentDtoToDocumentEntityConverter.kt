@@ -13,6 +13,7 @@ class DocumentDtoToDocumentEntityConverter : Converter<DocumentDto, DocumentEnti
         id = source.id?.let { ObjectId(it) },
         type = source.type,
         orderDate = source.orderDate,
+        completeDate = source.completeDate,
         status = source.status
     )
 }
