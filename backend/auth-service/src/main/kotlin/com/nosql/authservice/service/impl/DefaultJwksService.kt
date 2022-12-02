@@ -5,6 +5,9 @@ import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.KeyUse
 import com.nimbusds.jose.jwk.RSAKey
 import com.nosql.authservice.configuration.properties.JwtProperties
+import com.nosql.authservice.configuration.properties.KeystoreProperties
+import com.nosql.authservice.enumerator.TokenType
+import com.nosql.authservice.model.JwksParameters
 import com.nosql.authservice.service.JwksService
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
@@ -21,18 +24,27 @@ class DefaultJwksService(
     jwtProperties: JwtProperties,
 ) : JwksService {
 
-    private lateinit var internalKeyPair: KeyPair
-    private lateinit var internalJwkSet: JWKSet
-    private lateinit var internalKeyId: String
+    private lateinit var jwksParametersMap: Map<TokenType, JwksParameters>
 
     init {
-        val password = jwtProperties.keystore.password.toCharArray()
-        val store = loadKeyStore(jwtProperties.keystore.resourcePath, password)
-        val keystoreAlias = jwtProperties.keystore.keypairAlias
+        jwksParametersMap = mapOf(
+            TokenType.ACCESS to generateJwksParameters(jwtProperties.accessToken.keystore),
+            TokenType.REFRESH to generateJwksParameters(jwtProperties.refreshToken.keystore)
+        )
+    }
 
-        internalKeyPair = generateKeyPair(store, keystoreAlias, password)
-        internalJwkSet = generateJwks(store, keystoreAlias, internalKeyPair.public as RSAPublicKey)
-        internalKeyId = getX509CertificateSerialNumber(store, keystoreAlias)
+    private fun generateJwksParameters(keystore: KeystoreProperties): JwksParameters {
+        val password = keystore.password.toCharArray()
+        val store = loadKeystore(keystore.resourcePath, password)
+        val alias = keystore.keypairAlias
+
+        val keyPair = generateKeyPair(store, alias, password)
+
+        return JwksParameters(
+            keyPair = keyPair,
+            jwkSet = generateJwks(store, alias, keyPair.public as RSAPublicKey),
+            keyId = getX509CertificateSerialNumber(store, alias),
+        )
     }
 
     private fun generateKeyPair(store: KeyStore, keystoreAlias: String, password: CharArray): KeyPair {
@@ -42,7 +54,7 @@ class DefaultJwksService(
         return KeyPair(rsaPublicKey, rsaPrivateKey)
     }
 
-    private fun loadKeyStore(keystoreResourcePath: String, password: CharArray): KeyStore {
+    private fun loadKeystore(keystoreResourcePath: String, password: CharArray): KeyStore {
         val store = KeyStore.getInstance(JKS_KEY_STORE_TYPE)
         ClassPathResource(keystoreResourcePath).inputStream
             .let { store.load(it, password) }
@@ -73,11 +85,11 @@ class DefaultJwksService(
     private fun getX509CertificateSerialNumber(store: KeyStore, keystoreAlias: String) =
         (store.getCertificate(keystoreAlias) as X509Certificate).serialNumber.toString()
 
-    override fun getKeyPair() = internalKeyPair
+    override fun getKeyPair(tokenType: TokenType) = jwksParametersMap[tokenType]!!.keyPair
 
-    override fun getJwks() = internalJwkSet
+    override fun getJwks(tokenType: TokenType) = jwksParametersMap[tokenType]!!.jwkSet
 
-    override fun getKeyId() = internalKeyId
+    override fun getKeyId(tokenType: TokenType) = jwksParametersMap[tokenType]!!.keyId
 
     companion object {
 

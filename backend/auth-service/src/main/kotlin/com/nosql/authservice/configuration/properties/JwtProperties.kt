@@ -16,6 +16,4 @@ data class JwtProperties(
     val accessToken: TokenProperties,
 
     val refreshToken: TokenProperties,
-
-    val keystore: KeystoreProperties,
 )

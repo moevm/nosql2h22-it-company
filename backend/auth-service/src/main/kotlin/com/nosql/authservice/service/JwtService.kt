@@ -2,7 +2,6 @@ package com.nosql.authservice.service
 
 import com.nosql.authservice.dto.TokensDto
 import com.nosql.authservice.enumerator.Role
-import io.jsonwebtoken.Claims
 
 interface JwtService {
 
@@ -10,5 +9,4 @@ interface JwtService {
     fun generateAccessToken(userId: String, role: Role): String
     fun generateRefreshToken(userId: String, role: Role): String
     fun updateTokensByRefresh(authorizationHeader: String): TokensDto
-    fun parseJwtClaims(token: String): Claims
 }

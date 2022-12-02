@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank
 data class AppProperties(
 
     @field:NotBlank
-    val secretKey: String,
+    val passwordHashingSecretKey: String,
 
     @field:NotBlank
     val corsAllowedOrigin: String,

@@ -1,6 +1,7 @@
 package com.nosql.authservice.controller
 
 import com.nosql.authservice.constants.url.PUBLIC_API_V1_AUTH_URL_PATH
+import com.nosql.authservice.enumerator.TokenType
 import com.nosql.authservice.service.JwksService
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,7 +16,7 @@ class JwksController(
 
     @GetMapping(path = [GET_JWKS_URL_PATH], produces = [APPLICATION_JSON_VALUE])
     fun getJwks(): Map<String, Any> =
-        jwksService.getJwks().toJSONObject()
+        jwksService.getJwks(TokenType.ACCESS).toJSONObject()
 
     companion object {
 

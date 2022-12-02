@@ -3,20 +3,18 @@ package com.nosql.authservice.common.security.filter
 import com.nosql.authservice.common.security.authentication.JwtAuthentication
 import com.nosql.authservice.constants.authorization.BEARER_TOKEN_PREFIX
 import com.nosql.authservice.constants.authorization.ROLE_CLAIM
-import com.nosql.authservice.service.JwtService
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwtParser
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.context.ReactiveSecurityContextHolder
-import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@Component
 class JwtRoleFilter(
-    private val jwtService: JwtService,
+    private val accessTokenJwtParser: JwtParser,
 ) : WebFilter {
 
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
@@ -38,7 +36,7 @@ class JwtRoleFilter(
 
     private fun getJwtAuthenticationOrNull(exchange: ServerWebExchange) =
         getTokenOrNull(exchange)
-            ?.let { token -> tryToParseJwtClaims(token) }
+            ?.let { token -> tryToParseJwsClaims(token) }
             ?.takeIf { claims -> claims[ROLE_CLAIM] != null }
             ?.let { claims -> JwtAuthentication(claims) }
 
@@ -48,9 +46,9 @@ class JwtRoleFilter(
             ?.find { it.startsWith(BEARER_TOKEN_PREFIX) }
             ?.removePrefix(BEARER_TOKEN_PREFIX)
 
-    private fun tryToParseJwtClaims(token: String): Claims? =
+    private fun tryToParseJwsClaims(token: String): Claims? =
         try {
-            jwtService.parseJwtClaims(token)
+            accessTokenJwtParser.parseClaimsJws(token).body
         } catch (expectedException: Exception) {
             null
         }
