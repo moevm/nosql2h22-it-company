@@ -55,7 +55,7 @@ class DefaultDocumentComponent(
     override suspend fun getAll(
         types: List<DocumentType>,
         statuses: List<DocumentStatus>,
-        pageable: Pageable
+        pageable: Pageable,
     ): List<PersonDocumentEntity> {
 
         val operationDetails = "Get all 'document' records"
@@ -85,7 +85,7 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun update(document: DocumentEntity): DocumentEntity {
+    override suspend fun update(document: DocumentEntity): PersonDocumentEntity {
 
         val operationDetails = "Update 'document' record with id = '${document.id}'"
 
@@ -95,6 +95,9 @@ class DefaultDocumentComponent(
             .onErrorMap { handleError(it, operationDetails) }
             .doOnSuccess { log.logSuccess(operationDetails) }
             .awaitSingle()
+            .let {
+                PersonDocumentEntity(document = it, person = personRepository.findById(it.userId!!).awaitSingle())
+            }
     }
 
     override suspend fun delete(documentId: ObjectId) {

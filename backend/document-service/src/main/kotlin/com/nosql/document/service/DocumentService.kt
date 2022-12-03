@@ -22,7 +22,7 @@ interface DocumentService {
 
     suspend fun getAllByUserId(userId: String, pageable: Pageable): List<DocumentDto>
 
-    suspend fun update(id: String, statusDto: StatusDto): DocumentDto
+    suspend fun update(id: String, statusDto: StatusDto): PersonDocumentResponseDto
 
     suspend fun delete(documentId: String): DefaultApiResponseDto
 

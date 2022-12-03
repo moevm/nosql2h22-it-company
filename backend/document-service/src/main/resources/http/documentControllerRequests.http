@@ -23,12 +23,10 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Update document
-PATCH http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
+PATCH http://localhost:8083/public/api/v1/document/6387538a5e45346e2ef37558
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
-  "orderDate": "2022-10-23",
-  "type": "WORK_STATEMENT",
   "status": "IN_PROGRESS"
 }

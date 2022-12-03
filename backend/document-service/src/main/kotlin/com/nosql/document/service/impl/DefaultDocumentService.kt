@@ -46,7 +46,7 @@ class DefaultDocumentService(
         documentComponent.get(ObjectId(id))
             .apply { merge(statusDto) }
             .let { documentComponent.update(it) }
-            .let { conversionService.convert(it, DocumentDto::class) }
+            .let { conversionService.convert(it, PersonDocumentResponseDto::class) }
 
     override suspend fun delete(documentId: String): DefaultApiResponseDto {
         TODO("Not yet implemented")

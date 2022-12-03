@@ -21,7 +21,7 @@ interface DocumentComponent {
 
     suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity>
 
-    suspend fun update(document: DocumentEntity): DocumentEntity
+    suspend fun update(document: DocumentEntity): PersonDocumentEntity
 
     suspend fun delete(documentId: ObjectId)
 }
