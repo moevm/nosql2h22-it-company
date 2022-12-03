@@ -15,6 +15,13 @@ interface WatcherComponent {
 
     suspend fun getAllByUserIdAndDate(userId: ObjectId, from: Date, to: Date, pageable: Pageable): List<WatcherEntity>
 
+    suspend fun getAllByUserIdsAndDate(
+        userIds: List<ObjectId>,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): List<WatcherEntity>
+
     suspend fun getAllByUserIdAndDateAndProjectId(
         userId: ObjectId,
         projectId: ObjectId,
@@ -23,7 +30,7 @@ interface WatcherComponent {
         Pageable
     ): List<WatcherEntity>
 
-    suspend fun update(watcher: WatcherEntity)
+    suspend fun update(watcher: WatcherEntity): WatcherEntity
 
     suspend fun delete(watcherId: ObjectId)
 }

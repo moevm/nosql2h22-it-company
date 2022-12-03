@@ -20,4 +20,11 @@ interface WatcherRepository : ReactiveMongoRepository<WatcherEntity, ObjectId> {
         to: Date,
         pageable: Pageable,
     ): Flux<WatcherEntity>
+
+    fun findAllByUserIdInAndDateBetween(
+        userIds: List<ObjectId>,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): Flux<WatcherEntity>
 }

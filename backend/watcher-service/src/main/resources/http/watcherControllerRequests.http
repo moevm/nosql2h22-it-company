@@ -25,6 +25,11 @@ GET http://localhost:8082/public/api/v1/watcher/all-own-between-dates?from=2022-
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
+### Get subordinate watcher by date
+GET http://localhost:8082/public/api/v1/watcher/subordinate?ids=638b61ce58cc2c41de5ef7a6&from=2022-10-20&to=2022-10-25
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
 ### Get watcher by user id and sick
 GET http://localhost:8082/public/api/v1/watcher/sick?from=2022-10-21&to=2022-10-25
 Authorization: Bearer <access_token>
@@ -37,5 +42,20 @@ Content-Type: application/json
 
 ### Get all watcher
 GET http://localhost:8082/public/api/v1/watcher/all?page=0
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+### Update watcher
+PATCH http://localhost:8082/public/api/v1/watcher/638b660a86cad250bcf34fae
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "minutesAmount": "120",
+  "comment": "Закончила"
+}
+
+### Delete watcher
+DELETE http://localhost:8082/public/api/v1/watcher/638b660a86cad250bcf34fae
 Authorization: Bearer <access_token>
 Content-Type: application/json
