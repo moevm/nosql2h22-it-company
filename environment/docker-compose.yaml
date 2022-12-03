@@ -81,5 +81,17 @@ services:
       <<: *default-auth-jwks
       <<: *default-cors
 
+  react-client:
+    image: frontend/react-client
+    build:
+      context: ../frontend
+    depends_on:
+      - auth-service
+      - person-service
+      - watcher-service
+      - document-service
+    ports:
+      - "3000:80"
+
 volumes:
   mongodb-data:
