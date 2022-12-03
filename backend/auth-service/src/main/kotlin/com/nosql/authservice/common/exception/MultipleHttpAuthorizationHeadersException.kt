@@ -1,6 +1,6 @@
-package com.nosql.document.common.exception
+package com.nosql.authservice.common.exception
 
-import com.nosql.document.common.exception.enumerator.ApplicationExceptionCodeEnum.MULTIPLE_AUTHORIZATION_HEADERS
+import com.nosql.authservice.common.exception.enumerator.ApplicationExceptionCodeEnum.MULTIPLE_AUTHORIZATION_HEADERS
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 
 class MultipleHttpAuthorizationHeadersException : ApplicationException(

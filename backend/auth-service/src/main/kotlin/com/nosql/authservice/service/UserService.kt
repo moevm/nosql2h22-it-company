@@ -10,4 +10,8 @@ interface UserService {
     suspend fun signUp(signUpRequestDto: SignUpRequestDto): DefaultApiResponseDto
 
     suspend fun signIn(userDto: UserDto): TokensDto
+
+    suspend fun signOut(userId: String): DefaultApiResponseDto
+
+    suspend fun updateTokensByRefresh(userId: String, authorizationHeader: String): TokensDto
 }

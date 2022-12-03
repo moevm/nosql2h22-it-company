@@ -20,4 +20,7 @@ data class UserEntity(
 
     @Field("role")
     val role: Role? = null,
+
+    @Field("refresh_token")
+    var refreshToken: String? = null,
 )

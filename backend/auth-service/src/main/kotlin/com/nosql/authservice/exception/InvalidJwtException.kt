@@ -9,7 +9,7 @@ class InvalidJwtException(
     cause: Throwable? = null,
 ) : ApplicationException(
     status = HttpStatus.BAD_REQUEST,
-    code = ApplicationExceptionCodeEnum.VALIDATION_EXCEPTION,
+    code = ApplicationExceptionCodeEnum.INVALID_JWT,
     description = description,
     cause = cause,
 )
