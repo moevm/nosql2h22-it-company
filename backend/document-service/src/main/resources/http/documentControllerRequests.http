@@ -4,13 +4,11 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
-  "orderDate": "2022-10-22",
-  "type": "WORK_STATEMENT",
-  "status": "ORDERED"
+  "type": "WORK_STATEMENT"
 }
 
 ### Get document
-GET http://localhost:8083/public/api/v1/document/6359d0baf1339ed8b904fb00
+GET http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
@@ -20,6 +18,15 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Get all document
-GET http://localhost:8083/public/api/v1/document/all?sort=type,desc
+GET http://localhost:8083/public/api/v1/document/all?sort=orderDate,desc
 Authorization: Bearer <access_token>
 Content-Type: application/json
+
+### Update document
+PATCH http://localhost:8083/public/api/v1/document/6387538a5e45346e2ef37558
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}

@@ -12,6 +12,7 @@ class DocumentEntityToDocumentDtoConverter : Converter<DocumentEntity, DocumentD
         id = source.id!!.toHexString(),
         type = source.type,
         orderDate = source.orderDate,
+        completeDate = source.completeDate,
         status = source.status,
     )
 }

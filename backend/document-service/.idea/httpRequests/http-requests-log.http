@@ -1,3 +1,95 @@
+PATCH http://localhost:8083/public/api/v1/document/6387538a5e45346e2ef37558
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+<> 2022-12-03T160741.200.json
+
+###
+
+PATCH http://localhost:8083/public/api/v1/document/6387538a5e45346e2ef37558
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+<> 2022-12-03T160625.500.json
+
+###
+
+PATCH http://localhost:8083/public/api/v1/document/6387538a5e45346e2ef37558
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+<> 2022-12-03T160431.200.json
+
+###
+
+PATCH http://localhost:8083/public/api/v1/document/638b48da657e441f96d1ea4d
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+<> 2022-12-03T160228.500.json
+
+###
+
+POST http://localhost:8083/public/api/v1/document
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "type": "WORK_STATEMENT"
+}
+
+<> 2022-12-03T160219.200.json
+
+###
+
+POST http://localhost:8083/public/api/v1/document
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "type": "WORK_STATEMENT"
+}
+
+###
+
+PATCH http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
+Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjcwMDcyNDk2LCJleHAiOjE2NzAwNzQyOTYsInJvbGUiOiJIUiJ9.HIzJuZelKVpApCoWcvYrwyNmKqBtdbGHADZDcDRJALBba5K0p_XqjfBQ4TEewojLTawMAl7aEys82oILTNXdtFNDNn-kiVUxruP6Dg7yMoxbb5hVPUn-uxbulc4Q7lnqTBO0cnLOqyZwfNYFwzGOHVjqPjFXAIeAcs15nJpwpribav0RcpMmOrJT14rRJEh-ifl8rldh_nd25w-5aMRii__7ItzKIv20r-eeV6OXhyb1Pu9Lr20EtFq7x89vuhlR8eo5evB4rR9humA-O9MrMMwLlGd2WDdQpGzKb6oDmqRb1JimmmLwCB2Pu6QjyB6ku7nMYhhg6S1WAQsfyFYvDw
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+<> 2022-12-03T160150.500.json
+
+###
+
+PATCH http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+###
+
 GET http://localhost:8083/public/api/v1/document/all?sort=type,desc
 Authorization: Bearer eyJraWQiOiIxNDQwNzcyMTY5NDQyNDUwMjM2NCIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4NjdiYjVlZjBmZWUzMjU5MzQzMTFkIiwiaWF0IjoxNjY5ODEyMDkxLCJleHAiOjE2ODUzNjQwOTEsInJvbGUiOiJIUiJ9.q3ymXWLyns_lpUMP1fzGcerHDOya2ZZbNRGJpU7nWWeSQmW7hTeUdz4UiLo64Xf1SE62PisD4PWviqMn_tDG5uT_R7dSmj5QPNrzZisyjj6_nAJ939FQZ8ZBa3iHgzgwqZR3cYqJzN6uu4hhUZ4DWP6s7frDVEQYqdqQxB0D5T_NcXXTlXWFldYY5tYs6Is6VZErsqzgYngtXObPZiT4QQ5KmYwkvL_n8pnijLK-R8OgiCeYQEAG59HZgOkVl_g9maQzjIPZXCVWCPOsHv1rO12beVCiQGCYfcIP7AxwDaUIqc3FwKBPIzH1FIA5ykJwWWoTaMQvqasAVio1R-lshg
 Content-Type: application/json

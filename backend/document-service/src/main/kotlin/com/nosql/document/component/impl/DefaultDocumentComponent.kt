@@ -8,9 +8,11 @@ import com.nosql.document.common.logger.logSuccess
 import com.nosql.document.common.logger.logger
 import com.nosql.document.component.DocumentComponent
 import com.nosql.document.entity.DocumentEntity
+import com.nosql.document.entity.PersonDocumentEntity
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
 import com.nosql.document.repository.DocumentRepository
+import com.nosql.document.repository.PersonRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import org.bson.types.ObjectId
 import org.slf4j.Logger
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Component
 @Component
 class DefaultDocumentComponent(
     private val documentRepository: DocumentRepository,
+    private val personRepository: PersonRepository,
 ): DocumentComponent {
 
     private val log: Logger by logger()
@@ -49,7 +52,11 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun getAll(types: List<DocumentType>, statuses: List<DocumentStatus>, pageable: Pageable): List<DocumentEntity> {
+    override suspend fun getAll(
+        types: List<DocumentType>,
+        statuses: List<DocumentStatus>,
+        pageable: Pageable,
+    ): List<PersonDocumentEntity> {
 
         val operationDetails = "Get all 'document' records"
 
@@ -60,11 +67,14 @@ class DefaultDocumentComponent(
             .collectList()
             .doOnSuccess { log.logSuccess(operationDetails) }
             .awaitSingle()
+            .map {
+                PersonDocumentEntity(document = it, person = personRepository.findById(it.userId!!).awaitSingle())
+            }
     }
 
     override suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity> {
 
-        val operationDetails = "Get all 'document' records with userId = 'userId'"
+        val operationDetails = "Get all 'document' records with userId = '$userId'"
 
         log.logBefore(operationDetails)
 
@@ -75,8 +85,19 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun update(document: DocumentEntity) {
-        TODO("Not yet implemented")
+    override suspend fun update(document: DocumentEntity): PersonDocumentEntity {
+
+        val operationDetails = "Update 'document' record with id = '${document.id}'"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.save(document)
+            .onErrorMap { handleError(it, operationDetails) }
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+            .let {
+                PersonDocumentEntity(document = it, person = personRepository.findById(it.userId!!).awaitSingle())
+            }
     }
 
     override suspend fun delete(documentId: ObjectId) {
