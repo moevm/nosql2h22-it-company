@@ -1,9 +1,9 @@
 package com.nosql.authservice.common.exception.handler
 
+import com.nosql.authservice.common.exception.ApplicationException
 import com.nosql.authservice.common.exception.dto.ApplicationErrorDto
 import com.nosql.authservice.common.exception.enumerator.ApplicationExceptionCodeEnum.DECODING_EXCEPTION
 import com.nosql.authservice.common.exception.enumerator.ApplicationExceptionCodeEnum.VALIDATION_EXCEPTION
-import com.nosql.authservice.common.exception.ApplicationException
 import com.nosql.authservice.common.logger.logger
 import org.slf4j.Logger
 import org.springframework.http.HttpStatus
@@ -26,7 +26,7 @@ class ExceptionHandler {
         val errorDto = ApplicationErrorDto(exception)
         val status = exception.status
 
-        log.error("Got application exception. Response: $errorDto")
+        log.error("Got application exception. Response: $errorDto", exception)
 
         return ResponseEntity
             .status(status ?: HttpStatus.INTERNAL_SERVER_ERROR)

@@ -1,8 +1,10 @@
 package com.nosql.authservice.common.security.configuration
 
 import com.nosql.authservice.common.security.filter.CorsFilter
+import com.nosql.authservice.common.security.filter.JwtRoleFilter
 import com.nosql.authservice.configuration.properties.AppProperties
 import com.nosql.authservice.enumerator.Role
+import io.jsonwebtoken.JwtParser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
@@ -10,17 +12,18 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.web.server.WebFilter
 
 @Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
-class SecurityConfig(
-    private val appProperties: AppProperties,
-) {
+class SecurityConfig {
 
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity, jwtRoleFilter: WebFilter): SecurityWebFilterChain {
+    fun securityWebFilterChain(
+        http: ServerHttpSecurity,
+        appProperties: AppProperties,
+        accessTokenJwtParser: JwtParser,
+    ): SecurityWebFilterChain {
         return http.csrf().disable()
             .httpBasic().disable()
             .formLogin().disable()
@@ -29,7 +32,7 @@ class SecurityConfig(
                 it.pathMatchers(ADMIN_URL_PATH_PATTERN).hasAuthority(Role.HR.name)
                     .anyExchange().permitAll()
             }
-            .addFilterAt(jwtRoleFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+            .addFilterAt(JwtRoleFilter(accessTokenJwtParser), SecurityWebFiltersOrder.AUTHENTICATION)
             .addFilterAt(CorsFilter(appProperties), SecurityWebFiltersOrder.CORS)
             .build()
     }

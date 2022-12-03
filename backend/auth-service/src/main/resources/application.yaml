@@ -13,7 +13,7 @@ spring:
     banner-mode: off
 
 app:
-  secret-key: ${APP_SECRET_KEY:}
+  password-hashing-secret-key: ${PASSWORD_HASHING_SECRET_KEY:}
   cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:}
 
 mongock:
@@ -27,9 +27,13 @@ jwt:
   issuer: ${JWT_ISSUER:nosql-it-company}
   access-token:
     ttl: ${JWT_ACCESS_TOKEN_TTL:PT30M}
+    keystore:
+      password: ${JWKS_ACCESS_TOKEN_PASSWORD:}
+      resource-path: ${JWKS_ACCESS_TOKEN_RESOURCE_PATH:jwks/nosql-access-token.jks}
+      keypair-alias: ${JWKS_ACCESS_TOKEN_KEYPAIR_ALIAS:nosql-access-token}
   refresh-token:
     ttl: ${JWT_REFRESH_TOKEN_TTL:P180D}
-  keystore:
-    password: ${JWT_KEYSTORE_PASSWORD:}
-    resource-path: ${JWT_KEYSTORE_RESOURCE_PATH:jwks/nosql-jwt.jks}
-    keypair-alias: ${JWT_KEYSTORE_KEYPAIR_ALIAS:nosql-it-company-jwt}
+    keystore:
+      password: ${JWKS_REFRESH_TOKEN_PASSWORD:}
+      resource-path: ${JWKS_REFRESH_TOKEN_RESOURCE_PATH:jwks/nosql-refresh-token.jks}
+      keypair-alias: ${JWKS_REFRESH_TOKEN_KEYPAIR_ALIAS:nosql-refresh-token}

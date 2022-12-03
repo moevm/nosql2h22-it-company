@@ -1,6 +1,7 @@
 package com.nosql.authservice.configuration
 
 import com.nosql.authservice.configuration.properties.JwtProperties
+import com.nosql.authservice.enumerator.TokenType
 import com.nosql.authservice.service.JwksService
 import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
@@ -13,10 +14,16 @@ class JwtConfig(
 ) {
 
     @Bean
-    fun jwtParser(jwksService: JwksService): JwtParser {
-        return Jwts.parserBuilder()
+    fun accessTokenJwtParser(jwksService: JwksService) =
+        buildJwtParser(jwksService, TokenType.ACCESS)
+
+    @Bean
+    fun refreshTokenJwtParser(jwksService: JwksService) =
+        buildJwtParser(jwksService, TokenType.REFRESH)
+
+    private fun buildJwtParser(jwksService: JwksService, tokenType: TokenType): JwtParser =
+        Jwts.parserBuilder()
             .requireIssuer(jwtProperties.issuer)
-            .setSigningKey(jwksService.getKeyPair().private)
+            .setSigningKey(jwksService.getKeyPair(tokenType).private)
             .build()
-    }
 }

@@ -5,4 +5,6 @@ import java.time.Duration
 data class TokenProperties(
 
     val ttl: Duration,
+
+    val keystore: KeystoreProperties,
 )

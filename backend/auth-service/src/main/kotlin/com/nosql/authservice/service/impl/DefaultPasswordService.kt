@@ -12,5 +12,5 @@ class DefaultPasswordService(
 ) : PasswordService {
 
     override fun convertToHash(password: String): String =
-        HmacUtils(HmacAlgorithms.HMAC_SHA_256, appProperties.secretKey).hmacHex(password)
+        HmacUtils(HmacAlgorithms.HMAC_SHA_256, appProperties.passwordHashingSecretKey).hmacHex(password)
 }
