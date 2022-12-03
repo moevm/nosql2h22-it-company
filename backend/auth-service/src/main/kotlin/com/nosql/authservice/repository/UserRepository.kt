@@ -11,5 +11,7 @@ interface UserRepository : ReactiveMongoRepository<UserEntity, ObjectId> {
 
     fun existsByLogin(login: String): Mono<Boolean>
 
-    fun getByLoginAndPasswordHash(login: String, passwordHash: String): Mono<UserEntity>
+    fun findByLoginAndPasswordHash(login: String, passwordHash: String): Mono<UserEntity>
+
+    fun findByIdAndRefreshToken(id: ObjectId, refreshToken: String): Mono<UserEntity>
 }

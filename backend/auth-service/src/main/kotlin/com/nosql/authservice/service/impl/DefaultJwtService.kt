@@ -1,7 +1,6 @@
 package com.nosql.authservice.service.impl
 
 import com.nosql.authservice.configuration.properties.JwtProperties
-import com.nosql.authservice.constants.authorization.BEARER_TOKEN_PREFIX
 import com.nosql.authservice.constants.authorization.ROLE_CLAIM
 import com.nosql.authservice.dto.TokensDto
 import com.nosql.authservice.enumerator.Role
@@ -58,8 +57,7 @@ class DefaultJwtService(
     override fun generateRefreshToken(userId: String, role: Role) =
         generateToken(userId, role, jwtProperties.refreshToken.ttl, TokenType.REFRESH)
 
-    override fun updateTokensByRefresh(authorizationHeader: String): TokensDto {
-        val token = authorizationHeader.removePrefix(BEARER_TOKEN_PREFIX)
+    override fun generateTokensByRefresh(token: String): TokensDto {
         val claims = parseJwsClaims(token)
 
         val userId = claims.subject

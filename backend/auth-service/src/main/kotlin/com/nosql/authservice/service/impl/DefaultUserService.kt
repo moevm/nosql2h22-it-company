@@ -1,6 +1,7 @@
 package com.nosql.authservice.service.impl
 
 import com.nosql.authservice.component.UserComponent
+import com.nosql.authservice.constants.authorization.BEARER_TOKEN_PREFIX
 import com.nosql.authservice.dto.DefaultApiResponseDto
 import com.nosql.authservice.dto.SignUpRequestDto
 import com.nosql.authservice.dto.TokensDto
@@ -23,15 +24,37 @@ class DefaultUserService(
         conversionService.convert(signUpRequestDto, UserEntity::class)
             .let { userComponent.save(it) }
 
-        return DefaultApiResponseDto("ok")
+        return DefaultApiResponseDto()
     }
 
     override suspend fun signIn(userDto: UserDto): TokensDto {
         val user = conversionService.convert(userDto, UserEntity::class)
-            .let { userComponent.getByLoginAndPasswordHash(it) }
-        val userId = user.id!!.toHexString()
-        val role = user.role!!
+            .let { userComponent.findByLoginAndPasswordHash(it) }
 
-        return jwtService.generateTokens(userId, role)
+        val tokens = jwtService.generateTokens(user.id!!.toHexString(), user.role!!)
+
+        user.apply { refreshToken = tokens.refreshToken }
+            .let { userComponent.update(it) }
+
+        return tokens
+    }
+
+    override suspend fun signOut(userId: String): DefaultApiResponseDto {
+        userComponent.findByUserId(userId)
+            .apply { refreshToken = null }
+            .let { userComponent.update(it) }
+
+        return DefaultApiResponseDto()
+    }
+
+    override suspend fun updateTokensByRefresh(userId: String, authorizationHeader: String): TokensDto {
+        val receivedToken = authorizationHeader.removePrefix(BEARER_TOKEN_PREFIX)
+        val tokens = jwtService.generateTokensByRefresh(receivedToken)
+
+        userComponent.findByUserIdAndRefreshToken(userId, receivedToken)
+            .apply { refreshToken = tokens.refreshToken }
+            .let { userComponent.update(it) }
+
+        return tokens
     }
 }

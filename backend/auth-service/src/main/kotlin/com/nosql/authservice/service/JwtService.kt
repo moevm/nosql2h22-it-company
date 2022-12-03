@@ -6,7 +6,10 @@ import com.nosql.authservice.enumerator.Role
 interface JwtService {
 
     fun generateTokens(userId: String, role: Role): TokensDto
+
     fun generateAccessToken(userId: String, role: Role): String
+
     fun generateRefreshToken(userId: String, role: Role): String
-    fun updateTokensByRefresh(authorizationHeader: String): TokensDto
+
+    fun generateTokensByRefresh(token: String): TokensDto
 }
