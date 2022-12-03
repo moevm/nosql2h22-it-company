@@ -9,6 +9,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -38,6 +39,16 @@ class GrantAuthoritiesPersonController(
     suspend fun delete(
         @PathVariable personId: String,
     ) = personService.delete(personId)
+
+    @PutMapping(
+        path = [PERSON_ID_URL_PATH],
+        consumes = [APPLICATION_JSON_VALUE],
+        produces = [APPLICATION_JSON_VALUE],
+    )
+    suspend fun update(
+        @PathVariable personId: String,
+        @Valid @RequestBody personDto: PersonDto,
+    ) = personService.update(personId, personDto)
 
     companion object {
 

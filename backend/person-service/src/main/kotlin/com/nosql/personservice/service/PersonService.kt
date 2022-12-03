@@ -29,5 +29,7 @@ interface PersonService {
         pageable: Pageable,
     ): List<PersonDto>
 
-    suspend fun editContacts(personId: String, contactsDto: ContactsDto): PersonDto
+    suspend fun updateContacts(personId: String, contactsDto: ContactsDto): PersonDto
+
+    suspend fun update(personId: String, personDto: PersonDto): PersonDto
 }
