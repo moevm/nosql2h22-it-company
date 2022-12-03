@@ -5,6 +5,7 @@ import com.nosql.document.common.auth.UserAuthInfo
 import com.nosql.document.constants.openapi.SECURITY_SCHEME_IDENTIFIER
 import com.nosql.document.constants.url.PUBLIC_API_V1_DOCUMENT_URL_PATH
 import com.nosql.document.dto.DocumentDto
+import com.nosql.document.dto.StatusDto
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
 import com.nosql.document.service.DocumentService
@@ -13,9 +14,9 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -73,15 +74,15 @@ class DocumentController(
         @Valid @RequestBody documentDto: DocumentDto,
     ) = documentService.save(userAuthInfo.userId, documentDto)
 
-    @PutMapping(
+    @PatchMapping(
         value = [ID_URL_PATH],
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE],
     )
     suspend fun updateStatus(
         @PathVariable id: String,
-        @RequestBody documentDto: DocumentDto,
-    ) = documentService.update(id, documentDto)
+        @RequestBody statusDto: StatusDto,
+    ) = documentService.update(id, statusDto)
 
     companion object {
         private const val TYPE_REQUEST_PARAM = "type"

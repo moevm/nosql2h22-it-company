@@ -22,8 +22,8 @@ GET http://localhost:8083/public/api/v1/document/all?sort=orderDate,desc
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
-### Get document
-PUT http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
+### Update document
+PATCH http://localhost:8083/public/api/v1/document/638759f44da9805de8877486
 Authorization: Bearer <access_token>
 Content-Type: application/json
 

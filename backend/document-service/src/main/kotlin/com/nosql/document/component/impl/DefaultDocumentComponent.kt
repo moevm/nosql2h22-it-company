@@ -11,7 +11,6 @@ import com.nosql.document.entity.DocumentEntity
 import com.nosql.document.entity.PersonDocumentEntity
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
-import com.nosql.document.mapper.merge
 import com.nosql.document.repository.DocumentRepository
 import com.nosql.document.repository.PersonRepository
 import kotlinx.coroutines.reactor.awaitSingle
@@ -86,15 +85,13 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun update(id: ObjectId, document: DocumentEntity): DocumentEntity {
+    override suspend fun update(document: DocumentEntity): DocumentEntity {
 
-        val operationDetails = "Update 'document' record with id = '${id}'"
+        val operationDetails = "Update 'document' record with id = '${document.id}'"
 
         log.logBefore(operationDetails)
 
-        return documentRepository.findById(id)
-            .doOnNext { it.merge(document) }
-            .flatMap { documentRepository.save(it) }
+        return documentRepository.save(document)
             .onErrorMap { handleError(it, operationDetails) }
             .doOnSuccess { log.logSuccess(operationDetails) }
             .awaitSingle()

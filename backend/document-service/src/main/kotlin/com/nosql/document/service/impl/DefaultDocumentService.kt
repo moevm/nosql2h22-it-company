@@ -4,9 +4,11 @@ import com.nosql.document.component.DocumentComponent
 import com.nosql.document.dto.DefaultApiResponseDto
 import com.nosql.document.dto.DocumentDto
 import com.nosql.document.dto.PersonDocumentResponseDto
+import com.nosql.document.dto.StatusDto
 import com.nosql.document.entity.DocumentEntity
 import com.nosql.document.enumerator.DocumentStatus
 import com.nosql.document.enumerator.DocumentType
+import com.nosql.document.mapper.merge
 import com.nosql.document.service.DocumentService
 import com.nosql.document.util.convert
 import org.bson.types.ObjectId
@@ -40,9 +42,10 @@ class DefaultDocumentService(
         documentComponent.getAllByUserId(ObjectId(userId), pageable)
             .map { conversionService.convert(it, DocumentDto::class) }
 
-    override suspend fun update(id: String, documentDto: DocumentDto) =
-        conversionService.convert(documentDto, DocumentEntity::class)
-            .let { documentComponent.update(ObjectId(id), it) }
+    override suspend fun update(id: String, statusDto: StatusDto) =
+        documentComponent.get(ObjectId(id))
+            .apply { merge(statusDto) }
+            .let { documentComponent.update(it) }
             .let { conversionService.convert(it, DocumentDto::class) }
 
     override suspend fun delete(documentId: String): DefaultApiResponseDto {
