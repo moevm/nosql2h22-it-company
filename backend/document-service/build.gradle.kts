@@ -40,10 +40,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	implementation("io.mongock:mongodb-springdata-v3-driver:5.1.6")
-	implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.13")
-
-	compileOnly("io.mongock:mongock-springboot:5.1.6")
+	implementation("io.mongock:mongodb-springdata-v3-driver:5.2.1")
+	implementation("io.mongock:mongock-springboot:5.2.1")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
