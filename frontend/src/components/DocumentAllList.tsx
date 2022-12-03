@@ -27,11 +27,23 @@ const statusName = [
     {status: "CANCELED", name: "Отменено"}
 ];
 
+type PersonDocument = {
+    person: {
+        name: string,
+        surname: string,
+        contacts: {
+            phoneNumber: string,
+            email: string
+        }
+    },
+    document: IDocument
+};
+
 export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProps) {
-    const [documentList, setDocumentList] = useState<IDocument[]>([]);
+    const [documentList, setDocumentList] = useState<PersonDocument[]>([]);
 
     const getDocuments = () => {
-        axios.get<IDocument[]>(`${process.env.REACT_APP_DOCUMENT_HOST}/document/all`, {
+        axios.get<PersonDocument[]>(`${process.env.REACT_APP_DOCUMENT_HOST}/document/all`, {
             headers: {
                 Authorization: `Bearer ${localStorage.accessToken}`
             },
@@ -53,20 +65,35 @@ export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProp
         getDocuments();
     }, [sortRequest, typeRequest, statusRequest]);
 
+
+
     return (
         <Stack spacing={2}>
-            {documentList.map((document: IDocument) => (
+            {documentList.map((data: PersonDocument) => (
                 <Item elevation={6}>
                     <Typography variant="body1" component="span">
-                        {DOCUMENT_TYPES.find(doc => doc.name === document.type)?.value}
+                        {DOCUMENT_TYPES.find(document => document.name === data.document.type)?.value}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                        Дата заказа: {document.orderDate}
+                        Дата заказа: {data.document.orderDate}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                        Статус: {statusName.find(status => status.status === document.status)?.name}
+                        Дата выдачи: {data.document.completeDate ? data.document.completeDate.substr(0, 10) : "не выдано"}
+                    </Typography>
+                    <br/>
+                    <Typography variant="body1" component="span">
+                        Статус: {statusName.find(status => status.status === data.document.status)?.name}
+                    </Typography>
+                    <br/>
+                    <br/>
+                    <Typography variant="body1" component="span">
+                        ФИ: {data.person.surname} {data.person.name}
+                    </Typography>
+                    <br/>
+                    <Typography variant="body1" component="span">
+                        ({data.person.contacts.phoneNumber}, {data.person.contacts.email})
                     </Typography>
                 </Item>
             ))}

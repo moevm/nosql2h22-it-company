@@ -55,5 +55,6 @@ export interface IDocument {
     type: string,
     user_id: string,
     orderDate: string,
+    completeDate: string,
     status: string
 }
