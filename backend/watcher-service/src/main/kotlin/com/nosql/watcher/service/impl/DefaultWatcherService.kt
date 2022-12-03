@@ -4,7 +4,10 @@ import com.nosql.watcher.component.ProjectComponent
 import com.nosql.watcher.component.WatcherComponent
 import com.nosql.watcher.dto.DefaultApiResponseDto
 import com.nosql.watcher.dto.WatcherDto
+import com.nosql.watcher.dto.WatcherFillRequestDto
 import com.nosql.watcher.entity.WatcherEntity
+import com.nosql.watcher.entity.WatcherFillModel
+import com.nosql.watcher.mapper.merge
 import com.nosql.watcher.service.WatcherService
 import com.nosql.watcher.util.convert
 import org.bson.types.ObjectId
@@ -30,6 +33,14 @@ class DefaultWatcherService(
 
     override suspend fun getAll(pageable: Pageable) = watcherComponent.getAll(pageable)
         .map { conversionService.convert(it, WatcherDto::class) }
+
+    override suspend fun getAllByUserIdsAndDate(
+        userIds: List<String>,
+        from: Date,
+        to: Date,
+        pageable: Pageable,
+    ): List<WatcherDto> = watcherComponent.getAllByUserIdsAndDate(userIds.map { ObjectId(it) }, from, to, pageable)
+            .map { conversionService.convert(it, WatcherDto::class) }
 
     override suspend fun getAllByUserIdAndDate(userId: String, from: Date, to: Date, pageable: Pageable) =
         watcherComponent.getAllByUserIdAndDate(ObjectId(userId), from, to, pageable)
@@ -57,12 +68,20 @@ class DefaultWatcherService(
             .map { conversionService.convert(it, WatcherDto::class) }
     }
 
-    override suspend fun update(watcherDto: WatcherDto) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun update(id: String, watcherFillRequestDto: WatcherFillRequestDto) =
+        watcherComponent.get(ObjectId(id))
+            .apply {
+                val watcherFill = conversionService.convert(watcherFillRequestDto, WatcherFillModel::class)
+                merge(watcherFill)
+            }
+            .let { watcherComponent.update(it) }
+            .let { conversionService.convert(it, WatcherDto::class) }
+
 
     override suspend fun delete(watcherId: String): DefaultApiResponseDto {
-        TODO("Not yet implemented")
+
+        watcherComponent.delete(ObjectId(watcherId))
+        return DefaultApiResponseDto()
     }
 
     private fun makeWatcherEntity(userId: String, watcherDto: WatcherDto) =
