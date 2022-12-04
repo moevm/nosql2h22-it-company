@@ -20,3 +20,10 @@ spring:
 
 app:
   cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:}
+
+mongock:
+  enabled: true
+  transaction-enabled: false
+  default-migration-author: mongock
+  migration-scan-package:
+    - com.nosql.personservice.configuration.mongodb.migration
