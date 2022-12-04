@@ -5,7 +5,8 @@ import io.mongock.api.annotations.RollbackExecution
 import org.slf4j.Logger
 
 abstract class AbstractChangeUnit(
-    private val changeUnitParameter: String,
+    private val changeUnitId: String,
+    private val changeUnitOrder: String,
 ) : ChangeUnit {
 
     private val log: Logger by logger()
@@ -14,10 +15,6 @@ abstract class AbstractChangeUnit(
 
     @RollbackExecution
     override fun rollback() {
-        log.error("Rollback: [id = $changeUnitParameter, order = $changeUnitParameter]")
-    }
-
-    companion object {
-        const val CHANGE_UNIT_AUTHOR = "application"
+        log.error("Rollback: [id = $changeUnitId, order = $changeUnitOrder]")
     }
 }
