@@ -60,7 +60,7 @@ export function DocumentAllInfo() {
                     <form>
                         <FormControl>
                             <FormControlLabel control={<Checkbox defaultChecked value="ORDERED" onChange={handleStatus} />} label="Заказано" />
-                            <FormControlLabel control={<Checkbox defaultChecked value="IN_PROGRESS" onChange={handleStatus} />} label="В работе" />
+                            <FormControlLabel control={<Checkbox defaultChecked value="IN_PROGRESS" onChange={handleStatus} />} label="В процессе" />
                             <FormControlLabel control={<Checkbox defaultChecked value="DONE" onChange={handleStatus} />} label="Готово" />
                             <FormControlLabel control={<Checkbox defaultChecked value="CANCELED" onChange={handleStatus} />} label="Отменено" />
                         </FormControl>
