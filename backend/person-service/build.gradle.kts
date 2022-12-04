@@ -27,6 +27,7 @@ extra["testcontainersVersion"] = "1.17.3"
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.security:spring-security-oauth2-resource-server")
 	implementation("org.springframework.security:spring-security-oauth2-jose")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")

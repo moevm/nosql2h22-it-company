@@ -1,6 +1,6 @@
-package com.nosql.authservice.configuration.mongodb.migration
+package com.nosql.personservice.configuration.mongodb.migration
 
-import com.nosql.authservice.common.logger.logger
+import com.nosql.personservice.common.logger.logger
 import io.mongock.api.annotations.RollbackExecution
 import org.slf4j.Logger
 
