@@ -75,7 +75,7 @@ export function WatcherModule() {
             <Stack spacing={2}>
                 {tasks.map((task) => (
                     <Item elevation={6}>
-                        {task.date}
+                        Дата: {task.date.substring(0, 10)}
                         <br/>
                         Часы: {(task.minutesAmount / 60).toFixed(2)}
                         <br/>
