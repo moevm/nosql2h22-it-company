@@ -36,18 +36,22 @@ export function DocumentUserList() {
 
     return (
         <Stack spacing={2}>
-            {documentList.map((document: IDocument) => (
+            {documentList.map((data: IDocument) => (
                 <Item elevation={6}>
                     <Typography variant="body1" component="span">
-                        {DOCUMENT_TYPES.find(doc => doc.name === document.type)?.value}
+                        {DOCUMENT_TYPES.find(document => document.name === data.type)?.value}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                         Дата заказа: {document.orderDate}
+                        Дата заказа: {data.orderDate}
                     </Typography>
                     <br/>
                     <Typography variant="body1" component="span">
-                        Статус: {statusName.find(status => status.status === document.status)?.name}
+                        Дата выдачи: {data.completeDate ?? "неизвестно"}
+                    </Typography>
+                    <br/>
+                    <Typography variant="body1" component="span">
+                        Статус: {statusName.find(status => status.status === data.status)?.name}
                     </Typography>
                 </Item>
             ))}
