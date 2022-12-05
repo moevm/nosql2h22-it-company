@@ -1,6 +1,6 @@
 ### Sign up person
 POST http://localhost:8081/admin/api/v1/person/sign-up
-Authorization: Bearer eyJraWQiOiIxMDg1NzAyNzQ2NjMwMTQ3NzUyMSIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJub3NxbC1pdC1jb21wYW55Iiwic3ViIjoiNjM4YjllMjFmZTljZmEzNGQ5M2JlOTNkIiwiaWF0IjoxNjcwMTA5Njg4LCJleHAiOjE2NzAxMTE0ODgsInJvbGUiOiJIUiJ9.aGxE0-pVWtuMIzow7vYRCNdb1f37Iu9SheYgvM0A9a4lKJyVI61T8Hs1FalDdCpGrK40bUsEBWN6nLJL5MLSodQI6ilaLrsIm1pqI3t-6gEXNZG-KtOLsWcMJ8ggn5JVZqDQNonbFJP-T1X0xzKtls5D4BqEscHSXrl8KIg3dR5h9a9Z9Z_XfzJE93gj0z8o7jIE4Jj7lI9p4i6vEtCo2pQGLlJzHrc0xdbnTK6BPAPBTM6kw7CeTWsdVi4kNXha5cLBn4pFN8wkGjXewY7MiyPNq7j8-wcnxkc-eww_L61rvHuw3uib7y4KqxiqtKEE0PngDSwt1yMqpQdryWJHpA
+Authorization: Bearer <access_token>
 Content-Type: application/json
 
 {
@@ -106,7 +106,7 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Extended get person
-GET http://localhost:8081/public/api/v1/person/extended
+GET http://localhost:8081/public/api/v1/person/extended?sex=FEMALE
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
