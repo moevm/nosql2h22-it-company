@@ -4,6 +4,7 @@ import com.nosql.authservice.component.UserComponent
 import com.nosql.authservice.constants.authorization.BEARER_TOKEN_PREFIX
 import com.nosql.authservice.dto.DefaultApiResponseDto
 import com.nosql.authservice.dto.SignUpRequestDto
+import com.nosql.authservice.dto.SignUpResponseDto
 import com.nosql.authservice.dto.TokensDto
 import com.nosql.authservice.dto.UserDto
 import com.nosql.authservice.entity.UserEntity
@@ -20,12 +21,10 @@ class DefaultUserService(
     private val conversionService: ConversionService,
 ) : UserService {
 
-    override suspend fun signUp(signUpRequestDto: SignUpRequestDto): DefaultApiResponseDto {
+    override suspend fun signUp(signUpRequestDto: SignUpRequestDto) =
         conversionService.convert(signUpRequestDto, UserEntity::class)
             .let { userComponent.save(it) }
-
-        return DefaultApiResponseDto()
-    }
+            .let { SignUpResponseDto(it.id!!.toHexString()) }
 
     override suspend fun signIn(userDto: UserDto): TokensDto {
         val user = conversionService.convert(userDto, UserEntity::class)
