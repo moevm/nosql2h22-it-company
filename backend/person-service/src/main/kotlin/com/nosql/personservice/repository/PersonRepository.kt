@@ -14,7 +14,7 @@ interface PersonRepository : ReactiveMongoRepository<PersonEntity, ObjectId> {
 
     fun findAllByIdNotNull(pageable: Pageable): Flux<PersonEntity>
 
-    fun findAllByNameIsLike(name: String, pageable: Pageable): Flux<PersonEntity>
+    fun findAllByNameIsLikeIgnoreCase(name: String, pageable: Pageable): Flux<PersonEntity>
 
     @Query(
         "{'\$and': " +
