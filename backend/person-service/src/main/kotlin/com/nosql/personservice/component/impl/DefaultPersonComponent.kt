@@ -70,7 +70,7 @@ class DefaultPersonComponent(
 
         log.logBefore(operationDetails)
 
-        return personRepository.findAllByNameIsLike(name, pageable)
+        return personRepository.findAllByNameIsLikeIgnoreCase(name, pageable)
             .onErrorMap { handleError(it, operationDetails) }
             .collectList()
             .doOnSuccess { log.logSuccess(operationDetails) }
