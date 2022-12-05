@@ -16,7 +16,7 @@ export function Footer({handle, children}: IProps) {
     const userState: IUserState = useTypedSelector(state => state.user);
 
     useEffect(() => {
-        setExtendedRights(userState.advancedRole);
+        setExtendedRights(userState?.advancedRole);
     }, [userState]);
 
     return (
