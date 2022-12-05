@@ -19,9 +19,9 @@ interface PersonRepository : ReactiveMongoRepository<PersonEntity, ObjectId> {
     @Query(
         "{'\$and': " +
                 "[" +
-                "{ 'name' : { '\$regex': ?0 } }, " +
-                "{ 'surname' : { '\$regex': ?1 } }, " +
-                "{ 'patronymic' : { '\$regex': ?2 } }, " +
+                "{ 'name' : { '\$regex': ?0, '\$options': 'i' } }, " +
+                "{ 'surname' : { '\$regex': ?1, '\$options': 'i' } }, " +
+                "{ 'patronymic' : { '\$regex': ?2, '\$options': 'i'  } }, " +
                 "{ 'sex' : ?3 }, " +
                 "{ 'position' : { '\$regex': ?4 } }, " +
                 "{ 'status' : { '\$regex': ?5 } }, " +

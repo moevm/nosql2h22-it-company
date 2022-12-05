@@ -106,7 +106,7 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 
 ### Extended get person
-GET http://localhost:8081/public/api/v1/person/extended?sex=FEMALE
+GET http://localhost:8081/public/api/v1/person/extended?sex=FEMALE&name=екат&surname=акс&patronymic=але
 Authorization: Bearer <access_token>
 Content-Type: application/json
 
