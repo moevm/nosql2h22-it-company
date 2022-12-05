@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -11,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import {Button, ThemeProvider} from "@mui/material";
+import {ThemeProvider} from "@mui/material";
 import {AccessTime, GroupsOutlined, TextSnippetOutlined} from "@mui/icons-material";
 import headerTheme from "../themes/HeaderTheme";
 import {ACCESS_TOKEN, EMPTY_STRING, REFRESH_TOKEN} from "../constants";
@@ -84,11 +85,14 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon
-                                        sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}>
+                                        sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}
+                                    >
                                         <AccessTime fontSize='large'/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Watcher"
-                                                  sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}/>
+                                    <ListItemText
+                                        primary="Watcher"
+                                        sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                             <ListItem key="person" disablePadding>
@@ -97,11 +101,14 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon
-                                        sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}>
+                                        sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}
+                                    >
                                         <GroupsOutlined fontSize='large'/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Person"
-                                                  sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}/>
+                                    <ListItemText
+                                        primary="Person"
+                                        sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                             <ListItem key="document" disablePadding>
@@ -110,11 +117,14 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon
-                                        sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}>
+                                        sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}
+                                    >
                                         <TextSnippetOutlined fontSize='large'/>
                                     </ListItemIcon>
-                                    <ListItemText primary="Document"
-                                                  sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}/>
+                                    <ListItemText
+                                        primary="Document"
+                                        sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         </List>
@@ -123,7 +133,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                 <Button
                     id="quit-button"
                     variant="text"
-                    endIcon={<Avatar src="/broken-image.jpg"/>}
+                    endIcon={<Avatar src="/broken-image.jpg" />}
                     onClick={handleClickQuit}
                 >
                     {userState?.name} {userState?.surname}

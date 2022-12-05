@@ -10,10 +10,11 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import {Add, Remove} from "@mui/icons-material";
 import {Footer} from "./Footer";
+import {ImportExport} from "./ImportExport";
 import {PersonAdvancedSearch} from "./PersonAdvancedSearch";
 import {PersonInfo} from "./PersonInfo";
 import {PersonSearch} from "./PersonSearch";
-import {authAdminRequest, personAdminRequest, personRequest} from "../requests/httpRequests";
+import {authAdminRequest, personAdminRequest, personRequest} from "../utils/HTTPRequest";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {PERSON_PAGE_TITLE, ROLES} from "../constants";
 
@@ -107,6 +108,12 @@ const getCurrentDay = () => {
     return `${year}-${month}-${day}`;
 }
 
+const databases = [
+    {id: "people", name: "Пользователи"},
+    {id: "offices", name: "Офисы"},
+    {id: "projects", name: "Проекты"}
+];
+
 export function PersonModule() {
     const [personInfo, setPersonInfo] = useState<IPerson | null>(null);
     const [newPersonInfo, setNewPersonInfo] = useState<IAddingPerson>(initialState);
@@ -114,6 +121,7 @@ export function PersonModule() {
     const [changePersonAbility, setChangePersonAbility] = useState<boolean>(false);
     const [processDialog, setProcessDialog] = useState<string>("add");
     const [openDialog, setOpenDialog] = useState<boolean>(false);
+    const [action, setAction] = useState<string | null>(null);
 
     const userState: IUserState = useTypedSelector(state => state.user);
 
@@ -217,9 +225,9 @@ export function PersonModule() {
             {advancedSearch ? <PersonAdvancedSearch setPerson={setPersonInfo} setAdvancedSearch={setAdvancedSearch} /> : <Stack>
                 <PersonSearch setPerson={setPersonInfo} setAdvancedSearch={setAdvancedSearch} />
                 <PersonInfo person={personInfo} />
-                {changePersonAbility && <Footer handle={(data) => {data === 0 ? handleAddClick() : handleRemoveClick()}}>
-                    <Add />
-                    {userState?.id !== personInfo?.id ? <Remove /> : <></>}
+                {changePersonAbility && <Footer handle={(data) => {data === 0 ? handleAddClick() : handleRemoveClick()}} setAction={setAction}>
+                    <Add fontSize='large' />
+                    {userState?.id !== personInfo?.id ? <Remove fontSize='large' /> : <></>}
                 </Footer>}
             </Stack>}
             <Dialog open={openDialog} onClose={handleCloseDialog}>
@@ -250,6 +258,7 @@ export function PersonModule() {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <ImportExport action={action} setAction={setAction} dbs={databases} />
         </>
     );
 }
