@@ -5,4 +5,10 @@ enum class DocumentStatus {
     IN_PROGRESS,
     DONE,
     CANCELED;
+
+    companion object {
+        fun isMember(type: String) = values().any { it.name == type.uppercase() }
+
+        fun get(type: String) = values().first { it.name == type.uppercase() }
+    }
 }

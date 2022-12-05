@@ -9,6 +9,8 @@ interface WatcherComponent {
 
     suspend fun save(watcher: WatcherEntity): WatcherEntity
 
+    suspend fun saveAll(watchers: List<WatcherEntity>): List<WatcherEntity>
+
     suspend fun get(watcherId: ObjectId): WatcherEntity
 
     suspend fun getAll(pageable: Pageable): List<WatcherEntity>

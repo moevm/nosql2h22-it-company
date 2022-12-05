@@ -53,5 +53,5 @@ class PersonWithOfficeAndProjectsDto(
     val confidential: ConfidentialWithProjectDto,
 
     @JsonProperty("comment")
-    val comment: String,
+    val comment: String?,
 )

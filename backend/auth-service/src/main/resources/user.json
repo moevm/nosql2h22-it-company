@@ -1,0 +1,36 @@
+[
+  {
+    "id": "638b61ce58cc2c41de5ef7a0",
+    "name": "Катя",
+    "surname": "Аксёнова",
+    "patronymic": "Александровна",
+    "sex": "FEMALE",
+    "birthday": "2001-11-14",
+    "firstWorkDate": "2022-04-14",
+    "position": "JUNIOR_BACKEND_DEVELOPER",
+    "status": "WORKING",
+    "contacts": {
+      "phoneNumber": "79112886438",
+      "email": "kate.kate6575@gmail.com"
+    },
+    "jobTime": {
+      "start": "11:00",
+      "end": "20:00"
+    },
+    "officeId": "638c7040c3223565f8cabb3f",
+    "confidential": {
+      "passportData": {
+        "number": "BM5653789",
+        "issuedPlace": "Октябрьский РОВД",
+        "issuedDate": "2015-10-14"
+      },
+      "nationality": "BELARUS",
+      "address": "Улица Торжковская, дом 15",
+      "salary": "1000000",
+      "projectIds": [
+        "638c830ec3223565f8cabb43"
+      ]
+    },
+    "comment": "Устала! Импорт готов снова!"
+  }
+]

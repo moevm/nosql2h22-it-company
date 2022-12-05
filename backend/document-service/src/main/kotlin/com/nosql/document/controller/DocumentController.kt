@@ -6,8 +6,6 @@ import com.nosql.document.constants.openapi.SECURITY_SCHEME_IDENTIFIER
 import com.nosql.document.constants.url.PUBLIC_API_V1_DOCUMENT_URL_PATH
 import com.nosql.document.dto.DocumentDto
 import com.nosql.document.dto.StatusDto
-import com.nosql.document.enumerator.DocumentStatus
-import com.nosql.document.enumerator.DocumentType
 import com.nosql.document.service.DocumentService
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.Pageable
@@ -40,24 +38,6 @@ class DocumentController(
     ) = documentService.getAllByUserId(userAuthInfo.userId, pageable)
 
     @GetMapping(
-        value = [ALL_URL_PATH],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun getAll(
-        @RequestParam(
-            TYPE_REQUEST_PARAM,
-            defaultValue = "INCOME_STATEMENT, WORK_STATEMENT",
-            required = false
-        ) types: List<DocumentType>,
-        @RequestParam(
-            STATUS_REQUEST_PARAM,
-            defaultValue = "ORDERED, IN_PROGRESS, DONE, CANCELED",
-            required = false,
-        ) statuses: List<DocumentStatus>,
-        @PageableDefault(page = 0, size = 20) pageable: Pageable,
-    ) = documentService.getAll(types, statuses, pageable)
-
-    @GetMapping(
         value = [ID_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
@@ -74,20 +54,7 @@ class DocumentController(
         @Valid @RequestBody documentDto: DocumentDto,
     ) = documentService.save(userAuthInfo.userId, documentDto)
 
-    @PatchMapping(
-        value = [ID_URL_PATH],
-        consumes = [APPLICATION_JSON_VALUE],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun updateStatus(
-        @PathVariable id: String,
-        @RequestBody statusDto: StatusDto,
-    ) = documentService.update(id, statusDto)
-
     companion object {
-        private const val TYPE_REQUEST_PARAM = "type"
-        private const val STATUS_REQUEST_PARAM = "status"
-        private const val ALL_URL_PATH = "all"
         private const val ALL_OWN_URL_PATH = "all-own"
         private const val ID_URL_PATH = "{id}"
     }

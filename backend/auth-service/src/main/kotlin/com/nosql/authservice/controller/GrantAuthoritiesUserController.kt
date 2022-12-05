@@ -15,7 +15,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping(ADMIN_API_V1_AUTH_URL_PATH)
 @SecurityRequirement(name = SECURITY_SCHEME_IDENTIFIER)
-class SignUpController(
+class GrantAuthoritiesUserController(
     private val userService: UserService,
 ) {
 

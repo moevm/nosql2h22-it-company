@@ -8,6 +8,8 @@ import java.util.Date
 interface PersonComponent {
     suspend fun save(person: PersonEntity): PersonEntity
 
+    suspend fun saveAll(persons: List<PersonEntity>): List<PersonEntity>
+
     suspend fun get(personId: ObjectId): PersonEntity
 
     suspend fun getAll(pageable: Pageable): List<PersonEntity>

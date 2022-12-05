@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable
 
 interface OfficeComponent {
 
+    suspend fun saveAll(offices: List<OfficeEntity>): List<OfficeEntity>
+
     suspend fun getById(id: ObjectId): OfficeEntity
 
     suspend fun getAll(pageable: Pageable): List<OfficeEntity>

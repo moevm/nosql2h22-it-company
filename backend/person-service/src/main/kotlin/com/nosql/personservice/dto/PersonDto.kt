@@ -56,5 +56,5 @@ class PersonDto (
     var confidential: ConfidentialDto,
 
     @JsonProperty("comment")
-    var comment: String,
+    var comment: String?,
 )

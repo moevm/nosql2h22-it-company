@@ -11,13 +11,17 @@ interface DocumentComponent {
 
     suspend fun save(document: DocumentEntity): DocumentEntity
 
+    suspend fun saveAll(documents: List<DocumentEntity>): List<DocumentEntity>
+
     suspend fun get(documentId: ObjectId): DocumentEntity
 
-    suspend fun getAll(
+    suspend fun getAllByTypesAndStatuses(
         types: List<DocumentType>,
         statuses: List<DocumentStatus>,
         pageable: Pageable,
     ): List<PersonDocumentEntity>
+
+    suspend fun getAll(pageable: Pageable): List<DocumentEntity>
 
     suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity>
 

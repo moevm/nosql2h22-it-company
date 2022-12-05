@@ -52,5 +52,5 @@ class PersonEntity(
     var confidential: ConfidentialEntity,
 
     @Field("comment")
-    var comment: String,
+    var comment: String?,
 )

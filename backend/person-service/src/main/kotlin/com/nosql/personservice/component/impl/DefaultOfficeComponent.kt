@@ -22,6 +22,19 @@ class DefaultOfficeComponent(
 ) : OfficeComponent {
 
     private val log: Logger by logger()
+    override suspend fun saveAll(offices: List<OfficeEntity>): List<OfficeEntity> {
+
+        val operationDetails = "Save 'office' records"
+
+        log.logBefore(operationDetails)
+
+        return officeRepository.saveAll(offices)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
     override suspend fun getById(id: ObjectId): OfficeEntity {
 
         val operationDetails = "Get 'office' record with id = '$id'"

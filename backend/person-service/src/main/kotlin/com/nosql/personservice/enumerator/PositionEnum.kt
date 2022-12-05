@@ -17,4 +17,11 @@ enum class PositionEnum {
     PM,
     ADMINISTRATION,
     OFFICE_MANAGER;
+
+    companion object {
+
+        fun isMember(position: String) = values().any { it.name == position.uppercase() }
+
+        fun get(position: String) = values().first { it.name == position.uppercase() }
+    }
 }
