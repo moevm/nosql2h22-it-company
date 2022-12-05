@@ -5,7 +5,6 @@ import {DocumentUserInfo} from "./DocumentUserInfo";
 import {DocumentAllInfo} from "./DocumentAllInfo";
 import {Footer} from "./Footer";
 import {DOCUMENT_PAGE_TITLE} from "../constants";
-import {IToken} from "../models";
 
 export function DocumentModule() {
     const [showAllDocuments, setShowAllDocuments] = useState<boolean>(false);

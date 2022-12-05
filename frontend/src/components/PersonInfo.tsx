@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import {IPerson} from "../models";
 import personInfoTheme from "../themes/PersonInfoTheme";
 
 interface IProps {
@@ -57,6 +56,5 @@ export function PersonInfo({person}: IProps) {
                 </Item>
             </Stack>
         </ThemeProvider>
-
     );
 }

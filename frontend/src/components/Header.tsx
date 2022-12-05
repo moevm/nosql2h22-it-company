@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,10 +15,9 @@ import Toolbar from "@mui/material/Toolbar";
 import {ThemeProvider} from "@mui/material";
 import {AccessTime, GroupsOutlined, TextSnippetOutlined} from "@mui/icons-material";
 import headerTheme from "../themes/HeaderTheme";
-import Button from "@mui/material/Button";
 import {USER_TOKEN} from "../constants";
-import axios from "axios";
-import {IError, IPerson} from "../models";
+import {useActions} from "../hooks/useAction";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 export enum ActiveModule {
     NONE,
@@ -26,50 +26,32 @@ export enum ActiveModule {
     DOCUMENT
 }
 
-interface IUserInfo {
-    userName: string,
-    userSurname: string
-}
-
 interface IActiveModule {
     activeModule: ActiveModule,
     setActiveModule: (data: ActiveModule) => void
 }
 
+const watcherButtonId = "watcher-button";
+const personButtonId = "person-button";
+const documentButtonId = "document-button";
+
 export function Header({activeModule, setActiveModule}: IActiveModule) {
     const [quitAnchorElement, setQuitAnchorElement] = useState<null | HTMLElement>(null);
-    const [data, setData] = useState<IUserInfo>({
-        userName: "",
-        userSurname: ""
-    })
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get<IPerson>(`${process.env.REACT_APP_PERSON_HOST}/${process.env.REACT_APP_PERSON_GET}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.accessToken}`
-            }
-        }).then(response => {
-            setData({
-                ...data,
-                userName: response.data.name,
-                userSurname: response.data.surname
-            })
-        }).catch((error: IError) => {
-            console.log(error);
-        });
-    }, []);
+    const {changeUser} = useActions();
+    const userState: IUserState = useTypedSelector(state => state.user);
 
     const handleClickModule = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         switch (event.currentTarget.id) {
-            case "watcher-button":
+            case watcherButtonId:
                 setActiveModule(ActiveModule.WATCHER);
                 break;
-            case "person-button":
+            case personButtonId:
                 setActiveModule(ActiveModule.PERSON);
                 break;
-            case "document-button":
+            case documentButtonId:
                 setActiveModule(ActiveModule.DOCUMENT);
                 break;
         }
@@ -86,6 +68,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
     const handleQuit = () => {
         setQuitAnchorElement(null);
         localStorage.setItem(USER_TOKEN, "");
+        changeUser();
         navigate(`${process.env.REACT_APP_AUTH_PAGE}`);
     }
 
@@ -97,7 +80,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                         <List>
                             <ListItem key="watcher" disablePadding>
                                 <ListItemButton
-                                    id="watcher-button"
+                                    id={watcherButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.WATCHER ? "#660708" : "black")}}>
@@ -108,7 +91,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                             </ListItem>
                             <ListItem key="person" disablePadding>
                                 <ListItemButton
-                                    id="person-button"
+                                    id={personButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.PERSON ? "#660708" : "black")}}>
@@ -119,7 +102,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                             </ListItem>
                             <ListItem key="document" disablePadding>
                                 <ListItemButton
-                                    id="document-button"
+                                    id={documentButtonId}
                                     onClick={handleClickModule}
                                 >
                                     <ListItemIcon sx={{color: (activeModule === ActiveModule.DOCUMENT ? "#660708" : "black")}}>
@@ -137,7 +120,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
                     endIcon={<Avatar src="/broken-image.jpg" />}
                     onClick={handleClickQuit}
                 >
-                    {data.userName} {data.userSurname}
+                    {userState?.name} {userState?.surname}
                 </Button>
                 <Menu
                     id="quit-menu"
