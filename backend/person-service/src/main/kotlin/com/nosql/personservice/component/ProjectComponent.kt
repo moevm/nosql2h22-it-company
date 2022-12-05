@@ -9,4 +9,6 @@ interface ProjectComponent {
     suspend fun getById(id: ObjectId): ProjectEntity
 
     suspend fun getAll(pageable: Pageable): List<ProjectEntity>
+
+    suspend fun getAllByIds(ids: List<ObjectId>): List<ProjectEntity>
 }

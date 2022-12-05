@@ -8,9 +8,9 @@ class PassportDataEntity(
     @Field("number")
     var number: String,
 
-    @Field("issuedPlace")
+    @Field("issued_place")
     var issuedPlace: String,
 
-    @Field("issuedDate")
+    @Field("issued_date")
     var issuedDate: Date,
 )

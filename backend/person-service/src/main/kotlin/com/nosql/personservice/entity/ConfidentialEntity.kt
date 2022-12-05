@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 
 class ConfidentialEntity(
 
-    @Field("passportData")
+    @Field("passport_data")
     var passportData: PassportDataEntity,
 
     @Field("nationality")
@@ -17,6 +17,6 @@ class ConfidentialEntity(
     @Field("salary")
     var salary: Int,
 
-    @Field("projectIds")
+    @Field("project_ids")
     var projectIds: List<ObjectId>,
 )
