@@ -17,7 +17,7 @@ export const changeUser = () => {
                     advancedRole: ADVANCED_ROLE_LIST.indexOf(response.data.position) !== -1
                 }
             });
-        }).catch(() => {
+        }).catch((error: IError) => {
             dispatch({
                 type: SIGN_OUT,
                 user: null
