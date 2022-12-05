@@ -3,6 +3,7 @@ package com.nosql.personservice.service
 import com.nosql.personservice.dto.ContactsDto
 import com.nosql.personservice.dto.DefaultApiResponseDto
 import com.nosql.personservice.dto.PersonDto
+import com.nosql.personservice.dto.PersonWithOfficeAndProjectsDto
 import org.springframework.data.domain.Pageable
 
 interface PersonService {
@@ -11,11 +12,11 @@ interface PersonService {
 
     suspend fun signUp(personDto: PersonDto): DefaultApiResponseDto
 
-    suspend fun get(personId: String): PersonDto
+    suspend fun get(personId: String): PersonWithOfficeAndProjectsDto
 
-    suspend fun getAll(pageable: Pageable): List<PersonDto>
+    suspend fun getAll(pageable: Pageable): List<PersonWithOfficeAndProjectsDto>
 
-    suspend fun getAllByName(name: String, pageable: Pageable): List<PersonDto>
+    suspend fun getAllByName(name: String, pageable: Pageable): List<PersonWithOfficeAndProjectsDto>
 
     suspend fun extendedGet(
         name: String,
@@ -27,9 +28,9 @@ interface PersonService {
         startAge: Int,
         endAge: Int,
         pageable: Pageable,
-    ): List<PersonDto>
+    ): List<PersonWithOfficeAndProjectsDto>
 
-    suspend fun updateContacts(personId: String, contactsDto: ContactsDto): PersonDto
+    suspend fun updateContacts(personId: String, contactsDto: ContactsDto): PersonWithOfficeAndProjectsDto
 
-    suspend fun update(personId: String, personDto: PersonDto): PersonDto
+    suspend fun update(personId: String, personDto: PersonDto): PersonWithOfficeAndProjectsDto
 }

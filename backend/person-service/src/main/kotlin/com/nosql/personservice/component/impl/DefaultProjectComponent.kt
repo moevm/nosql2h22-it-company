@@ -48,6 +48,19 @@ class DefaultProjectComponent(
             .awaitSingle()
     }
 
+    override suspend fun getAllByIds(ids: List<ObjectId>): List<ProjectEntity> {
+
+        val operationDetails = "Get 'project' records by ids in '$ids'"
+
+        log.logBefore(operationDetails)
+
+        return projectRepository.findAllById(ids)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
     private fun handleError(
         error: Throwable,
         operationDetails: String,

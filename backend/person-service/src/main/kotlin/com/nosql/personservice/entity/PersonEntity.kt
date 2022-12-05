@@ -30,7 +30,7 @@ class PersonEntity(
     @Field("birthday")
     var birthday: Date,
 
-    @Field("firstWorkDate")
+    @Field("first_work_date")
     var firstWorkDate: Date,
 
     @Field("position")
@@ -42,10 +42,10 @@ class PersonEntity(
     @Field("contacts")
     var contacts: ContactsEntity,
 
-    @Field("jobTime")
+    @Field("job_time")
     var jobTime: JobTimeEntity,
 
-    @Field("officeId")
+    @Field("office_id")
     var officeId: ObjectId,
 
     @Field("confidential")

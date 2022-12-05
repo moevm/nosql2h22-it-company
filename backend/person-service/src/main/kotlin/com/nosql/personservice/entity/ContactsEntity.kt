@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 
 class ContactsEntity(
 
-    @Field("phoneNumber")
+    @Field("phone_number")
     var phoneNumber: String,
 
     @Field("email")
