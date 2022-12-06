@@ -34,6 +34,7 @@ export function DocumentDeliver({onDeliver}: IProps) {
     }
 
     const handleDeliver = () => {
+        console.log(typeof documentRequest);
         documentRequest.post<IDocument>(`${process.env.REACT_APP_DOCUMENT_GET}`, {
             type: document
         }).then(response => {

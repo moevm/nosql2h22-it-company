@@ -3,11 +3,13 @@ import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
 import Select, {SelectChangeEvent} from "@mui/material/Select";
-import {WATCHER_PAGE_TITLE} from "../constants";
 import Stack from "@mui/material/Stack";
 import {styled} from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import {ImportExport} from "./ImportExport";
+import {Footer} from "./Footer";
+import {WATCHER_PAGE_TITLE} from "../constants";
 
 interface ITask {
     id: string,
@@ -28,6 +30,7 @@ export function WatcherModule() {
     const [week, setWeek] = useState<string[]>(["2022-11-28", "2022-12-04"]);
     const [weekLabel, setWeekLabel] = useState<string>("2022-11-28 - 2022-12-04");
     const [tasks, setTasks] = useState<ITask[]>([]);
+    const [action, setAction] = useState<string | null>(null);
 
     const getTasks = () => {
         axios.get<ITask[]>(`${process.env.REACT_APP_WATCHER_HOST}/watcher/all-own-between-dates`, {
@@ -83,6 +86,8 @@ export function WatcherModule() {
                     </Item>
                 ))}
             </Stack>
+            <ImportExport action={action} setAction={setAction} dbs={[{id: "watchers", name: "Списанные часы"}]} />
+            <Footer handle={(num: number) => {}} setAction={setAction} />
         </>
     );
 }
