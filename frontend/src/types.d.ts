@@ -1,5 +1,6 @@
 interface IUser {
     accessToken: string
+    refreshToken: string
 }
 
 interface IToken {

@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import {ThemeProvider} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import loginTheme from "../themes/LoginTheme";
-import {USER_TOKEN} from "../constants";
+import {ACCESS_TOKEN, REFRESH_TOKEN} from "../constants";
 import {useActions} from "../hooks/useAction";
 
 interface IData {
@@ -45,8 +45,8 @@ export function Login() {
             login: data.login,
             password: data.password
         }).then(response => {
-            console.log(`In Login.tsx: ${response.data.accessToken}`);
-            localStorage.setItem(USER_TOKEN, response.data.accessToken);
+            localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
+            localStorage.setItem(REFRESH_TOKEN, response.data.refreshToken);
             changeUser();
             navigate(`${process.env.REACT_APP_HOME_PAGE}`);
         }).catch((error: IError) => {
@@ -102,7 +102,7 @@ export function Login() {
                                         onMouseDown={handleMouseDownShowPassword}
                                         edge="end"
                                     >
-                                        {data.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {data.showPassword ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             }
