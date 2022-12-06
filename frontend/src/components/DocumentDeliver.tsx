@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import {documentRequest} from "../utils/HTTPRequest";
+import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
 
 interface IProps {

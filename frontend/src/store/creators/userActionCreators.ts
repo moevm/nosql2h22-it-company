@@ -1,6 +1,6 @@
 import {Dispatch} from "react";
 import {SIGN_IN, SIGN_OUT} from "../reducers/userReducer";
-import {personRequest} from "../../utils/HTTPRequest";
+import {personRequest} from "../../requests/httpRequests";
 import {ADVANCED_ROLE_LIST} from "../../constants";
 
 export const changeUser = () => {

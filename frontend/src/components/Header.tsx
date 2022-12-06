@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import {Button, ThemeProvider} from "@mui/material";
 import {AccessTime, GroupsOutlined, TextSnippetOutlined} from "@mui/icons-material";
 import headerTheme from "../themes/HeaderTheme";
-import {ACCESS_TOKEN, EMPTY_TOKEN, REFRESH_TOKEN} from "../constants";
+import {ACCESS_TOKEN, EMPTY_STRING, REFRESH_TOKEN} from "../constants";
 import {useActions} from "../hooks/useAction";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
@@ -66,8 +66,8 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
 
     const handleQuit = () => {
         setQuitAnchorElement(null);
-        localStorage.setItem(ACCESS_TOKEN, EMPTY_TOKEN);
-        localStorage.setItem(REFRESH_TOKEN, EMPTY_TOKEN);
+        localStorage.setItem(ACCESS_TOKEN, EMPTY_STRING);
+        localStorage.setItem(REFRESH_TOKEN, EMPTY_STRING);
         changeUser();
         navigate(`${process.env.REACT_APP_AUTH_PAGE}`);
     }

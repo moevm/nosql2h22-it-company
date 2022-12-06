@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {documentRequest} from "../utils/HTTPRequest";
+import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
 
 interface IProps {

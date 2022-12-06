@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {UNAUTHORIZED_STATUS_CODE} from "../constants/authorizationConstants";
+import {DEFAULT_AXIOS_TIMEOUT, UNAUTHORIZED_STATUS_CODE} from "../constants/authorizationConstants";
 import {getRefreshTokenPath} from "./pathResolutionService";
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "../constants";
 
-const authorizedAxios = axios.create({timeout: 30000})
+const authorizedAxios = axios.create({timeout: DEFAULT_AXIOS_TIMEOUT})
 
 authorizedAxios.interceptors.request.use(request => {
     request.headers!!.Authorization = addBearerPrefix(localStorage.accessToken)
@@ -22,7 +22,7 @@ authorizedAxios.interceptors.response.use(response => response, error => {
     }
 
     return axios.get(getRefreshTokenPath(), {
-        timeout: 30000,
+        timeout: DEFAULT_AXIOS_TIMEOUT,
         headers: {
             Authorization: addBearerPrefix(localStorage.refreshToken)
         },

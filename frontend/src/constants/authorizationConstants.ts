@@ -1,1 +1,2 @@
 export const UNAUTHORIZED_STATUS_CODE = 401;
+export const DEFAULT_AXIOS_TIMEOUT = 30000

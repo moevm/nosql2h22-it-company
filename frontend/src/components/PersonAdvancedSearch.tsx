@@ -12,7 +12,7 @@ import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import personAdvancedSearchTheme from "../themes/PersonAdvancedSearchTheme";
 import {PersonList} from "./PersonList";
-import {personRequest} from "../utils/HTTPRequest";
+import {personRequest} from "../requests/httpRequests";
 import {PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
 
 interface IProps {

@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {SearchOutlined, Tune} from "@mui/icons-material";
 import {ThemeProvider} from "@mui/material";
-import {personRequest} from "../utils/HTTPRequest";
+import {personRequest} from "../requests/httpRequests";
 import personSearchTheme from "../themes/PersonSearchTheme";
 
 interface IProps {
