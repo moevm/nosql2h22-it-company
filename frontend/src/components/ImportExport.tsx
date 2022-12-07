@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import axios from "axios";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
+import authorizedAxios from "../requests/authorizedAxios";
 
 interface IProps {
     action: string | null,
@@ -75,7 +75,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
         }
         
         if (action === Action.IMPORT) {
-            axios.post(path, data, {
+            authorizedAxios.post(path, data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.accessToken}`,
                     "Content-Type": "application/json"
@@ -92,7 +92,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                 setResultStatus(ResultStatus.ERROR);
             });
         } else {
-            axios.get(path, {
+            authorizedAxios.get(path, {
                 headers: {
                     Authorization: `Bearer ${localStorage.accessToken}`,
                     "Content-Type": "application/json"

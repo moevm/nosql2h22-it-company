@@ -9,8 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {SearchOutlined, Tune} from "@mui/icons-material";
 import {ThemeProvider} from "@mui/material";
-import {personRequest} from "../requests/httpRequests";
 import personSearchTheme from "../themes/PersonSearchTheme";
+import {getPersonByName} from "../requests/personHttpRequests";
 
 interface IProps {
     setPerson: (data: IPerson) => void,
@@ -26,15 +26,11 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        personRequest.get<IPerson[]>(
-            `${process.env.REACT_APP_PERSON_SEARCH}`, {
-            params: {
-                name: search.trim() === "" ? undefined : search
-            }
-        }).then(request => {
-            setPersons(request.data);
-            setSearchAnchorElement(anchor.current);
-        });
+        getPersonByName(search.trim() === "" ? undefined : search)
+            .then(request => {
+                setPersons(request.data);
+                setSearchAnchorElement(anchor.current);
+            });
     }
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +66,7 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
                             onChange={handleInput}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <SearchOutlined />
+                                    <SearchOutlined/>
                                 </InputAdornment>
                             }
                             endAdornment={
@@ -80,7 +76,7 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
                                         onMouseDown={handleMouseDownAdvancedSearch}
                                         edge="end"
                                     >
-                                        <Tune />
+                                        <Tune/>
                                     </IconButton>
                                 </InputAdornment>
                             }

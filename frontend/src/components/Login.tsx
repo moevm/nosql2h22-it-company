@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
@@ -15,6 +14,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import loginTheme from "../themes/LoginTheme";
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "../constants";
 import {useActions} from "../hooks/useAction";
+import {signInUser} from "../requests/authHttpRequests";
 
 interface IData {
     login: string,
@@ -41,15 +41,13 @@ export function Login() {
             ...data,
             showAlert: false,
         });
-        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}${process.env.REACT_APP_PUBLIC_API}${process.env.REACT_APP_AUTH_SIGN_IN}`, {
-            login: data.login,
-            password: data.password
-        }).then(response => {
-            localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
-            localStorage.setItem(REFRESH_TOKEN, response.data.refreshToken);
-            changeUser(response.data.accessToken);
-            navigate(`${process.env.REACT_APP_HOME_PAGE}`);
-        }).catch(() => {
+        signInUser(data.login, data.password)
+            .then(response => {
+                localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
+                localStorage.setItem(REFRESH_TOKEN, response.data.refreshToken);
+                changeUser(response.data.accessToken);
+                navigate(`${process.env.REACT_APP_HOME_PAGE}`);
+            }).catch(() => {
             setData({
                 ...data,
                 showAlert: true,
@@ -102,7 +100,7 @@ export function Login() {
                                         onMouseDown={handleMouseDownShowPassword}
                                         edge="end"
                                     >
-                                        {data.showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {data.showPassword ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             }

@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
+import {saveNewDocument} from "../requests/documentHttpRequests";
 
 interface IProps {
     onDeliver: (document: IDocument) => void
@@ -34,12 +34,10 @@ export function DocumentDeliver({onDeliver}: IProps) {
     }
 
     const handleDeliver = () => {
-        console.log(typeof documentRequest);
-        documentRequest.post<IDocument>(`${process.env.REACT_APP_DOCUMENT_GET}`, {
-            type: document
-        }).then(response => {
-            onDeliver(response.data);
-        });
+        saveNewDocument(document)
+            .then(response => {
+                onDeliver(response.data);
+            });
     }
 
     return (

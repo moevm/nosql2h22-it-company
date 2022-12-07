@@ -15,16 +15,14 @@ import {ImportExport} from "./ImportExport";
 import {PersonAdvancedSearch} from "./PersonAdvancedSearch";
 import {PersonInfo} from "./PersonInfo";
 import {PersonSearch} from "./PersonSearch";
-import {authAdminRequest, personAdminRequest, personRequest} from "../requests/httpRequests";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {PERSON_ADVANCED_SEARCH_ENUMS, PERSON_PAGE_TITLE, ROLES} from "../constants";
-
-interface IID {
-    id: string
-}
+import {PERSON_PAGE_TITLE, ROLES, PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
+import {getPerson, signUpPerson} from "../requests/personHttpRequests";
+import {signUpUser} from "../requests/authHttpRequests";
 
 interface IAddingPerson {
     [key: string]: number | string | string[];
+
     login: string,
     password: string,
     id: string,
@@ -128,9 +126,7 @@ export function PersonModule() {
 
     useEffect(() => {
         document.title = PERSON_PAGE_TITLE;
-        personRequest.get<IPerson>(
-            `${process.env.REACT_APP_PERSON_GET}`
-        ).then(response => {
+        getPerson().then(response => {
             setPersonInfo(response.data);
         }).catch((error: IError) => {
             console.log(error);
@@ -153,16 +149,12 @@ export function PersonModule() {
     }
 
     const handleAddPerson = () => {
-        console.log(newPersonInfo);
-        console.log(newPersonInfo.position);
-        console.log(ROLES[newPersonInfo.position as keyof typeof ROLES]);
-        authAdminRequest.post<IID>(`${process.env.REACT_APP_AUTH_SIGN_UP}`, {
+        signUpUser({
             login: newPersonInfo.login,
             password: newPersonInfo.password,
             role: ROLES[newPersonInfo.position as keyof typeof ROLES]
         }).then(authResponse => {
-            console.log(authResponse.data.id);
-            personAdminRequest.post<IMessage>(`${process.env.REACT_APP_PERSON_SIGN_UP}`, {
+            signUpPerson({
                 id: authResponse.data.id,
                 name: newPersonInfo.name,
                 surname: newPersonInfo.surname,
@@ -209,7 +201,6 @@ export function PersonModule() {
     }
 
     const handleRemovePerson = () => {
-        personAdminRequest.delete(`${process.env.REACT_APP_PERSON_GET}/${personInfo?.id}`);
         setOpenDialog(false);
     }
 
@@ -248,8 +239,8 @@ export function PersonModule() {
                                 select={param.select}
                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {handleInput(event, param.id)}}
                             >
-                                {param.select && 
-                                PERSON_ADVANCED_SEARCH_ENUMS!!.find(object => object.name === param.id)!!.enum.map((item) => (<MenuItem 
+                                {param.select &&
+                                PERSON_ADVANCED_SEARCH_ENUMS!!.find(object => object.name === param.id)!!.enum.map((item) => (<MenuItem
                                     key={item.name}
                                     value={item.name}
                                 >

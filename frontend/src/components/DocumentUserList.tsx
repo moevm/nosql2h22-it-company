@@ -3,8 +3,8 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
+import {getAllUserDocuments} from "../requests/documentHttpRequests";
 
 interface IProps {
     addedDocument: IDocument | null
@@ -28,11 +28,10 @@ export function DocumentUserList({addedDocument}: IProps) {
     const [documentList, setDocumentList] = useState<IDocument[]>([]);
 
     useEffect(() => {
-        documentRequest.get<IDocument[]>(
-            `${process.env.REACT_APP_DOCUMENT_GET_ALL_OWN}`
-        ).then(response => {
-            setDocumentList(response.data);
-        });
+        getAllUserDocuments()
+            .then(response => {
+                setDocumentList(response.data);
+            });
     }, []);
 
     useEffect(() => {
@@ -51,15 +50,15 @@ export function DocumentUserList({addedDocument}: IProps) {
                     <Typography variant="body1" component="span">
                         {DOCUMENT_TYPES.find(document => document.name === data.type)?.value}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Дата заказа: {data.orderDate}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Дата выдачи: {data.completeDate ? data.completeDate.substr(0, 10) : "не выдано"}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Статус: {statusName.find(status => status.status === data.status)?.name}
                     </Typography>

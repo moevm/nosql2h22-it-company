@@ -12,8 +12,8 @@ import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import personAdvancedSearchTheme from "../themes/PersonAdvancedSearchTheme";
 import {PersonList} from "./PersonList";
-import {personRequest} from "../requests/httpRequests";
 import {PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
+import {getPersonWithAdvancedSearch} from "../requests/personHttpRequests";
 
 interface IProps {
     setPerson: (data: IPerson) => void,
@@ -50,19 +50,18 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
     const [persons, setPersons] = useState<IPerson[]>([]);
 
     const getSearchResult = () => {
-        personRequest.get<IPerson[]>(
-            `${process.env.REACT_APP_PERSON_EXTENDED_SEARCH}`, {
-                params: {
-                    name: request.name.trim() === "" ? undefined : request.name,
-                    surname: request.surname.trim() === "" ? undefined : request.surname,
-                    patronymic: request.surname.trim() === "" ? undefined : request.surname,
-                    sex: (request.sex.trim() === "") ? undefined : request.sex,
-                    position: request.position.trim() === "" ? undefined : request.position,
-                    status: request.status.trim() === "" ? undefined : request.status,
-                    start_age: request.age[0],
-                    end_age: request.age[1]
-                }
-            }).then(response => {
+        getPersonWithAdvancedSearch(
+            {
+                name: request.name.trim() === "" ? undefined : request.name,
+                surname: request.surname.trim() === "" ? undefined : request.surname,
+                patronymic: request.surname.trim() === "" ? undefined : request.surname,
+                sex: (request.sex.trim() === "") ? undefined : request.sex,
+                position: request.position.trim() === "" ? undefined : request.position,
+                status: request.status.trim() === "" ? undefined : request.status,
+                start_age: request.age[0],
+                end_age: request.age[1]
+            }
+        ).then(response => {
             setPersons(response.data);
         });
     }
