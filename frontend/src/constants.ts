@@ -13,7 +13,6 @@ export const PERSON_ADVANCED_SEARCH_ENUMS = [
         name: "sex",
         value: "Пол",
         enum: [
-            {name: "UNDEFINED", value: "Не имеет значения"},
             {name: "MALE", value: "Мужчина"},
             {name: "FEMALE", value: "Женщина"}
         ]
