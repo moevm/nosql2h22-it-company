@@ -51,12 +51,12 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
 
     const getSearchResult = () => {
         personRequest.get<IPerson[]>(
-            `/person/extended`, {
+            `${process.env.REACT_APP_PERSON_EXTENDED_SEARCH}`, {
                 params: {
                     name: request.name.trim() === "" ? undefined : request.name,
                     surname: request.surname.trim() === "" ? undefined : request.surname,
                     patronymic: request.surname.trim() === "" ? undefined : request.surname,
-                    sex: (request.sex === "UNDEFINED" || request.sex.trim() === "") ? undefined : request.sex,
+                    sex: (request.sex.trim() === "") ? undefined : request.sex,
                     position: request.position.trim() === "" ? undefined : request.position,
                     status: request.status.trim() === "" ? undefined : request.status,
                     start_age: request.age[0],

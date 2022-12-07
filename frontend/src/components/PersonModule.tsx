@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import {Add, Remove} from "@mui/icons-material";
@@ -16,7 +17,7 @@ import {PersonInfo} from "./PersonInfo";
 import {PersonSearch} from "./PersonSearch";
 import {authAdminRequest, personAdminRequest, personRequest} from "../requests/httpRequests";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {PERSON_PAGE_TITLE, ROLES} from "../constants";
+import {PERSON_ADVANCED_SEARCH_ENUMS, PERSON_PAGE_TITLE, ROLES} from "../constants";
 
 interface IID {
     id: string
@@ -78,26 +79,26 @@ const initialState: IAddingPerson = {
 }
 
 const addParams = [
-    {id: "login", name: "Логин", type: "text", required: true},
-    {id: "password", name: "Пароль", type: "text", required: true},
-    {id: "name", name: "Имя", type: "text", required: true},
-    {id: "surname", name: "Фамилия", type: "text", required: true},
-    {id: "patronymic", name: "Отчество", type: "text", required: false},
-    {id: "sex", name: "Пол", type: "text", required: true},
-    {id: "birthday", name: "Дата рождения", type: "date", required: true},
-    {id: "position", name: "Должность", type: "text", required: true},
-    {id: "status", name: "Статус", type: "text", required: true},
-    {id: "phoneNumber", name: "Телефон", type: "text", required: true},
-    {id: "email", name: "Email", type: "email", required: true},
-    {id: "jobTimeStart", name: "Начало рабочего дня", type: "text", required: true},
-    {id: "jobTimeEnd", name: "Конец рабочего дня", type: "text", required: true},
-    {id: "passportNumber", name: "Номер паспорта", type: "text", required: true},
-    {id: "passportIssuedPlace", name: "Место выдачи паспорта", type: "text", required: true},
-    {id: "passportIssuedDate", name: "Дата выдачи паспорта", type: "date", required: true},
-    {id: "nationality", name: "Национальность", type: "text", required: true},
-    {id: "address", name: "Адрес", type: "text", required: true},
-    {id: "salary", name: "Зарплата", type: "text", required: true},
-    {id: "comment", name: "Комментарий", type: "text", required: false}
+    {id: "login", name: "Логин", type: "text", required: true, select: false},
+    {id: "password", name: "Пароль", type: "text", required: true, select: false},
+    {id: "name", name: "Имя", type: "text", required: true, select: false},
+    {id: "surname", name: "Фамилия", type: "text", required: true, select: false},
+    {id: "patronymic", name: "Отчество", type: "text", required: false, select: false},
+    {id: "sex", name: "Пол", type: "text", required: true, select: true},
+    {id: "birthday", name: "Дата рождения", type: "date", required: true, select: false},
+    {id: "position", name: "Должность", type: "text", required: true, select: true},
+    {id: "status", name: "Статус", type: "text", required: true, select: true},
+    {id: "phoneNumber", name: "Телефон", type: "text", required: true, select: false},
+    {id: "email", name: "Email", type: "email", required: true, select: false},
+    {id: "jobTimeStart", name: "Начало рабочего дня", type: "text", required: true, select: false},
+    {id: "jobTimeEnd", name: "Конец рабочего дня", type: "text", required: true, select: false},
+    {id: "passportNumber", name: "Номер паспорта", type: "text", required: true, select: false},
+    {id: "passportIssuedPlace", name: "Место выдачи паспорта", type: "text", required: true, select: false},
+    {id: "passportIssuedDate", name: "Дата выдачи паспорта", type: "date", required: true, select: false},
+    {id: "nationality", name: "Национальность", type: "text", required: true, select: false},
+    {id: "address", name: "Адрес", type: "text", required: true, select: false},
+    {id: "salary", name: "Зарплата", type: "text", required: true, select: false},
+    {id: "comment", name: "Комментарий", type: "text", required: false, select: false}
 ];
 
 const getCurrentDay = () => {
@@ -152,6 +153,9 @@ export function PersonModule() {
     }
 
     const handleAddPerson = () => {
+        console.log(newPersonInfo);
+        console.log(newPersonInfo.position);
+        console.log(ROLES[newPersonInfo.position as keyof typeof ROLES]);
         authAdminRequest.post<IID>(`${process.env.REACT_APP_AUTH_SIGN_UP}`, {
             login: newPersonInfo.login,
             password: newPersonInfo.password,
@@ -213,10 +217,10 @@ export function PersonModule() {
         setOpenDialog(false);
     }
 
-    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>, key: string) => {
         setNewPersonInfo({
             ...newPersonInfo,
-            [event.target.id]: event.target.value
+            [key]: event.target.value
         });
     }
 
@@ -241,8 +245,17 @@ export function PersonModule() {
                                 label={param.name}
                                 type={param.type}
                                 required={param.required}
-                                onChange={handleInput}
-                            />
+                                select={param.select}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {handleInput(event, param.id)}}
+                            >
+                                {param.select && 
+                                PERSON_ADVANCED_SEARCH_ENUMS!!.find(object => object.name === param.id)!!.enum.map((item) => (<MenuItem 
+                                    key={item.name}
+                                    value={item.name}
+                                >
+                                    {item.value}
+                                </MenuItem>))}
+                            </TextField>
                         ))}
                     </FormControl>}
                     {processDialog === "remove" && <DialogContentText>
