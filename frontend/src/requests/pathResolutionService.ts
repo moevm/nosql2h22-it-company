@@ -13,3 +13,7 @@ export function getWatcherSavingPath(): string {
 export function getAllWatcherRecordsBetweenDatesPath(): string {
     return `${process.env.REACT_APP_WATCHER_HOST}${process.env.REACT_APP_PUBLIC_API}${process.env.REACT_APP_WATCHER_GET_ALL_BETWEEN_DATES}`
 }
+
+export function getPersonInfoPath(): string {
+    return `${process.env.REACT_APP_PERSON_HOST}${process.env.REACT_APP_PUBLIC_API}${process.env.REACT_APP_PERSON_GET}`
+}

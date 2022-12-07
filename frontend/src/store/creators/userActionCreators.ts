@@ -1,12 +1,18 @@
 import {Dispatch} from "react";
+import axios from "axios";
 import {SIGN_IN, SIGN_OUT} from "../reducers/userReducer";
-import {personRequest} from "../../requests/httpRequests";
 import {ADVANCED_ROLE_LIST} from "../../constants";
+import {addBearerPrefix} from "../../requests/authorizedAxios";
+import {getPersonInfoPath} from "../../requests/pathResolutionService";
 
-export const changeUser = () => {
+export const changeUser = (accessToken: string) => {
     return async (dispatch: Dispatch<UserAction>) => {
-        await personRequest.get<IPerson>(
-            `${process.env.REACT_APP_PERSON_GET}`
+        await axios.get<IPerson>(
+            getPersonInfoPath(), {
+                headers: {
+                    Authorization: addBearerPrefix(accessToken)
+                }
+            }
         ).then(response => {
             dispatch({
                 type: SIGN_IN,
