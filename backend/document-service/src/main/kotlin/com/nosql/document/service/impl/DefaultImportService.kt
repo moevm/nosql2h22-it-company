@@ -13,6 +13,7 @@ import com.nosql.document.util.convert
 import org.slf4j.Logger
 import org.springframework.core.convert.ConversionService
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class DefaultImportService(
@@ -31,7 +32,11 @@ class DefaultImportService(
         val result = ImportResponseDto(expected = expectedCount)
 
         documents.filter { documentValidationService.validate(it) }
-            .map { conversionService.convert(it, DocumentEntity::class) }
+            .map {
+                it.completeDate = it.completeDate?.let { e -> LocalDate.parse(e).plusDays(1).toString() }
+                it.orderDate =  LocalDate.parse(it.orderDate).plusDays(1).toString()
+                conversionService.convert(it, DocumentEntity::class)
+            }
             .let { documentComponent.saveAll(it) }
             .also {
                 result.actual = it.size

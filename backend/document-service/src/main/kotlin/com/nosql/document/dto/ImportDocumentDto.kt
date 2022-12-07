@@ -18,7 +18,7 @@ data class ImportDocumentDto (
     var userId: String?,
 
     @JsonProperty("orderDate")
-    val orderDate: String?,
+    var orderDate: String?,
 
     @JsonProperty("completeDate")
     var completeDate: String?,

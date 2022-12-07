@@ -15,7 +15,7 @@ class ImportWatcherDto(
     var userId: String?,
 
     @JsonProperty("date")
-    val date: String?,
+    var date: String?,
 
     @JsonProperty("projectId")
     val projectId: String?,
