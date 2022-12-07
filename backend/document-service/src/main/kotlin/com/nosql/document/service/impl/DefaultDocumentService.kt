@@ -35,7 +35,7 @@ class DefaultDocumentService(
         types: List<DocumentType>,
         statuses: List<DocumentStatus>,
         pageable: Pageable,
-    ) = documentComponent.getAll(types, statuses, pageable)
+    ) = documentComponent.getAllByTypesAndStatuses(types, statuses, pageable)
         .map { conversionService.convert(it, PersonDocumentResponseDto::class) }
 
     override suspend fun getAllByUserId(userId: String, pageable: Pageable) =

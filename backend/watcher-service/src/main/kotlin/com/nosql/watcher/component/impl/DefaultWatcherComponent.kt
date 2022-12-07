@@ -38,6 +38,19 @@ class DefaultWatcherComponent(
             .awaitSingle()
     }
 
+    override suspend fun saveAll(watchers: List<WatcherEntity>): List<WatcherEntity> {
+
+        val operationDetails = "Save 'watcher' records"
+
+        log.logBefore(operationDetails)
+
+        return watcherRepository.saveAll(watchers)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
     override suspend fun get(watcherId: ObjectId): WatcherEntity {
 
         val operationDetails = "Get 'watcher' record with id = '$watcherId'"

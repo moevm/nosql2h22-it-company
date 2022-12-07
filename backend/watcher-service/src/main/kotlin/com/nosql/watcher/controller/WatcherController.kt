@@ -66,25 +66,6 @@ class WatcherController(
     ) = watcherService.getAllByUserIdAndVacation(userAuthInfo.userId, from, to, pageable)
 
     @GetMapping(
-        value = [SUBORDINATE_URL_PATH],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun getAllByUserIdsBetweenDates(
-        @RequestParam(IDS_QUERY_PARAM) ids: List<String>,
-        @RequestParam(FROM_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) from: Date,
-        @RequestParam(TO_QUERY_PARAM) @DateTimeFormat(pattern = DATE_PATTERN) to: Date,
-        @PageableDefault(page = 0, size = 20) pageable: Pageable,
-    ) = watcherService.getAllByUserIdsAndDate(ids, from, to, pageable)
-
-    @GetMapping(
-        value = [ALL_URL_PATH],
-        produces = [APPLICATION_JSON_VALUE],
-    )
-    suspend fun getAll(
-        @PageableDefault(page = 0, size = 20) pageable: Pageable,
-    ) = watcherService.getAll(pageable)
-
-    @GetMapping(
         value = [ID_URL_PATH],
         produces = [APPLICATION_JSON_VALUE],
     )
@@ -120,13 +101,10 @@ class WatcherController(
     ) = watcherService.delete(id)
 
     companion object {
-        private const val ALL_URL_PATH = "all"
-        private const val SUBORDINATE_URL_PATH = "subordinate"
         private const val ALL_OWN_BETWEEN_DATES_URL_PATH = "all-own-between-dates"
         private const val SICK_URL_PATH = "sick"
         private const val VACATION_URL_PATH = "vacation"
         private const val ID_URL_PATH = "{id}"
-        private const val IDS_QUERY_PARAM = "ids"
         private const val FROM_QUERY_PARAM = "from"
         private const val TO_QUERY_PARAM = "to"
     }

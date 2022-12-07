@@ -22,6 +22,18 @@ class DefaultProjectComponent(
 ) : ProjectComponent {
 
     private val log: Logger by logger()
+    override suspend fun saveAll(projects: List<ProjectEntity>): List<ProjectEntity> {
+
+        val operationDetails = "Save 'project' records"
+
+        log.logBefore(operationDetails)
+
+        return projectRepository.saveAll(projects)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
 
     override suspend fun getById(id: ObjectId): ProjectEntity {
 

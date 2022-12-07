@@ -41,6 +41,18 @@ class DefaultPersonComponent(
             .awaitSingle()
     }
 
+    override suspend fun saveAll(persons: List<PersonEntity>): List<PersonEntity> {
+        val operationDetails = "Save 'person' records"
+
+        log.logBefore(operationDetails)
+
+        return personRepository.saveAll(persons)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
     override suspend fun get(personId: ObjectId): PersonEntity {
         val operationDetails = "Get 'person' record with id = ${personId.toHexString()}"
 

@@ -40,6 +40,19 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
+    override suspend fun saveAll(documents: List<DocumentEntity>): List<DocumentEntity> {
+
+        val operationDetails = "Save 'document' records"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.saveAll(documents)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+    }
+
     override suspend fun get(documentId: ObjectId): DocumentEntity {
 
         val operationDetails = "Get 'document' record with id = '$documentId'"
@@ -52,7 +65,7 @@ class DefaultDocumentComponent(
             .awaitSingle()
     }
 
-    override suspend fun getAll(
+    override suspend fun getAllByTypesAndStatuses(
         types: List<DocumentType>,
         statuses: List<DocumentStatus>,
         pageable: Pageable,
@@ -70,6 +83,19 @@ class DefaultDocumentComponent(
             .map {
                 PersonDocumentEntity(document = it, person = personRepository.findById(it.userId!!).awaitSingle())
             }
+    }
+
+    override suspend fun getAll(pageable: Pageable): List<DocumentEntity> {
+
+        val operationDetails = "Get all 'document' records"
+
+        log.logBefore(operationDetails)
+
+        return documentRepository.findAllByIdNotNull(pageable)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
     }
 
     override suspend fun getAllByUserId(userId: ObjectId, pageable: Pageable): List<DocumentEntity> {

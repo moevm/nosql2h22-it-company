@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable
 
 interface ProjectComponent {
 
+    suspend fun saveAll(projects: List<ProjectEntity>): List<ProjectEntity>
+
     suspend fun getById(id: ObjectId): ProjectEntity
 
     suspend fun getAll(pageable: Pageable): List<ProjectEntity>

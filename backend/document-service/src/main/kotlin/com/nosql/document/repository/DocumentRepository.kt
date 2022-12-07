@@ -12,6 +12,8 @@ import reactor.core.publisher.Flux
 @Repository
 interface DocumentRepository : ReactiveMongoRepository<DocumentEntity, ObjectId> {
 
+    fun findAllByIdNotNull(pageable: Pageable): Flux<DocumentEntity>
+
     fun findAllByIdNotNullAndTypeInAndStatusIn(
         types: List<DocumentType>,
         status: List<DocumentStatus>,
