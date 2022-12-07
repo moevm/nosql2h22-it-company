@@ -88,7 +88,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                 } else {
                     setResultStatus(ResultStatus.WARNING);
                 }
-            }).catch(error => {
+            }).catch(() => {
                 setResultStatus(ResultStatus.ERROR);
             });
         } else {
@@ -107,7 +107,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(href);
                 setResultStatus(ResultStatus.SUCCESS);
-            }).catch(error => {
+            }).catch(() => {
                 setResultStatus(ResultStatus.ERROR);
             });
         }
@@ -158,7 +158,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
             </Snackbar>
             <Snackbar open={resultStatus === ResultStatus.WARNING} autoHideDuration={3000} onClose={handleAlertClose}>
                 <Alert onClose={handleAlertClose} severity="warning" sx={{ width: '100%' }}>
-                    Не все поля добавлены
+                    Не все записи добавлены
                 </Alert>
             </Snackbar>
         </>
