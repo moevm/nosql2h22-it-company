@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import jwt_decode from "jwt-decode";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Container from "@mui/material/Container";
-import {IToken} from "../models";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 interface IProps {
     handle: (data: number) => void,
@@ -14,16 +13,17 @@ export function Footer({handle, children}: IProps) {
     const [extendedRights, setExtendedRights] = useState<boolean>(false);
     const [value, setValue] = useState<number>(0);
 
+    const userState: IUserState = useTypedSelector(state => state.user);
+
     useEffect(() => {
-        let token: IToken = jwt_decode(localStorage.accessToken);
-        setExtendedRights(token.role === "HR");
-    }, []);
+        setExtendedRights(userState.advancedRole);
+    }, [userState]);
 
     return (
         <Container sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
             {extendedRights && <BottomNavigation value={value} onChange={(event, newValue) => {
                 setValue(newValue);
-                handle(value);
+                handle(newValue);
             }}>
                 {children.map((element: JSX.Element) => (
                     <BottomNavigationAction icon={element} />

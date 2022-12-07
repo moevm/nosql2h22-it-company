@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,7 +12,7 @@ import {ThemeProvider} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import personAdvancedSearchTheme from "../themes/PersonAdvancedSearchTheme";
 import {PersonList} from "./PersonList";
-import {IPerson} from "../models";
+import {personRequest} from "../utils/HTTPRequest";
 import {PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
 
 interface IProps {
@@ -50,12 +49,9 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
     });
     const [persons, setPersons] = useState<IPerson[]>([]);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person/extended`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.accessToken}`
-            },
+    const getSearchResult = () => {
+        personRequest.get<IPerson[]>(
+            `/person/extended`, {
             params: {
                 name: request.name.trim() === "" ? undefined : request.name,
                 surname: request.surname.trim() === "" ? undefined : request.surname,
@@ -71,11 +67,17 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
         });
     }
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        getSearchResult();
+    }
+
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRequest({
             ...request,
             [event.target.name]: event.target.value
         });
+        getSearchResult();
     }
 
     const handleChange = (event: Event, newValue: number | number[]) => {
@@ -83,6 +85,7 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
             ...request,
             age: newValue as number[]
         });
+        getSearchResult();
     };
 
     return (

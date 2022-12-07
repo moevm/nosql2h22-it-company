@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {IDocument} from "../models";
 import {DOCUMENT_TYPES} from "../constants";
 
 const Item = styled(Paper)(({theme}) => ({

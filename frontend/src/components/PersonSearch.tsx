@@ -1,5 +1,4 @@
 import React, {useRef, useState} from "react";
-import axios from "axios";
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
@@ -10,8 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {SearchOutlined, Tune} from "@mui/icons-material";
 import {ThemeProvider} from "@mui/material";
+import {personRequest} from "../utils/HTTPRequest";
 import personSearchTheme from "../themes/PersonSearchTheme";
-import {IPerson} from "../models";
 
 interface IProps {
     setPerson: (data: IPerson) => void,
@@ -27,10 +26,8 @@ export function PersonSearch({setPerson, setAdvancedSearch}: IProps) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        axios.get<IPerson[]>(`${process.env.REACT_APP_PERSON_HOST}/person/name`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.accessToken}`
-            },
+        personRequest.get<IPerson[]>(
+            `${process.env.REACT_APP_PERSON_SEARCH}`, {
             params: {
                 name: search.trim() === "" ? undefined : search
             }

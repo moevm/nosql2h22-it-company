@@ -13,8 +13,8 @@ import TextField from "@mui/material/TextField";
 import {ThemeProvider} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import loginTheme from "../themes/LoginTheme";
-import {IUser, IError} from "../models";
 import {USER_TOKEN} from "../constants";
+import {useActions} from "../hooks/useAction";
 
 interface IData {
     login: string,
@@ -30,6 +30,9 @@ export function Login() {
         showPassword: false,
         showAlert: false
     });
+
+    const {changeUser} = useActions();
+
     const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,11 +41,12 @@ export function Login() {
             ...data,
             showAlert: false,
         });
-        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}/${process.env.REACT_APP_AUTH_SIGN_IN}`, {
+        axios.post<IUser>(`${process.env.REACT_APP_AUTH_HOST}${process.env.REACT_APP_PUBLIC_API}${process.env.REACT_APP_AUTH_SIGN_IN}`, {
             login: data.login,
             password: data.password
         }).then(response => {
             localStorage.setItem(USER_TOKEN, response.data.accessToken);
+            changeUser();
             navigate(`${process.env.REACT_APP_HOME_PAGE}`);
         }).catch((error: IError) => {
             setData({

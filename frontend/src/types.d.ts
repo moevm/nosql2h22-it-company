@@ -1,8 +1,8 @@
-export interface IUser {
+interface IUser {
     accessToken: string
 }
 
-export interface IToken {
+interface IToken {
     iss: string,
     sub: string,
     iat: number,
@@ -10,14 +10,18 @@ export interface IToken {
     role: string
 }
 
-export interface IError {
+interface IMessage {
+    message: string
+}
+
+interface IError {
     id: string,
     code: string,
     description?: string,
     timestamp: number
 }
 
-export interface IPerson {
+interface IPerson {
     id: string,
     name: string,
     surname: string,
@@ -50,7 +54,7 @@ export interface IPerson {
     comment: string
 }
 
-export interface IDocument {
+interface IDocument {
     id: string,
     type: string,
     user_id: string,
@@ -58,3 +62,18 @@ export interface IDocument {
     completeDate: string,
     status: string
 }
+
+interface IUserState {
+    id: string,
+    name: string,
+    surname: string,
+    advancedRole: boolean
+}
+
+
+type UserAction = {
+    type: string,
+    user: IUserStore | null
+}
+
+type DispatchType = (args: UserStoreAction) => UserStoreAction
