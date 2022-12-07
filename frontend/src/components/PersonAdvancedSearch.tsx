@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
@@ -54,8 +55,8 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
             {
                 name: request.name.trim() === "" ? undefined : request.name,
                 surname: request.surname.trim() === "" ? undefined : request.surname,
-                patronymic: request.surname.trim() === "" ? undefined : request.surname,
-                sex: (request.sex.trim() === "") ? undefined : request.sex,
+                patronymic: request.patronymic.trim() === "" ? undefined : request.patronymic,
+                sex: request.sex.trim() === "" ? undefined : request.sex,
                 position: request.position.trim() === "" ? undefined : request.position,
                 status: request.status.trim() === "" ? undefined : request.status,
                 start_age: request.age[0],
@@ -71,12 +72,15 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
         getSearchResult();
     }
 
+    const handleSearch = () => {
+        getSearchResult();
+    }
+
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRequest({
             ...request,
             [event.target.name]: event.target.value
         });
-        getSearchResult();
     }
 
     const handleChange = (event: Event, newValue: number | number[]) => {
@@ -132,6 +136,9 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
                                                     onChange={handleInput}
                                                     variant="outlined"
                                                 >
+                                                    <MenuItem value="">
+                                                        <p />
+                                                    </MenuItem>
                                                     {item.enum.map((option) => (
                                                         <MenuItem key={option.name} value={option.name}>
                                                             {option.value}
@@ -167,6 +174,9 @@ export function PersonAdvancedSearch({setPerson, setAdvancedSearch}: IProps) {
                                 </Grid>
                             </Grid>
                         </Item>
+                        <Button onClick={handleSearch}>
+                            Поиск
+                        </Button>
                     </Stack>
                 </Grid>
                 <Grid item xs={6}>
