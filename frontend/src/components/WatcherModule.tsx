@@ -387,8 +387,7 @@ export function WatcherModule() {
                 <WatcherDaysList/>
             </Stack>
             <ImportExport action={action} setAction={setAction} dbs={[{id: "watchers", name: "Списанные часы"}]}/>
-            <Footer handle={(num: number) => {
-            }} setAction={setAction}/>
+            <Footer handle={(num: number) => {}} setAction={setAction}/>
         </>
     );
 }

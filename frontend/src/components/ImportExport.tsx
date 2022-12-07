@@ -31,6 +31,7 @@ enum ID {
 
 enum ResultStatus {
     SUCCESS = "success",
+    WARNING = "warning",
     ERROR = "error"
 }
 
@@ -80,7 +81,13 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                     "Content-Type": "application/json"
                 }
             }).then(response => {
-                setResultStatus(ResultStatus.SUCCESS);
+                if (response.data.actual === 0) {
+                    setResultStatus(ResultStatus.ERROR);
+                } else if (response.data.actual === response.data.expected) {
+                    setResultStatus(ResultStatus.SUCCESS);
+                } else {
+                    setResultStatus(ResultStatus.WARNING);
+                }
             }).catch(error => {
                 setResultStatus(ResultStatus.ERROR);
             });
@@ -91,14 +98,12 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                     "Content-Type": "application/json"
                 }
             }).then(response => {
-                console.log(response.headers);
-                console.log(response.data);                
-                var href = "data:application/json;charset=utf-8," + encodeURIComponent(response.data);
+                const href = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(response.data));
                 const link = document.createElement('a');
                 link.href = href;
                 link.download = `${dbs[index].id}.json`
                 document.body.appendChild(link);
-                link.click();           
+                link.click();
                 document.body.removeChild(link);
                 URL.revokeObjectURL(href);
                 setResultStatus(ResultStatus.SUCCESS);
@@ -107,18 +112,22 @@ export function ImportExport({action, setAction, dbs}: IProps) {
             });
         }
 
+        handleClose();
+    }
+
+    const handleClose = () => {
         setChosenFileName("");
         setData(null);
         setAction(null);
     }
 
-    const handleClose = () => {
+    const handleAlertClose = () => {
         setResultStatus(null);
     }
 
     return (
         <>
-            {action === Action.IMPORT && <Dialog sx={{}} open={action !== null} onClose={() => {setAction(null)}}>
+            {action === Action.IMPORT && <Dialog sx={{}} open={action !== null} onClose={handleClose}>
                 <DialogTitle>Импорт {chosenFileName}</DialogTitle>
                 <DialogContent>
                     {chosenFileName === "" ? <Button variant="text" component="label">
@@ -129,7 +138,7 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                     ))}
                 </DialogContent>
             </Dialog>}
-            {action === Action.EXPORT && <Dialog open={action !== null} onClose={() => {setAction(null)}}>
+            {action === Action.EXPORT && <Dialog open={action !== null} onClose={handleClose}>
                 <DialogTitle>Экспорт</DialogTitle>
                 <DialogContent>
                     {dbs.map((db, index) => (
@@ -137,14 +146,19 @@ export function ImportExport({action, setAction, dbs}: IProps) {
                     ))}
                 </DialogContent>
             </Dialog>}
-            <Snackbar open={resultStatus === ResultStatus.SUCCESS} autoHideDuration={3000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            <Snackbar open={resultStatus === ResultStatus.SUCCESS} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
                     Успешно!
                 </Alert>
             </Snackbar>
-            <Snackbar open={resultStatus === ResultStatus.ERROR} autoHideDuration={3000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            <Snackbar open={resultStatus === ResultStatus.ERROR} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
                     Ошибка!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={resultStatus === ResultStatus.WARNING} autoHideDuration={3000} onClose={handleAlertClose}>
+                <Alert onClose={handleAlertClose} severity="warning" sx={{ width: '100%' }}>
+                    Не все поля добавлены
                 </Alert>
             </Snackbar>
         </>
