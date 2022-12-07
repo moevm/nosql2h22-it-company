@@ -14,7 +14,7 @@ import {ImportExport} from "./ImportExport";
 import {PersonAdvancedSearch} from "./PersonAdvancedSearch";
 import {PersonInfo} from "./PersonInfo";
 import {PersonSearch} from "./PersonSearch";
-import {authAdminRequest, personAdminRequest, personRequest} from "../utils/HTTPRequest";
+import {authAdminRequest, personAdminRequest, personRequest} from "../requests/httpRequests";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {PERSON_PAGE_TITLE, ROLES} from "../constants";
 
