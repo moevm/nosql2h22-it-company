@@ -22,7 +22,7 @@ interface PersonService {
         name: String,
         surname: String,
         patronymic: String,
-        sex: String,
+        sex: List<String>,
         position: String,
         status: String,
         startAge: Int,

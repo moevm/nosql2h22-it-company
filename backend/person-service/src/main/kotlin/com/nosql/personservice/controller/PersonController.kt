@@ -64,7 +64,7 @@ class PersonController(
         @RequestParam(NAME_QUERY_PARAM, defaultValue = ".+", required = false) name: String,
         @RequestParam(SURNAME_QUERY_PARAM, defaultValue = ".+", required = false) surname: String,
         @RequestParam(PATRONYMIC_QUERY_PARAM, defaultValue = ".+", required = false) patronymic: String,
-        @RequestParam(SEX_QUERY_PARAM, defaultValue = ".+", required = false) sex: String,
+        @RequestParam(SEX_QUERY_PARAM, defaultValue = "FEMALE,MALE", required = false) sex: List<String>,
         @RequestParam(POSITION_QUERY_PARAM, defaultValue = ".+", required = false) position: String,
         @RequestParam(STATUS_QUERY_PARAM, defaultValue = ".+", required = false) status: String,
         @RequestParam(START_AGE_QUERY_PARAM, defaultValue = "0", required = false) startAge: Int,

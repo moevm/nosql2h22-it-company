@@ -22,7 +22,7 @@ interface PersonRepository : ReactiveMongoRepository<PersonEntity, ObjectId> {
                 "{ 'name' : { '\$regex': ?0, '\$options': 'i' } }, " +
                 "{ 'surname' : { '\$regex': ?1, '\$options': 'i' } }, " +
                 "{ 'patronymic' : { '\$regex': ?2, '\$options': 'i'  } }, " +
-                "{ 'sex' : ?3 }, " +
+                "{ 'sex' : { '\$in': ?3 } }, " +
                 "{ 'position' : { '\$regex': ?4 } }, " +
                 "{ 'status' : { '\$regex': ?5 } }, " +
                 "{'\$and' : [{ 'birthday' : {'\$lte' : ?6 } }, { 'birthday' : { '\$gte' : ?7 } }]}, " +
@@ -33,7 +33,7 @@ interface PersonRepository : ReactiveMongoRepository<PersonEntity, ObjectId> {
         name: String,
         surname: String,
         patronymic: String,
-        sex: String,
+        sex: List<String>,
         position: String,
         status: String,
         startAge: Date,
