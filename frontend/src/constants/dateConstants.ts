@@ -1,0 +1,5 @@
+export const WEEK_UNIT = 'week'
+export const DAY_UNIT = 'day'
+export const SHORT_DAY_NAME_FORMAT = 'dd'
+export const DAY_NAME_FORMAT = 'dddd'
+export const DATE_FORMAT = 'YYYY-MM-DD'

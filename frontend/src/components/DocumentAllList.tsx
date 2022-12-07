@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {documentRequest} from "../utils/HTTPRequest";
+import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
 
 interface IProps {
@@ -68,25 +68,26 @@ export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProp
                     <Typography variant="body1" component="span">
                         {DOCUMENT_TYPES.find(document => document.name === data.document.type)?.value}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Дата заказа: {data.document.orderDate}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
-                        Дата выдачи: {data.document.completeDate ? data.document.completeDate.substr(0, 10) : "не выдано"}
+                        Дата
+                        выдачи: {data.document.completeDate ? data.document.completeDate.substr(0, 10) : "не выдано"}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Статус: {statusName.find(status => status.status === data.document.status)?.name}
                     </Typography>
-                    <br />
-                    <hr />
-                    <br />
+                    <br/>
+                    <hr/>
+                    <br/>
                     <Typography variant="body1" component="span">
                         ФИ: {data.person.surname} {data.person.name}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         ({data.person.contacts.phoneNumber}, {data.person.contacts.email})
                     </Typography>

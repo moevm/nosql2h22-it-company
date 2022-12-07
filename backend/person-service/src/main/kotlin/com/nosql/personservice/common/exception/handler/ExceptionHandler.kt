@@ -26,7 +26,7 @@ class ExceptionHandler {
         val errorDto = ApplicationErrorDto(exception)
         val status = exception.status
 
-        log.error("Got application exception. Response: $errorDto")
+        log.error("Got application exception. Response: $errorDto", exception)
 
         return ResponseEntity
             .status(status ?: HttpStatus.INTERNAL_SERVER_ERROR)

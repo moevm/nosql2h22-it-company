@@ -1,4 +1,6 @@
-export const USER_TOKEN = "accessToken";
+export const ACCESS_TOKEN = "accessToken";
+export const REFRESH_TOKEN = "refreshToken";
+export const EMPTY_STRING = ""
 export const ADVANCED_ROLE_LIST = ["HR", "PM"];
 export const AUTH_PAGE_IMAGE = "auth_image.png";
 export const AUTH_PAGE_TITLE = "Auth";
@@ -49,6 +51,7 @@ export const PERSON_ADVANCED_SEARCH_ENUMS = [
         ]
     }
 ];
+
 export const ROLES = {
     JUNIOR_BACKEND_DEVELOPER: "DEVELOPER",
     MIDDLE_BACKEND_DEVELOPER: "DEVELOPER",
@@ -67,6 +70,7 @@ export const ROLES = {
     ADMINISTRATION: "ADMINISTRATOR",
     OFFICE_MANAGER: "OFFICE_MANAGER"
 };
+
 export const DOCUMENT_TYPES = [
     {
         name: "INCOME_STATEMENT",

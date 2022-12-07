@@ -1,5 +1,6 @@
 interface IUser {
     accessToken: string
+    refreshToken: string
 }
 
 interface IToken {
@@ -77,3 +78,23 @@ type UserAction = {
 }
 
 type DispatchType = (args: UserStoreAction) => UserStoreAction
+
+interface IProject {
+    id: string;
+    name: string;
+}
+
+interface ISaveWatcherRecord {
+    date: string;
+    projectId: string;
+    minutesAmount: number;
+    comment: string;
+}
+
+interface IWatcherRecord {
+    id: string,
+    date: string,
+    projectId: string,
+    minutesAmount: number,
+    comment: string
+}
