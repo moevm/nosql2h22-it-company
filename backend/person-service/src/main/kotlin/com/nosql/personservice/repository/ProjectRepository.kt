@@ -8,4 +8,6 @@ import reactor.core.publisher.Flux
 
 interface ProjectRepository : ReactiveMongoRepository<ProjectEntity, ObjectId> {
     fun findAllByIdNotNull(pageable: Pageable): Flux<ProjectEntity>
+
+    fun findAllByNameIn(names: List<String>): Flux<ProjectEntity>
 }
