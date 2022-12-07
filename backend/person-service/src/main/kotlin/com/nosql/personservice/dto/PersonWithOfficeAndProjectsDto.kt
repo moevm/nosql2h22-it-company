@@ -6,8 +6,9 @@ import com.nosql.personservice.constants.jackson.DATE_PATTERN
 import com.nosql.personservice.enumerator.PositionEnum
 import com.nosql.personservice.enumerator.SexEnum
 import com.nosql.personservice.enumerator.StatusEnum
-import org.springframework.data.mongodb.core.mapping.Field
 import java.util.Date
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 class PersonWithOfficeAndProjectsDto(
 
@@ -15,12 +16,18 @@ class PersonWithOfficeAndProjectsDto(
     val id: String,
 
     @JsonProperty("name")
+    @field:NotBlank
+    @field:Size(max = 40)
     val name: String,
 
     @JsonProperty("surname")
+    @field:NotBlank
+    @field:Size(max = 40)
     val surname: String,
 
     @JsonProperty("patronymic")
+    @field:NotBlank
+    @field:Size(max = 40)
     val patronymic: String?,
 
     @JsonProperty("sex")
@@ -34,7 +41,7 @@ class PersonWithOfficeAndProjectsDto(
     @JsonFormat(pattern = DATE_PATTERN)
     val firstWorkDate: Date,
 
-    @Field("position")
+    @JsonProperty("position")
     val position: PositionEnum,
 
     @JsonProperty("status")

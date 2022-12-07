@@ -9,6 +9,8 @@ import com.nosql.personservice.enumerator.PositionEnum
 import com.nosql.personservice.enumerator.SexEnum
 import com.nosql.personservice.enumerator.StatusEnum
 import java.util.Date
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,12 +20,18 @@ class PersonDto (
     var id: String,
 
     @JsonProperty("name")
+    @field:NotBlank
+    @field:Size(max = 40)
     var name: String,
 
     @JsonProperty("surname")
+    @field:NotBlank
+    @field:Size(max = 40)
     var surname: String,
 
     @JsonProperty("patronymic")
+    @field:NotBlank
+    @field:Size(max = 40)
     var patronymic: String?,
 
     @JsonProperty("sex")
