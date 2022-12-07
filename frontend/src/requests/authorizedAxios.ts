@@ -10,7 +10,7 @@ authorizedAxios.interceptors.request.use(request => {
     return request
 })
 
-const addBearerPrefix = (token: string): string => {
+export const addBearerPrefix = (token: string): string => {
     return `Bearer ${token}`
 }
 

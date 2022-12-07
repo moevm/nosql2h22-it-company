@@ -68,7 +68,7 @@ export function Header({activeModule, setActiveModule}: IActiveModule) {
         setQuitAnchorElement(null);
         localStorage.setItem(ACCESS_TOKEN, EMPTY_STRING);
         localStorage.setItem(REFRESH_TOKEN, EMPTY_STRING);
-        changeUser();
+        changeUser(EMPTY_STRING);
         navigate(`${process.env.REACT_APP_AUTH_PAGE}`);
     }
 

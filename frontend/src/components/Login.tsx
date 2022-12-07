@@ -47,9 +47,9 @@ export function Login() {
         }).then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
             localStorage.setItem(REFRESH_TOKEN, response.data.refreshToken);
-            changeUser();
+            changeUser(response.data.accessToken);
             navigate(`${process.env.REACT_APP_HOME_PAGE}`);
-        }).catch((error: IError) => {
+        }).catch(() => {
             setData({
                 ...data,
                 showAlert: true,
