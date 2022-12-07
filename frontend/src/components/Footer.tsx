@@ -1,15 +1,25 @@
 import React, {useEffect, useState} from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import Container from "@mui/material/Container";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import {FileDownloadOutlined, FileUploadOutlined} from "@mui/icons-material";
+import {ThemeProvider} from "@mui/material";
+import footerTheme from "../themes/FooterTheme";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 interface IProps {
+    colorable?: boolean,
     handle: (data: number) => void,
-    children: JSX.Element[]
+    setAction: (data: string | null) => void,
+    children?: JSX.Element[]
 }
 
-export function Footer({handle, children}: IProps) {
+enum Action {
+    IMPORT = "import",
+    EXPORT = "export"
+}
+
+export function Footer({colorable, handle, setAction, children}: IProps) {
     const [extendedRights, setExtendedRights] = useState<boolean>(false);
     const [value, setValue] = useState<number>(0);
 
@@ -19,16 +29,36 @@ export function Footer({handle, children}: IProps) {
         setExtendedRights(userState?.advancedRole);
     }, [userState]);
 
+    const handleClick = (index: number) => {
+        setValue(index);
+        handle(index ?? -1);
+    }
+
     return (
-        <Container sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-            {extendedRights && <BottomNavigation value={value} onChange={(event, newValue) => {
-                setValue(newValue);
-                handle(newValue);
-            }}>
-                {children.map((element: JSX.Element) => (
-                    <BottomNavigationAction icon={element} />
-                ))}
-            </BottomNavigation>}
-        </Container>
+        <ThemeProvider theme={footerTheme}>
+            {extendedRights && <Paper component="footer" square>
+                {children && <ButtonGroup>
+                    {children.map((element: JSX.Element, index: number) => (
+                        <IconButton onClick={() => {
+                            handleClick(index)
+                        }} sx={{color: (colorable && value === index) ? "#660708" : "black"}}>
+                            {element}
+                        </IconButton>
+                    ))}
+                </ButtonGroup>}
+                <ButtonGroup>
+                    <IconButton sx={{color: "black"}} onClick={() => {
+                        setAction(Action.IMPORT)
+                    }}>
+                        <FileDownloadOutlined fontSize='large'/>
+                    </IconButton>
+                    <IconButton sx={{color: "black"}} onClick={() => {
+                        setAction(Action.EXPORT)
+                    }}>
+                        <FileUploadOutlined fontSize='large'/>
+                    </IconButton>
+                </ButtonGroup>
+            </Paper>}
+        </ThemeProvider>
     );
 }

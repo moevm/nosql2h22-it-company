@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {WATCHER_PAGE_TITLE} from "../constants";
+import {ImportExport} from "./ImportExport";
+import {Footer} from "./Footer";
 import Stack from "@mui/material/Stack";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -43,13 +45,13 @@ const Item = styled(Paper)(({theme}) => ({
 }));
 
 export function WatcherModule() {
-
     const now = dayjs()
     const [start, end] = getWeekBounds(now)
 
     const [week, setWeek] = useState<Dayjs[]>([start, end]);
     const [groupedTasks, setGroupedTasks] = useState<IGroupedTasks[]>([]);
     const [projects, setProjects] = useState<IProject[]>([]);
+    const [action, setAction] = useState<string | null>(null);
 
     const getTasks = () => {
         const from = week[0].format(DATE_FORMAT)
@@ -384,6 +386,8 @@ export function WatcherModule() {
             <Stack direction={"row"} spacing={2} sx={{marginX: "1rem"}}>
                 <WatcherDaysList/>
             </Stack>
+            <ImportExport action={action} setAction={setAction} dbs={[{id: "watchers", name: "Списанные часы"}]}/>
+            <Footer handle={(num: number) => {}} setAction={setAction}/>
         </>
     );
 }

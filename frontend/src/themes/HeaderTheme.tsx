@@ -17,6 +17,9 @@ const headerTheme = createTheme({
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
+                    position: 'sticky', 
+                    top: 0,
+                    zIndex: 3,
                     height: '80px',
                     boxShadow: 'none',
                     borderBottom: 'solid #660708'
