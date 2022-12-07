@@ -98,3 +98,42 @@ interface IWatcherRecord {
     minutesAmount: number,
     comment: string
 }
+
+interface IUserRegistration {
+    login: string,
+    password: string,
+    role: string
+}
+
+interface ISignUpResponse {
+    id: string
+}
+
+interface IPersonExtendedRequest {
+    name: string | undefined,
+    surname: string | undefined,
+    patronymic: string | undefined,
+    sex: string | undefined,
+    position: string | undefined,
+    status: string | undefined,
+    start_age: number,
+    end_age: number
+}
+
+interface IPersonDocument {
+    person: {
+        name: string,
+        surname: string,
+        contacts: {
+            phoneNumber: string,
+            email: string
+        }
+    },
+    document: IDocument
+}
+
+interface IPersonDocumentRequest {
+    sort: string,
+    type: string,
+    status: string
+}

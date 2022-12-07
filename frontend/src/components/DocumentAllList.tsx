@@ -3,8 +3,8 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
-import {documentRequest} from "../requests/httpRequests";
 import {DOCUMENT_TYPES} from "../constants";
+import {getPersonDocument} from "../requests/documentHttpRequests";
 
 interface IProps {
     sortRequest: string,
@@ -26,28 +26,14 @@ const statusName = [
     {status: "CANCELED", name: "Отменено"}
 ];
 
-type PersonDocument = {
-    person: {
-        name: string,
-        surname: string,
-        contacts: {
-            phoneNumber: string,
-            email: string
-        }
-    },
-    document: IDocument
-};
-
 export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProps) {
-    const [documentList, setDocumentList] = useState<PersonDocument[]>([]);
+    const [documentList, setDocumentList] = useState<IPersonDocument[]>([]);
 
     const getDocuments = () => {
-        documentRequest.get<PersonDocument[]>(`${process.env.REACT_APP_DOCUMENT_GET_ALL}`, {
-            params: {
-                sort: sortRequest,
-                type: typeRequest,
-                status: statusRequest
-            }
+        getPersonDocument({
+            sort: sortRequest,
+            type: typeRequest,
+            status: statusRequest
         }).then(response => {
             setDocumentList(response.data);
         });
@@ -63,31 +49,31 @@ export function DocumentAllList({sortRequest, typeRequest, statusRequest}: IProp
 
     return (
         <Stack spacing={2}>
-            {documentList.map((data: PersonDocument) => (
+            {documentList.map((data: IPersonDocument) => (
                 <Item elevation={6}>
                     <Typography variant="body1" component="span">
                         {DOCUMENT_TYPES.find(document => document.name === data.document.type)?.value}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Дата заказа: {data.document.orderDate}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Дата
                         выдачи: {data.document.completeDate ? data.document.completeDate.substr(0, 10) : "не выдано"}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         Статус: {statusName.find(status => status.status === data.document.status)?.name}
                     </Typography>
-                    <br />
-                    <hr />
-                    <br />
+                    <br/>
+                    <hr/>
+                    <br/>
                     <Typography variant="body1" component="span">
                         ФИ: {data.person.surname} {data.person.name}
                     </Typography>
-                    <br />
+                    <br/>
                     <Typography variant="body1" component="span">
                         ({data.person.contacts.phoneNumber}, {data.person.contacts.email})
                     </Typography>
