@@ -11,6 +11,7 @@ import com.nosql.personservice.component.PersonComponent
 import com.nosql.personservice.entity.PersonEntity
 import com.nosql.personservice.exception.UserAlreadyExistsException
 import com.nosql.personservice.repository.PersonRepository
+import com.nosql.personservice.repository.ProjectRepository
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.bson.types.ObjectId
@@ -24,6 +25,7 @@ import java.util.Date
 @Component
 class DefaultPersonComponent(
     private val personRepository: PersonRepository,
+    private val projectRepository: ProjectRepository,
 ) : PersonComponent {
 
     private val log: Logger by logger()
@@ -35,7 +37,10 @@ class DefaultPersonComponent(
 
         assertUserNotExists(person)
 
-        return personRepository.save(person)
+        val defaultProjects = getAllAbsentDefaultProjects(person.confidential.projectIds.toMutableList())
+
+        return person.apply { confidential.projectIds = defaultProjects }
+            .let { personRepository.save(it) }
             .onErrorMap { handleError(it, operationDetails) }
             .doOnSuccess { log.logSuccess(operationDetails) }
             .awaitSingle()
@@ -168,6 +173,20 @@ class DefaultPersonComponent(
             throw UserAlreadyExistsException("User with id = '${person.id}' already exists")
     }
 
+    private suspend fun getAllAbsentDefaultProjects(projectIds: MutableList<ObjectId>): List<ObjectId> {
+
+        val operationDetails = "Get default projects with names in $DEFAULT_PROJECTS_NAMES"
+
+        val defaultProjects = projectRepository.findAllByNameIn(DEFAULT_PROJECTS_NAMES)
+            .onErrorMap { handleError(it, operationDetails) }
+            .collectList()
+            .doOnSuccess { log.logSuccess(operationDetails) }
+            .awaitSingle()
+
+        projectIds.addAll(defaultProjects.map { it.id!! })
+        return projectIds.distinct()
+    }
+
     private fun handleError(
         error: Throwable,
         operationDetails: String,
@@ -193,5 +212,9 @@ class DefaultPersonComponent(
                 )
             }
         }
+    }
+
+    companion object {
+        private val DEFAULT_PROJECTS_NAMES = listOf("Больничный", "Отпуск")
     }
 }
