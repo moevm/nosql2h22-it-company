@@ -45,6 +45,7 @@ export function Login() {
             login: data.login,
             password: data.password
         }).then(response => {
+            console.log(`In Login.tsx: ${response.data.accessToken}`);
             localStorage.setItem(USER_TOKEN, response.data.accessToken);
             changeUser();
             navigate(`${process.env.REACT_APP_HOME_PAGE}`);

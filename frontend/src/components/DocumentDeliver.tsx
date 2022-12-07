@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -7,9 +8,12 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import {documentRequest} from "../utils/HTTPRequest";
 import {DOCUMENT_TYPES} from "../constants";
-import Button from "@mui/material/Button";
-import axios from "axios";
+
+interface IProps {
+    onDeliver: (document: IDocument) => void
+}
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: "#EFEFEF",
@@ -18,7 +22,7 @@ const Item = styled(Paper)(({theme}) => ({
     borderRadius: "20px"
 }));
 
-export function DocumentDeliver() {
+export function DocumentDeliver({onDeliver}: IProps) {
     const [document, setDocument] = useState<string>("");
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -29,9 +33,12 @@ export function DocumentDeliver() {
         setDocument(event.target.value);
     }
 
-    // TODO: POST-request
     const handleDeliver = () => {
-
+        documentRequest.post<IDocument>(`${process.env.REACT_APP_DOCUMENT_GET}`, {
+            type: document
+        }).then(response => {
+            onDeliver(response.data);
+        });
     }
 
     return (
