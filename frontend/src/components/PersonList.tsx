@@ -4,6 +4,8 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
+import {PERSON_ADVANCED_SEARCH_ENUMS} from "../constants";
+import {calculateAge} from "../util/dateUtil";
 
 interface IProps {
     persons: IPerson[],
@@ -41,10 +43,16 @@ export function PersonList({persons, setPerson, setAdvancedSearch}: IProps) {
                             <Avatar src="/broken-image.jpg" sx={{width: '50px', height: '50px', marginRight: '1rem'}} />
                             <div>
                                 <Typography variant="body1" component="p">
-                                    {person.name} {person.surname}
+                                    {person.name} {person.surname}, {calculateAge(person.birthday)}
                                 </Typography>
                                 <Typography variant="body1" component="p">
-                                    {person.position}
+                                    {PERSON_ADVANCED_SEARCH_ENUMS.find(item => item.name === "sex")!!.enum.find(item => item.name === person.sex)!!.value}
+                                </Typography>
+                                <Typography variant="body1" component="p">
+                                    {PERSON_ADVANCED_SEARCH_ENUMS.find(item => item.name === "position")!!.enum.find(item => item.name === person.position)!!.value}
+                                </Typography>
+                                <Typography variant="body1" component="p">
+                                    {PERSON_ADVANCED_SEARCH_ENUMS.find(item => item.name === "status")!!.enum.find(item => item.name === person.status)!!.value}
                                 </Typography>
                             </div>
                         </Stack>

@@ -1,3 +1,4 @@
+export const YEAR_UNIT = 'year'
 export const WEEK_UNIT = 'week'
 export const DAY_UNIT = 'day'
 export const SHORT_DAY_NAME_FORMAT = 'dd'
