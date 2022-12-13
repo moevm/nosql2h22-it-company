@@ -16,8 +16,6 @@ x-cors-variables: &default-cors
 services:
   mongodb:
     image: mongo:5.0.12
-    ports:
-      - "27017:27017"
     volumes:
       - mongodb-data:/data/db
     environment:
@@ -30,8 +28,6 @@ services:
       context: ../backend/auth-service
     depends_on:
       - mongodb
-    ports:
-      - "8080:8080"
     environment:
       <<: *default-mongodb-authentication
       <<: *default-cors
@@ -46,8 +42,6 @@ services:
     depends_on:
       - mongodb
       - auth-service
-    ports:
-      - "8081:8080"
     environment:
       <<: *default-mongodb-authentication
       <<: *default-auth-jwks
@@ -60,8 +54,6 @@ services:
     depends_on:
       - mongodb
       - auth-service
-    ports:
-      - "8082:8080"
     environment:
       <<: *default-mongodb-authentication
       <<: *default-auth-jwks
@@ -74,8 +66,6 @@ services:
     depends_on:
       - mongodb
       - auth-service
-    ports:
-      - "8083:8080"
     environment:
       <<: *default-mongodb-authentication
       <<: *default-auth-jwks
