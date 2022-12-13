@@ -9,7 +9,8 @@ const personInfoTheme = createTheme({
                     padding: '30px',
                     border: '3px solid #660708',
                     borderRadius: '20px',
-                    height: 'calc(100vh - 300px)'
+                    height: 'calc(100vh - 380px)',
+                    overflowY: 'scroll'
                 }
             }
         }
